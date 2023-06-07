@@ -1,0 +1,599 @@
+.Home {
+margin-top: rem(75);
+@media (max-width:$mobile){
+    margin-top: rem(44);
+}
+    &__header {
+       
+    }
+    
+    &__possibile {
+    }
+    &__grid {
+    }
+    &__work {
+    }
+}
+.headerHome {
+position: relative;
+    &__image {  
+        width: 100%;
+        padding: 0 0 550/1380 * 100% 0;
+        @media (max-width:$mobileSmall){
+            padding: 0 0  100% 0;   
+        }
+        img{
+            object-fit: cover;
+            position: absolute;width: 100%;height: 100%;top: 0;left: 0;
+            
+        }
+    }
+
+    &__container {
+      position: absolute;bottom: 0;right:0;
+      width: 100%;
+      max-width: rem(1260);
+   
+      padding: 0;
+      padding-bottom: rem(50);
+      
+    }
+   &__span{
+    display: inline;
+    
+    @media (min-width:$mobile){
+        display: none;
+          background: linear-gradient(270deg, #8EE901 0%, #4F9C2C 99.06%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+    }
+   }
+   &__span2{
+    @media (min-width:$mobile){
+        background: linear-gradient(270deg, #8EE901 0%, #4F9C2C 99.06%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+   }
+    &__texts {
+     
+        padding: 0 rem(15);
+        @media (max-width: rem(1275)){
+            padding: 0 rem(35);
+        }
+        @media (max-width:$mobileSmall){
+            padding: 0 rem(20);
+        }
+        //position: absolute;bottom:  50/550*100%;left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+        @media (max-width:$mobile){
+              
+        }
+        &::before{
+            content:'';
+ 
+            @include adaptiveValue("width", 60, 3);
+            @include adaptiveValue("height", 60, 3);
+            @media (max-width:$mobile){
+                 width: rem(30);
+                 height: rem(30); 
+            }
+            border-radius: 50%;
+            background: linear-gradient(180deg, #8EE902 0%, #4F9C2C 100%);
+            position: absolute;top: 100%;left: rem(15);
+            @media (max-width: rem(1275)){
+                left: rem(35);
+            }
+            @media (max-width:$mobileSmall){
+                left: rem(20);
+            }
+            transform: translate(-50%,-50%);
+        }
+    }
+
+    &__text {
+        &:nth-child(1){
+            z-index: 3;
+            @media (max-width:$mobile){
+                font-size: 16px;
+                line-height: 42px;
+            }
+         
+        }
+        &:nth-child(2){
+            z-index: 2;
+            @media (max-width:$mobile){
+                 display: none; 
+            }
+        }
+        &:nth-child(3){
+            z-index: 1;
+            @media (max-width:$mobile){
+                font-size: 16px;
+                line-height: 42px;
+            }
+        }
+        background: #FFFFFF;
+box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+
+    
+        font-family: 'Ubuntu';
+      
+        font-weight: 700;
+        
+        @include adaptiveValue("font-size", 30,8 );
+        @include adaptiveValue("line-height", 61,18 );
+
+        @include adaptiveValue("padding-left",16 ,4 );
+        @include adaptiveValue("padding-right",16 ,4 );
+        text-transform: uppercase;
+        color: #000000;
+    }
+}
+
+//===========================================================
+
+
+.possibileHome {
+    @include adaptiveValue("margin-bottom",56 ,46 );
+    background: #F5F5F5;
+    @media (max-width:$mobileSmall){
+        background: #fff;
+    }
+    &__container {
+      
+        
+       
+    }
+    &__cover{
+        display: flex;
+        align-items: center;
+        gap: rem(20);
+        @media (max-width:$mobileSmall){
+            flex-direction: column;
+            justify-content: center; 
+           
+        }
+    }
+    &__body {
+        display: flex;
+        padding: rem(44) 0;
+        justify-content: space-between;
+        gap:rem(10);
+        @media (max-width:rem(1000)){
+            flex-wrap: wrap; 
+            justify-content: left;
+            row-gap:rem(30);
+            
+        }
+        @media (max-width:$mobileSmall){
+             display: grid; 
+             gap: rem(20);
+             grid-template-columns: 1fr 1fr;
+             grid-template-rows: 1fr 1fr 1fr;
+        }
+        //padding-right: rem(185);
+    }
+
+    &__item {
+        
+        @media (max-width:rem(1000)){
+            flex: 0 1 calc(33.333% - 10px) ;
+
+        }
+        @media (max-width:$mobileSmall){
+             &::before{
+                content:'';
+                padding-bottom: 100%;
+                display: block;
+               
+                
+             } 
+             height: 100%;
+         
+             background: #F5F5F5;
+             justify-content: center;
+        }
+        display: flex;
+       
+        align-items: center;
+    }
+
+    &__image {
+        max-width: rem(32);
+        display: flex;
+        align-items: center;
+    }
+
+    &__text {
+        max-width: rem(142);
+        font-family: 'Ubuntu';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+@include adaptiveValue("font-size",14 ,9 );
+@include adaptiveValue("line-height",20 ,16 );
+color: #000000;
+@media (max-width:$mobileSmall){
+     text-align: center; 
+     max-width: rem(110);
+     font-size: 14px;
+line-height: 20px;
+}
+    }
+}
+
+//========================================================================
+
+
+.Home {
+
+    &__slides {
+        margin-bottom: rem(70);
+    }
+}
+.slidesHome {
+   
+    &__mobile{
+        display: none;
+
+        @media (max-width:$mobile){
+             display: flex; 
+             flex-direction: column;
+             gap: rem(20);
+        }
+    }
+    &__container {
+    }
+
+    &__header {
+        @include adaptiveValue("margin-bottom",27 ,27 );
+        font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        
+        color: #000000;
+    }
+
+    &__sliderCover {
+    }
+
+    &__slide {
+    }
+}
+.slideHome {
+padding: 0 0 410/350 * 100% 0;
+position: relative;
+&__business {
+}
+    &__body {
+        position: absolute;width: 100%;height: 100%;top: 0;left: 0;
+        padding:  rem(20) 0;
+        @media (max-width:$mobile){
+            padding:  rem(10) 0;
+        }
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        border: 1px solid #EFEFEF;
+    }
+
+    &__image {
+       width: 126/236 * 100%;
+    
+        @include adaptiveValue("margin-bottom",10 ,-20);
+        @media (max-width:$mobile){
+             margin-bottom: 10px; 
+        }
+    }
+    &__price{
+        font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 700;
+
+        @include adaptiveValue("font-size", 16,13 );
+        @include adaptiveValue("line-height", 26,16 );
+        text-align: center;
+        
+        color: #000000;
+    }
+    &__imageCover {
+ 
+        padding: 0 0 141/200 * 100% 0;
+        position: relative;
+        img{
+            position: absolute;width: 100%;height: 100%;top: 0;left: 0;
+            object-fit: cover;
+        }
+    }
+
+    &__name {
+        font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 700;
+       
+        
+        @include adaptiveValue("font-size", 16,13 );
+        @include adaptiveValue("line-height", 26,16 );
+        text-align: center;
+        
+        color: #000000;
+      
+    }
+
+    &__brand {
+        font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 26px;
+        @include adaptiveValue("font-size", 14,10 );
+        @include adaptiveValue("line-height", 26,13 );
+        
+        text-align: center;
+        
+        color: #75758A;
+       
+    }
+
+    &__rating {
+        display: flex;
+        justify-content: center;
+        flex: 1 1 auto;
+        @media (max-width:$tablet){
+
+            @include adaptiveValue("margin-bottom",10 , 3);
+        }
+        @media (max-width:$mobile){
+           
+            .css-dqr9h-MuiRating-label{
+               
+            }
+        }
+    }
+
+    &__actions {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: rem(20);
+        align-items: center;
+       
+        &:nth-child(n){
+            //flex: 1 1 50%;
+        }
+    }
+}
+.slider {
+}
+
+
+.businessHome {
+position: absolute;top: rem(20);right:rem(20);
+display: flex;
+flex-direction: column;
+gap: rem(15);
+@media (max-width:$mobile){
+     right: rem(10); 
+}
+    &__item {
+    }
+}
+
+//================================================================================
+
+
+.gridHome {
+
+@include adaptiveValue("margin-bottom",90 ,10 );
+    &__container {
+    }
+    &__cover{
+        position: relative;
+        padding: 0 0 730/1100*100% 0;
+        @media (max-width:$tablet){
+            padding: 0 0 1100/1100*100% 0;
+        }
+        @media (max-width:$mobile){
+            padding: 0 0 520% 0;
+        }
+    }
+    &__body {
+        gap: rem(30);
+        position: absolute;width: 100%;height: 100%;top: 0;left: 0;
+        :nth-child(1){
+            grid-area: a;
+        }
+        :nth-child(2){
+            grid-area: b;
+
+        }
+        :nth-child(3){
+            grid-area: c;
+        }
+        :nth-child(4){
+            grid-area: d;
+        }
+      
+        :nth-child(5){
+            grid-area: e;
+        }
+        display: grid;
+       
+        grid-template-areas:"a b c"
+                            "d d e";
+        @media (max-width:$tablet){
+            grid-template-areas:"a b "
+            "d d "
+            "c e";
+        }
+        @media (max-width:$mobile){
+            grid-template-areas:"a"
+            "b"
+            "c"
+            "d"
+            "e";
+        }
+    }
+
+    &__item {
+    }
+}
+.itemGridHome {
+    
+    position: relative;
+    &__cover {
+      //position: absolute;width: 100%;height: 100%;top: 0;left: 0;
+    }
+
+    &__image {
+        //position: absolute;width: 100%;height: 100%;top: 0;left: 0;
+      
+        img{
+            object-fit: cover;
+            position: absolute;width: 100%;height: 100%;top: 0;left: 0;
+        }
+    }
+
+    &__texts {
+        position: absolute;bottom: 25/350 * 100%;left: 25/350 * 100%;
+        @media (max-width:$tablet){
+            bottom: rem(10);
+            left: rem(10);
+        }
+        font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 42px;
+        color: #000000;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+       
+    }
+
+    &__text {
+        background: #FFFFFF;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+        padding: rem(0) rem(15);
+        &._add{
+            background: #75758A;
+            color: #fff;
+        }
+    }
+}
+
+//==============================================================================================
+
+
+
+.workHome {
+ 
+position: relative;
+max-width: $maxWidth+px;
+    &__map {
+        position: absolute;width: 100%;height: 100%;top: 0;left: 0;
+        z-index: -1;
+       @media (max-width:$pc){
+          display: none;
+       }
+        img{
+            position: absolute;width: 100%;height: 100%;top: 0;left: 0;
+            object-fit: cover;
+        }
+    }
+
+    &__container {
+    }
+
+    &__body {
+padding: rem(100) rem(0);
+display: flex;
+flex-direction: column;
+@media (max-width:$pc){
+  
+ }
+    }
+
+    &__title {
+        font-family: 'Ubuntu';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 20px;
+text-align: center;
+text-transform: uppercase;
+color: #000000;
+margin-bottom: rem(17);
+    }
+
+    &__items {
+        display: flex;
+        gap: rem(30);
+        @media (max-width:$tablet){
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        @media (max-width:$mobileSmall){
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__item {
+    }
+}
+.itemWorkHome {
+    flex: 0 1 25%;
+    @media (max-width:$tablet){
+       
+    }
+    background: #FFFFFF;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+    padding: rem(25) rem(30);
+    &__name {
+        display: flex;
+        gap: rem(15);
+        font-family: 'Ubuntu';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 20px;
+/* identical to box height, or 125% */
+margin-bottom: rem(17);
+
+color: #000000;
+    }
+
+    &__text {
+        font-family: 'Ubuntu';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 16px;
+margin-bottom: rem(10);
+color: #75758A;
+    }
+
+    &__link {
+        font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        text-decoration-line: underline;
+        
+        color: #60B021;
+    }
+}
+
+

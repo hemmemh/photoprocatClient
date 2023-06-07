@@ -1,0 +1,32 @@
+.Button2{
+    background: linear-gradient(180deg, #8EE902 0%, #4F9C2C 100%);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+    border-radius: 100px;
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: 700;
+    @include adaptiveValue("font-size", 14,11 );
+    @include adaptiveValue("line-height",16 ,13 );
+    @include adaptiveValue("padding-left",54 ,13 );
+    @include adaptiveValue("padding-right",54 ,13 );
+    @include adaptiveValue("height",50 ,30 );
+    text-transform: uppercase;
+    color: #fff;
+    transition: all 0.3s ease 0s;
+    &.slider{
+        display: flex;
+        align-items: center;
+        gap: rem(10);
+        @include adaptiveValue("padding-left",20 ,13 );
+        @include adaptiveValue("padding-right",20 ,13 );
+        @include adaptiveValue("height",40 ,40);
+        font-size: 14px;
+    }
+    @media (any-hover: hover){
+        &:hover{
+            transition: all 0.3s ease 0s;          
+            background: linear-gradient(180deg, #4F9C2C 0%, #4F9C2C 100%);
+        }
+        
+    }
+}

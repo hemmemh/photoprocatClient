@@ -1,0 +1,128 @@
+$breakpoint: 7677.98px;
+
+.AccordionUser {
+  flex: 1 1 auto;
+    display: flex;
+
+    @media (max-width:$breakpoint){
+        flex-direction: column;
+       //margin-bottom: 10px;
+      
+  }
+  &.origin{
+   .sliderAccordion{
+
+    padding: 0 30px;
+    max-width: inherit;
+    width: 100%;
+   }
+   .sliderAccordion__name{
+    display: none;
+   }
+    .AccordionUser__bodyCover{
+        &:not(:last-child) {
+            border-bottom: 1px solid rgba($color: #000000, $alpha: 0.3);
+        }
+ 
+    }
+    .AccordionUser__body{
+ 
+    }
+    .AccordionUser__bodytwo{
+        //padding-bottom: 10px;  
+   
+    }
+    .AccordionUser__item{
+        padding-bottom: 10px;
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 200;
+        @include adaptiveValue("font-size", 16, 14);
+         @include adaptiveValue("line-height",19, 17);
+        color: #252525;
+        display: flex;
+        justify-content: center;
+         &:not(:last-child) {
+             margin-bottom: 10px;
+         }
+    }
+    .AccordionUser__button{
+     
+        //box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 18px;
+        text-align: center;
+        padding: 10px 0;
+ 
+        background: #fff;
+    }
+  }
+  &.user{
+    .AccordionUser__bodyCover{
+    
+            border-bottom: 1px solid #EFEFEF;
+        
+    }
+   
+  }
+    &__bodyCover{
+       
+       
+       
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        @media (max-width:$breakpoint){
+            //align-items:flex-start;
+        }
+        
+        flex: 1 1 auto;
+    }
+    
+    &__body{
+        display: flex;
+        flex-direction: column;
+       align-items: flex-start;
+  
+        width: 100%;
+        transition: all 0.3s ease 0s;
+        @media (min-width: $breakpoint){
+            height: auto;
+            align-items: flex-start;
+          }
+      
+    }
+    &__bodytwo{
+       
+      }
+    &__item{
+     width: 100%;
+  
+       transition: all 0.3s ease 0s;
+     
+      
+        
+    }
+
+    &__button{
+       
+       width: 100%;
+        cursor: pointer;
+      
+        @media (min-width: $breakpoint){
+            pointer-events: none;
+            cursor: inherit;
+
+      }
+    
+        &.active{
+          
+           }
+    }
+   
+ 
+}
+

@@ -1,0 +1,100 @@
+.RadioGroup {
+    &.origin{
+       
+        font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 18px;
+
+        color: #000000;
+        margin-bottom: 28px;
+        &.g{
+            margin-bottom: 0;
+        }
+        .RadioGroup__body{
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+        &.g{
+            .RadioGroup__body{
+                flex-direction: row;
+            }
+        }
+        .RadioGroup__name {
+            margin-bottom: 14px;
+            text-transform: uppercase;
+           }
+
+
+        .RadioGroup__label{
+            font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 14px;
+        color: #000000;
+        transition: all 0.3s ease 0s;
+        @media (any-hover: hover){
+            &:hover{
+                color: #60B021;
+                transition: all 0.3s ease 0s;
+            }
+        }
+        }
+
+        .RadioGroup__check{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 14px;
+            height: 14px;
+            box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15);
+            background: #4F9C2C;
+            &::before{
+                content:'';
+                background: linear-gradient(180deg, rgba(245, 245, 245, 0.5) 0%, #F5F5F5 100%);
+            
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                transition: all 0.3s ease 0s;
+            }
+        }
+        .RadioGroup__item{
+
+            gap: 14px;
+            &.active{
+                .RadioGroup__label{
+                    color: #000000;
+                }
+                .RadioGroup__check{
+                   
+                        &::before{
+                            transform: scale(0.47);
+                            transition: all 0.3s ease 0s;
+                        }
+                    
+                   
+                }
+            }
+        }
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+    }
+   
+
+    &__check {
+        cursor: pointer;
+        border: 1px solid #E3E3E3;
+        border-radius: 50%;
+    }
+
+    &__label {
+        cursor: pointer;
+    }
+}

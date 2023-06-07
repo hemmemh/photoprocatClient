@@ -1,0 +1,273 @@
+.Basket {
+margin-top: rem(100);
+@media (max-width:$mobile){
+    margin-top: rem(50);
+}
+    &__container {
+    }
+
+    &__body {
+    }
+
+    &__title {
+        font-family: 'Ubuntu';
+font-style: normal;
+font-weight: 700;
+font-size: 30px;
+line-height: 34px;
+text-transform: uppercase;
+margin-bottom: rem(43);
+color: #000000;
+@media (max-width:$mobile){
+    margin-bottom: rem(10);
+    font-size: 20px;
+line-height: 24px;
+}
+    }
+
+    &__items {
+    }
+}
+.items-basket {
+border-top: 1px solid #EFEFEF;
+border-bottom: 1px solid #EFEFEF;
+position: relative;
+    &__top {
+    }
+    &__bottom{
+        display: flex;
+        margin-top: rem(30);
+        justify-content: flex-end;
+        margin-bottom: rem(116);
+
+    }
+    &__body {
+        border-bottom: 1px solid #EFEFEF;
+    }
+
+    &__product {
+        display: flex;
+        align-items: center;
+        position: relative;
+        height: rem(74);
+        &:not(:last-child) {
+            border-bottom: 1px solid #EFEFEF;
+        }
+    }
+    &__image-flex{
+        flex: 0 0 rem(96);
+        @media (max-width:$mobile){
+            flex: 0 0 rem(40);
+        }
+    }
+    &__image-cover{
+        width: rem(60);
+        @media (max-width:$mobile){
+            width: rem(30);
+        }
+    }
+    &__image {
+     
+        position: relative;
+        padding:  0 0   42/60 * 100% 0;
+        img{
+            position: absolute;width: 100%;height: 100%;top: 0;left: 0;
+        }
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+       
+        flex: 0 1 rem(285);
+        @media (max-width:497px){
+            flex: 0 0 rem(112);
+        }
+    }
+
+    &__name {
+        font-family: 'Ubuntu';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 20px;
+@media (max-width:$mobile){
+    font-size: 10px;
+    line-height: 12px;
+}
+
+color: #000000;
+
+    }
+
+    &__brand {
+        font-family: 'Ubuntu';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 20px;
+@media (max-width:$mobile){
+    font-size: 10px;
+    line-height: 12px;
+}
+
+
+color: #75758A;
+    }
+
+    &__price {
+        font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 16px;
+        flex: 0 1 rem(184);
+        color: #60B021;
+        @media (max-width:$mobile){
+            font-size: 10px;
+            line-height: 12px;
+        }
+    }
+
+    &__number {
+
+    }
+     &__amount{
+        flex: 0 1 rem(290);
+     }
+    &__total {
+        font-family: 'Ubuntu';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 16px;
+
+color: #000000;
+@media (max-width:$mobile){
+    font-size: 10px;
+    line-height: 12px; 
+    flex: 0 0 rem(70);
+}
+        flex: 1 0 rem(130);
+        @media (max-width:454px){
+          
+        }
+    }
+
+    &__delete {
+        position: absolute;top: 50%;right: 0;
+        transform: translate(0,-50%);
+        width: rem(40);
+        height: rem(40);
+        border-radius: 50%;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @media (max-width:$mobile){
+            width: rem(20);
+            height: rem(20);
+            &::before{
+                font-size: 9px;
+                
+            }
+        }
+    }
+    
+
+    &__submit {
+        margin-right: rem(105);
+        @media (max-width:$mobile){
+            margin-right: rem(50); 
+        }
+    }
+
+    &__totalPrice {
+    }
+}
+.top-basket {
+display: flex;
+padding: 14px 0;
+border-bottom: 1px solid #EFEFEF;
+:nth-child(1){
+    flex: 0 0 rem(96);
+    @media (max-width:$mobile){
+        flex: 0 0 rem(40);
+    }
+}
+:nth-child(2){
+    @media (max-width:497px){
+        flex: 0 0 rem(112);
+    }
+    flex: 0 1 rem(285);
+}
+:nth-child(3){
+    flex: 0 1 rem(186);
+}
+:nth-child(4){
+    flex: 0 1 rem(288);
+}
+:nth-child(5){
+    flex: 1 0 rem(130);
+    @media (max-width:$mobile){
+        flex: 0 0 rem(70);
+    }
+}
+    &__item {
+        font-family: 'Ubuntu';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+@media (max-width:$mobile){
+    font-size: 9px;
+    line-height: 12px;
+}
+/* identical to box height, or 143% */
+
+
+color: #75758A;
+    }
+}
+
+.totalPrice-basket {
+display: flex;
+align-items: center;
+
+gap:rem(40);
+    &__left {
+        font-family: 'Ubuntu';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 21px;
+@media (max-width:$mobile){
+    font-size: 12px;
+    line-height: 16px;    
+}
+
+
+color: #000000;
+
+    }
+
+    &__right {
+        padding-bottom: rem(11);
+        font-family: 'Ubuntu';
+font-style: normal;
+font-weight: 700;
+font-size: 30px;
+line-height: 34px;
+color: #000000;
+position: relative;
+@media (max-width:$mobile){
+    font-size: 18px;
+    line-height: 22px;    
+}
+&::before{
+    content:'';
+    position: absolute;width: 100%;height: rem(2);bottom: 0;left: 0;
+    background: linear-gradient(270deg, #8EE901 0%, #4F9C2C 99.06%);
+}
+    }
+}
