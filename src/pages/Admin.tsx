@@ -10,6 +10,8 @@ import { createBrand, getAllBrands } from '../https/brandsApi'
 import ProductSpoiler from '../components/UI/productSpoiler/ProductSpoiler'
 import { createProduct } from '../https/productApi'
 import { set } from 'mobx'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { ADMIN_ROUTE, HOME_ROUTE } from '../utils/routs'
 
 
 
@@ -37,6 +39,7 @@ const Admin = () => {
     const [type, settype] = useState<any>({name:'тип'})
     const [changeDescriptionLoader, setchangeDescriptionLoader] = useState(false)
     const sliders = useRef<any>([])
+    const navigate = useNavigate()
     const senInfo = (name:any)=>{
         setinfoName(name)
     }
@@ -75,7 +78,9 @@ const Admin = () => {
                 console.log(data);
                 settypeInformation([])
                 setname('')
+                navigate(HOME_ROUTE)
                 window.location.reload()
+                navigate(ADMIN_ROUTE)
             })
         }else{
             alert('недостаточно данных')
