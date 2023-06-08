@@ -75,6 +75,7 @@ const Admin = () => {
                 console.log(data);
                 settypeInformation([])
                 setname('')
+                window.location.reload()
             })
         }else{
             alert('недостаточно данных')
@@ -99,6 +100,7 @@ const Admin = () => {
             setname('')
             setfile(null)
             setfileImage(null)
+            window.location.reload()
         })
         }else{
             alert('недостаточно данных')
@@ -230,6 +232,7 @@ console.log(files);
        setbrand({name:'бренд'})
        settype({name:'тип'})
        setfileImages([]) 
+       window.location.reload()
     })
     }else{
 alert('недостаточно данных')

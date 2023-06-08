@@ -100,7 +100,7 @@ const Navbar:FC<button>  = ({filterCatalog,setfilterCatalog}) => {
             login({mail,password}).then(e=>{
                 console.log(jwtDecode(e.refreshToken));
                 user.setuser(jwtDecode(e.refreshToken))
-                navigate(HOME_ROUTE)
+                navigate(USER_ROUTE)
             })
         }else{
             if (!validationEmail) {

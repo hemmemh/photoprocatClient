@@ -13,6 +13,8 @@ const Input:FC<button> = ({inputClass='origin',placeholder='name',children,lock=
     const inputRef = useRef<any>()
     const input2Ref = useRef<any>()
  useEffect(() => {
+    console.log(value,')(');
+    
     document.addEventListener('click',addClick)
     if (lock) {
         setactive(true)
@@ -24,6 +26,10 @@ const Input:FC<button> = ({inputClass='origin',placeholder='name',children,lock=
     return () => document.removeEventListener('click', addClick);
     
  }, [])
+ useEffect(() => {
+   setactive(active) 
+   
+ }, [value])
  
 const addClick = (e:any)=>{
     if (!lock) {
@@ -37,6 +43,8 @@ const onFocus = ()=>{
     setactive(true)
     input2Ref.current.focus()   
 }
+
+
   return (
     <div ref={inputRef} onClick={()=>onFocus()}  className={active ? `Input ${inputClass} active`: `Input ${inputClass}`} >
         <input value={value} onChange={(e:any)=>change(e.target.value)}  ref={input2Ref} className='Input__text'  type="text"  />

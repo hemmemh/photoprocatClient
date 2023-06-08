@@ -56,13 +56,13 @@ color: #fff;
             transition: all 0.3s ease 0s;
             transform: scale(1,1);
         }
-        .css-cwhad8-MuiDateCalendar-root{
+        .MuiDateCalendar-root{
             background: #fff;
             box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
           
           
         }
-        .css-nk89i7-MuiPickersCalendarHeader-root{
+        .MuiPickersCalendarHeader-root{
             position: relative;
             padding-top: rem(16);
             padding-left: 0;
@@ -70,7 +70,7 @@ color: #fff;
             justify-content: center;
             display: flex;
         }
-        .css-cyfsxc-MuiPickersCalendarHeader-labelContainer{
+        .MuiPickersCalendarHeader-labelContainer{
             position: absolute;
             left: 50%;
             transform: translate(-50%,0);
@@ -80,26 +80,26 @@ color: #fff;
             justify-content: center;
             overflow: visible;
         }
-        .css-9reuh9-MuiPickersArrowSwitcher-root{
+        .MuiPickersArrowSwitcher-root{
             position: absolute;
             left:7%;
             width:87%;
             justify-content: space-between;
         }
-        .css-dplwbx-MuiPickersCalendarHeader-label{
+        .MuiPickersCalendarHeader-label{
             white-space: normal;
          
             margin: 0;
         }
-        .Mui-selected.css-qa7bje-MuiButtonBase-root-MuiPickersDay-root{
+        .Mui-selected.MuiPickersDay-root{
             background: linear-gradient(270deg, #8EE901 0%, #4F9C2C 99.06%);
         }
-        .css-12mkn7b-MuiButtonBase-root-MuiIconButton-root-MuiPickersCalendarHeader-switchViewButton{
+        .MuiIconButton-root-MuiPickersCalendarHeader-switchViewButton{
            
            margin: 0;
           
         }
-        .css-1tkx1wf-MuiSvgIcon-root-MuiPickersCalendarHeader-switchViewIcon{
+        .MuiSvgIcon-root-MuiPickersCalendarHeader-switchViewIcon{
             position: relative;
             z-index: 1000;
         }
