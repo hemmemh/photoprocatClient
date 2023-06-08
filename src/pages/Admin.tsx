@@ -78,7 +78,6 @@ const Admin = () => {
                 console.log(data);
                 settypeInformation([])
                 setname('')
-                navigate(HOME_ROUTE)
                 window.location.reload()
                 navigate(ADMIN_ROUTE)
             })
