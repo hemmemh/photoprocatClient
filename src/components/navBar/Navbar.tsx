@@ -5,7 +5,7 @@ import { Modal } from '../UI/modal/Modal'
 import Input from '../UI/input/Input'
 import CheckBox from '../UI/checkBox/CheckBox'
 import { useLocation, useNavigate, useNavigation } from 'react-router-dom'
-import { BASKET_ROUTE, CATALOG_ROUTE, COMPARE_ROUTE, HOME_ROUTE, LOVES_ROUTE, NEWS_ROUTE, REGISTRATION_ROUTE, USER_ROUTE } from '../../utils/routs'
+import { ADMIN_ROUTE, BASKET_ROUTE, CATALOG_ROUTE, COMPARE_ROUTE, HOME_ROUTE, LOVES_ROUTE, NEWS_ROUTE, REGISTRATION_ROUTE, USER_ROUTE } from '../../utils/routs'
 import { forgetPassword, forgetPassword2, login } from '../../https/userApi'
 import jwtDecode from 'jwt-decode'
 import { Context } from '../..'
@@ -207,6 +207,7 @@ const Navbar:FC<button>  = ({filterCatalog,setfilterCatalog}) => {
                     <div   className="navigationNavbar__item">Правила</div>
                     <div onClick={()=>navigate(NEWS_ROUTE)} className="navigationNavbar__item">Новости</div>
                     <div className="navigationNavbar__item">Контакты</div>
+                    <div onClick={()=>navigate(ADMIN_ROUTE)} className="navigationNavbar__item">Админ</div>
                     
                 </div>
                 <div className="menu__shedule">
@@ -237,7 +238,7 @@ const Navbar:FC<button>  = ({filterCatalog,setfilterCatalog}) => {
                         <div className="catalogNavbar__item_two">Правила</div>
                         <div onClick={()=>navigate(NEWS_ROUTE)}   className="catalogNavbar__item_two">Новости</div>
                         <div className="catalogNavbar__item_two">Контакты</div>
-                        
+                        <div onClick={()=>navigate(ADMIN_ROUTE)} className="catalogNavbar__item_two">Админ</div>
                     </div>
                     
                  </div>
