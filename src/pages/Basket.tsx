@@ -9,7 +9,7 @@ import { Context } from '..'
 import { API_URL } from '../utils/config'
 import BasketProduct from '../components/BasketProduct'
 import { useNavigate } from 'react-router-dom'
-import { USER_ROUTE } from '../utils/routs'
+import { HOME_ROUTE, USER_ROUTE } from '../utils/routs'
 import { change } from '../https/productApi'
 
 const Basket = () => {
@@ -58,7 +58,7 @@ const Basket = () => {
                 console.log(data);
                 
             })
-            navigate(USER_ROUTE)
+            navigate(HOME_ROUTE)
             window.location.reload();
         })
  

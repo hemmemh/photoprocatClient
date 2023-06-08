@@ -78,8 +78,8 @@ const Admin = () => {
                 console.log(data);
                 settypeInformation([])
                 setname('')
+                navigate(HOME_ROUTE)
                 window.location.reload()
-                navigate(ADMIN_ROUTE)
             })
         }else{
             alert('недостаточно данных')
@@ -104,6 +104,7 @@ const Admin = () => {
             setname('')
             setfile(null)
             setfileImage(null)
+            navigate(HOME_ROUTE)
             window.location.reload()
         })
         }else{
@@ -236,6 +237,7 @@ console.log(files);
        setbrand({name:'бренд'})
        settype({name:'тип'})
        setfileImages([]) 
+       navigate(HOME_ROUTE)
        window.location.reload()
     })
     }else{

@@ -165,7 +165,97 @@ const Catalog = () => {
    useEffect(() => {
     setsearchParamsLoader(true)
     if (searchParamsLoader) {
-        window.location.reload()
+        let typeInformationConst = {}
+        let informationValuesConst = {}
+        let informationsConst:any = []
+        let slideMouseOneConst:any = {}
+
+        getAllproduct(searchParams.get("type"),null,null,null,null,null,null,null,null,null,null).then(data=>{
+           if (data.count !== 0) {
+            
+           }
+           setproducts({...data})
+           let price:any = []
+           data.responce.forEach((el:any)=>price.push(el.price))
+           price = price.sort((a:any,b:any)=>a-b)
+           setpriceRange([price[0],price[price.length-1]])
+           
+           for (const it of JSON.parse(data.responce[0].type.informations)) {
+            let val:any = ''
+            if (Object.entries(it)[0][1] == 'check') {
+                val = []
+            }else if(Object.entries(it)[0][1] == 'slider'){
+                val = [0,0]
+                slideMouseOneConst = {...slideMouseOneConst,[Object.entries(it)[0][0]]:[0,0]}
+            }
+            typeInformationConst = {...typeInformationConst,[Object.entries(it)[0][0]]:Object.entries(it)[0][1]}
+            informationValuesConst = {...informationValuesConst,[Object.entries(it)[0][0]]:val}
+           }
+
+            for (const it of data.responceAll) {
+                informationsConst = [...informationsConst,...it.information]
+            
+           }
+       
+           
+           setinformations(informationsConst)
+           Object.entries(typeInformationConst).map((el:any)=>{
+            const type = el[1]
+            const typeName = el[0]
+            let arr:any = []
+            arr = [...informationsConst.filter((fil:any)=>fil.name == typeName).map((ee:any)=>ee.description)]
+            arr = arr.filter((fil:any,pos:any)=> arr.indexOf(fil) === pos)
+           
+            
+            if (type == 'slider') {
+                if(arr.length ===  1){
+                    informationValuesConst = {...informationValuesConst,[typeName]:[0,Number(arr.sort((a:any,b:any)=>b-a)[0]) ]}
+                    slideMouseOneConst = {...slideMouseOneConst, [typeName]:[0,Number(arr.sort((a:any,b:any)=>b-a)[0]) ]}
+                }else{
+                    informationValuesConst = {...informationValuesConst,[typeName]:[Number(arr.sort((a:any,b:any)=>a-b)[0]) ,Number(arr.sort((a:any,b:any)=>b-a)[0]) ]}
+                    slideMouseOneConst = {...slideMouseOneConst, [typeName]:[Number(arr.sort((a:any,b:any)=>a-b)[0]) ,Number(arr.sort((a:any,b:any)=>b-a)[0]) ]}
+                }
+              
+            }else if (type == 'check'){
+            informationValuesConst = {...informationValuesConst,[typeName]:[...arr]}
+            }else{
+                informationValuesConst = {...informationValuesConst,[typeName]:arr[0]} 
+            }
+           })
+           setsliderMouseOn(slideMouseOneConst)
+           setinformationValues(informationValuesConst) 
+           settypeInformation(typeInformationConst)
+
+           console.log(informationValuesConst,typeInformationConst,'@@@@@@@@@'); 
+           //setproducts({...data})   
+            
+         
+       
+            getBasket({id:user.user.id}).then(data=>{
+                setbasket(data?.basketItems)
+                
+          })
+          setproductsLoad(true)
+        })
+       
+        
+        getAllBrands().then(data=>{
+            setbrands(data)
+     
+            setbrandsLoad(true)
+        })
+        getCompare({id:user.user.compare}).then(data=>{
+            console.log(data);
+            setcompare(data?.compareItems)
+       
+        })
+        getLoves({id:user.user.loves}).then(data=>{
+            console.log(data);
+            
+          setloves(data?.lovesItems)
+          setproductsLoad(true)
+         })
+        secheckedBrands(brand.checkedBrands)
     }
    
    }, [searchParams])

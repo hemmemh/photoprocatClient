@@ -218,7 +218,7 @@ line-height: 16px;
 text-align: center;
 text-transform: uppercase;
 @include adaptiveValue("width",200 , 100);
-@include adaptiveValue("font-size",14, 9);
+@include adaptiveValue("font-size",14, 6);
 @include adaptiveValue("line-height",16 , 12);
 color: #FFFFFF;
 .Button__absolute{

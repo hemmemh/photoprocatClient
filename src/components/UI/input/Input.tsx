@@ -13,7 +13,7 @@ const Input:FC<button> = ({inputClass='origin',placeholder='name',children,lock=
     const inputRef = useRef<any>()
     const input2Ref = useRef<any>()
  useEffect(() => {
-    console.log(value,')(');
+    console.log(value,')(11');
     
     document.addEventListener('click',addClick)
     if (lock) {
@@ -27,7 +27,10 @@ const Input:FC<button> = ({inputClass='origin',placeholder='name',children,lock=
     
  }, [])
  useEffect(() => {
-   setactive(active) 
+    if (value !== '') {
+        setactive(true)  
+    }
+
    
  }, [value])
  

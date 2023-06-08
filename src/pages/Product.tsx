@@ -88,7 +88,7 @@ const Product = () => {
          
             addItemToBasket({basketId:user.user.basket,product:product._id,count:1}).then(data=>{
                 console.log(data);
-           
+                setinBasket(true)
                 setinBasket(true)
                 
             })

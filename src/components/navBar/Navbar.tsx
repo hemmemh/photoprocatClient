@@ -43,6 +43,7 @@ const Navbar:FC<button>  = ({filterCatalog,setfilterCatalog}) => {
     const [filter, setfilter] = useState('')
     const [filterTime, setfilterTime] = useState<any>(null)
     const {user} = useContext(Context)
+    
     const location = useLocation()
     const navigate = useNavigate()
     const addClick = useCallback(
@@ -180,6 +181,9 @@ const Navbar:FC<button>  = ({filterCatalog,setfilterCatalog}) => {
    
        
       
+    }
+    const catalogNav = ()=>{
+
     }
   return (
     <div ref={navbarRef} className={navBarActive ? "Navbar active" : "Navbar"}>

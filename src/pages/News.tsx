@@ -13,6 +13,8 @@ import { log } from 'console'
 import { API_URL } from '../utils/config'
 import Loader from '../components/UI/loader/Loader'
 import { Context } from '..'
+import { useNavigate } from 'react-router-dom'
+import { HOME_ROUTE } from '../utils/routs'
 
 const News = () => {
     const {user} = useContext(Context)
@@ -31,7 +33,7 @@ const News = () => {
     const [newsId, setnewsId] = useState(null)
     const [loader, setloader] = useState(false)
     const inputRef = useRef<any>()
-   
+    const navigate = useNavigate()
     useEffect(() => {
         getAllNews().then(data=>{
             console.log(data);
@@ -52,6 +54,7 @@ const News = () => {
             setfile(null)
             setFileImage(null)
             setFileDiv(false)
+            navigate(HOME_ROUTE)
             window.location.reload()
             
            })
@@ -93,7 +96,7 @@ const News = () => {
      const addCommentToNews = ()=>{
         if (name !== '' && sername !== ''&& textComment !== '' ) {
        addComment({name,sername,text:textComment,news:newsId}).then(data=>{
-        console.log(data);
+        navigate(HOME_ROUTE)
         window.location.reload()
        })
      }else{
