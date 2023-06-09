@@ -127,6 +127,8 @@ const Catalog = () => {
             informationValuesConst = {...informationValuesConst,[typeName]:[...arr]}
             }else{
                 arr.unshift('неважно')
+                console.log(arr,'********');
+                
                 informationValuesConst = {...informationValuesConst,[typeName]:arr[0]} 
             }
            })
@@ -187,7 +189,7 @@ const Catalog = () => {
            setpriceRange([price[0],price[price.length-1]])
            
            for (const it of JSON.parse(data.responce[0].type.informations)) {
-            let val:any = ''
+            let val:any = 'неважно'
             if (Object.entries(it)[0][1] == 'check') {
                 val = []
             }else if(Object.entries(it)[0][1] == 'slider'){
@@ -225,6 +227,7 @@ const Catalog = () => {
             }else if (type == 'check'){
             informationValuesConst = {...informationValuesConst,[typeName]:[...arr]}
             }else{
+                arr.unshift('неважно')
                 informationValuesConst = {...informationValuesConst,[typeName]:arr[0]} 
             }
            })
