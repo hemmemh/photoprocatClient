@@ -28,8 +28,8 @@ import { getCompare } from '../https/compareApi';
 import { getLoves } from '../https/lovesApi';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import useIntersectionObserver from '../hooks/UseIntersectionObserver';
-
-
+import { useInView } from 'react-intersection-observer';
+import { log } from 'console';
 
 const Catalog = () => {
  
@@ -67,7 +67,10 @@ const Catalog = () => {
   const [observerLoader, setobserverLoader] = useState(false)
   const [searchParamsLoader, setsearchParamsLoader] = useState(false)
   const [priceRange, setpriceRange] = useState<any>([0,10])
-
+  const { ref, inView, entry } = useInView({
+    /* Optional options */
+    threshold: 0,
+  });
     useEffect(() => {
         let typeInformationConst = {}
         let informationValuesConst = {}
@@ -85,7 +88,7 @@ const Catalog = () => {
            setpriceRange([price[0],price[price.length-1]])
            
            for (const it of JSON.parse(data.responce[0].type.informations)) {
-            let val:any = ''
+            let val:any = 'неважно'
             if (Object.entries(it)[0][1] == 'check') {
                 val = []
             }else if(Object.entries(it)[0][1] == 'slider'){
@@ -109,8 +112,8 @@ const Catalog = () => {
             let arr:any = []
             arr = [...informationsConst.filter((fil:any)=>fil.name == typeName).map((ee:any)=>ee.description)]
             arr = arr.filter((fil:any,pos:any)=> arr.indexOf(fil) === pos)
-           
-            
+  
+             
             if (type == 'slider') {
                 if(arr.length ===  1){
                     informationValuesConst = {...informationValuesConst,[typeName]:[0,Number(arr.sort((a:any,b:any)=>b-a)[0]) ]}
@@ -123,6 +126,7 @@ const Catalog = () => {
             }else if (type == 'check'){
             informationValuesConst = {...informationValuesConst,[typeName]:[...arr]}
             }else{
+                arr.unshift('неважно')
                 informationValuesConst = {...informationValuesConst,[typeName]:arr[0]} 
             }
            })
@@ -163,13 +167,15 @@ const Catalog = () => {
     }, [])
 
    useEffect(() => {
+
     setsearchParamsLoader(true)
     if (searchParamsLoader) {
         let typeInformationConst = {}
         let informationValuesConst = {}
         let informationsConst:any = []
         let slideMouseOneConst:any = {}
-
+        console.log('111111111');
+    
         getAllproduct(searchParams.get("type"),null,null,null,null,null,null,null,null,null,null).then(data=>{
            if (data.count !== 0) {
             
@@ -266,10 +272,10 @@ const Catalog = () => {
         setobserverLoader(true)
         if (observerLoader) {
 
-            console.log(products,((page * limit) - limit ),']iiiiii22');
-            if (observerLoader && observer?.isIntersecting && ((page * limit) - limit ) <= products.responceAll?.length) {
+   
+            if (observerLoader && inView && (page +1) * limit < products.responceAll?.length) {
                 //setproductsLoad(false)
-               
+                console.log('7777777777777777',inView,(((page + 1) * limit) - limit ) <= products.responceAll?.length);
                 console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
                 getAllproduct(searchParams.get("type"),page+1,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
                     console.log(data,'oop5555555555555555555');
@@ -282,7 +288,7 @@ const Catalog = () => {
        
        
        
-      }, [observer?.isIntersecting])
+      }, [inView])
 
 
     useEffect(() => {
@@ -290,6 +296,7 @@ const Catalog = () => {
         setsortLoader(true)
         if (sortLoader) {
         setproductsLoad(false)
+        console.log('222222222222');
         console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
         getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
             console.log(sort,'oop5555555555555555555');
@@ -304,11 +311,11 @@ const Catalog = () => {
        
     useEffect(() => {
       
-       
+
         setsortNumberLoader(true)
         if (sortNumberLoader) {
             setproductsLoad(false) 
-            console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
+            console.log('333333333333333');
            getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
                 setproducts({...data})
                 setproductsLoad(true)
@@ -320,11 +327,11 @@ const Catalog = () => {
 
     useEffect(() => {
 
-
+   
         setcheckedBrandsLoader((prev:any)=>prev+1)
         if(checkedBrandsLoader > 1){
             setproductsLoad(false)
-            console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
+            console.log('444444444444');
             
             getAllproduct(searchParams.get("type"),page,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
                 setproducts({...data})
@@ -336,10 +343,12 @@ const Catalog = () => {
     }, [checkedBrands])
 
     useEffect(() => {
+     
         setinformationValuesLoasder((prev:any)=>prev+1)
-        console.log(informationValuesLoader,'ppppppppppppppppppppppppp');
+
         
   if (informationValuesLoader > 1) {
+    console.log('55555555555555');
     console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
             
     setproductsLoad(false)
@@ -360,7 +369,7 @@ const Catalog = () => {
      setfilterLoader(true)
      if (filterLoader) {
         setproductsLoad(false)
-     
+        console.log('666666666666');
         getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
             setproducts({...data})
             setproductsLoad(true)
@@ -530,7 +539,7 @@ const Catalog = () => {
     if (type == 'radio') {
         return   <AccordionUserItem key={typeName}> 
         <div className='RadioGroup__name'>{typeName}</div>
-        <RadioGroup  items={arr.join(',')} name={typeName} value={informationValues[typeName]} change={(ru)=>setinformationValues((prev:any)=>({...prev,[typeName]:ru}))}  checked={1} nameVisible={false}/>
+        <RadioGroup  items={'неважно,' + arr.join(',')} name={typeName} value={informationValues[typeName]} change={(ru)=>setinformationValues((prev:any)=>({...prev,[typeName]:ru}))}  checked={0} nameVisible={false}/>
         </AccordionUserItem>
  
        
@@ -581,7 +590,7 @@ const Catalog = () => {
                   {products.responce?.map((e:any)=>
                   <ProductComponent key={e._id} data={e} basket={basket} loves={loves} compare={compare} inCompare = {compare?.find((el:any)=>el.product?._id == e._id) ? true : false} inBasket = {basket?.find((el:any)=>el.product?._id == e._id)  ? true : false} inLoves = {loves?.find((el:any)=>el.product?._id == e._id)  ? true : false}/>
                   )}
-                    <div  ref={obsRef}className="mainCatalog__gridEnd"></div>
+                    <div  ref={ref} className="mainCatalog__gridEnd"></div>
                     
                   </div>
                  :
@@ -607,7 +616,7 @@ const Catalog = () => {
              
                    if (type == 'radio') {
             
-                      return   <RadioGroup key={typeName} items={arr.join(',')} name={typeName} value={informationValues[typeName]} change={(ru)=>setinformationValues((prev:any)=>({...prev,[typeName]:ru}))}  checked={1} nameVisible={true}/>
+                      return   <RadioGroup key={typeName} items={'неважно,' + arr.join(',')} name={typeName} value={informationValues[typeName]} change={(ru)=>setinformationValues((prev:any)=>({...prev,[typeName]:ru}))}  checked={1} nameVisible={true}/>
                    }
                    if (type == 'check') {
                     return   <CheckBox key={typeName}  items={arr.join(',')} name={typeName} value={informationValues[typeName]} change={(ru)=>setinformationValues((prev:any)=>({...prev,[typeName]:[...ru]}))}  checked={[0,1]} nameVisible={true}/>
