@@ -54,6 +54,7 @@ $responsiveType: 1;
 	max-width:$maxWidth + px ;
 	margin: 0 auto;
 	position: relative;
+	min-height: 100vh;
 }
 body {
 	// Скролл заблокирован

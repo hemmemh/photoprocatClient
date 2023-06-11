@@ -1,4 +1,70 @@
 .Registration {
+    .MuiDateCalendar-root{
+        background: #fff;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+      
+      
+    }
+    .MuiFormLabel-root{
+        display: none;
+        border: none;
+    }
+    .MuiFormControl-root{
+        border: none;
+       
+    }
+    .MuiOutlinedInput-notchedOutline{
+        border: none;
+      
+    }
+    .MuiInputBase-root{
+        border: none;
+        input{
+            padding: 0;
+        }
+    }
+    .MuiPickersCalendarHeader-root{
+        position: relative;
+        padding-top: rem(16);
+        padding-left: 0;
+        padding-right: 0;
+        justify-content: center;
+        display: flex;
+    }
+    .MuiPickersCalendarHeader-labelContainer{
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%,0);
+        z-index: 1;
+        display: flex;
+        width: auto;
+        justify-content: center;
+        overflow: visible;
+    }
+    .MuiPickersArrowSwitcher-root{
+        position: absolute;
+        left:7%;
+        width:87%;
+        justify-content: space-between;
+    }
+    .MuiPickersCalendarHeader-label{
+        white-space: normal;
+     
+        margin: 0;
+    }
+    .Mui-selected.MuiPickersDay-root{
+        background: linear-gradient(270deg, #8EE901 0%, #4F9C2C 99.06%);
+    }
+    .MuiIconButton-root-MuiPickersCalendarHeader-switchViewButton{
+       
+       margin: 0;
+      
+    }
+    .MuiSvgIcon-root-MuiPickersCalendarHeader-switchViewIcon{
+        position: relative;
+        z-index: 1000;
+    }
+
 margin-top: rem(123);
 position: relative;
 @media (max-width:$mobile){
@@ -56,53 +122,7 @@ color: #fff;
             transition: all 0.3s ease 0s;
             transform: scale(1,1);
         }
-        .MuiDateCalendar-root{
-            background: #fff;
-            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
-          
-          
-        }
-        .MuiPickersCalendarHeader-root{
-            position: relative;
-            padding-top: rem(16);
-            padding-left: 0;
-            padding-right: 0;
-            justify-content: center;
-            display: flex;
-        }
-        .MuiPickersCalendarHeader-labelContainer{
-            position: absolute;
-            left: 50%;
-            transform: translate(-50%,0);
-            z-index: 1;
-            display: flex;
-            width: auto;
-            justify-content: center;
-            overflow: visible;
-        }
-        .MuiPickersArrowSwitcher-root{
-            position: absolute;
-            left:7%;
-            width:87%;
-            justify-content: space-between;
-        }
-        .MuiPickersCalendarHeader-label{
-            white-space: normal;
-         
-            margin: 0;
-        }
-        .Mui-selected.MuiPickersDay-root{
-            background: linear-gradient(270deg, #8EE901 0%, #4F9C2C 99.06%);
-        }
-        .MuiIconButton-root-MuiPickersCalendarHeader-switchViewButton{
-           
-           margin: 0;
-          
-        }
-        .MuiSvgIcon-root-MuiPickersCalendarHeader-switchViewIcon{
-            position: relative;
-            z-index: 1000;
-        }
+      
     }
     &__title {
         

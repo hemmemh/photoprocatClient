@@ -1,5 +1,5 @@
 .Footer {
-
+margin-top: auto;
     &__top {
     }
     &__bottom {
@@ -128,6 +128,10 @@ display: flex;
         align-items: center; 
         justify-content: center;
         transition: all 0.3s ease 0s;
+        &::before{
+        font-size: rem(12);
+        display: none;
+        }
         @media (any-hover: hover){
             &:hover{
                 background: #34661d;
@@ -138,11 +142,7 @@ display: flex;
         @media (max-width:$mobile){
             
         }
-        &::before{
-            display: none;
-            font-size: rem(12);
-            
-        }
+    
         @media (max-width:$tablet){
             flex-basis: rem(120);
             min-width: rem(120);
@@ -153,14 +153,14 @@ display: flex;
         flex-basis: rem(40); 
         min-width: rem(40);
         padding: 0;
-       
+        &::before{
+            font-size: rem(12);
+            display: block;
+            }
         span{
             display: none;
         }
-        &::before{
-            display: block;
-            
-        }
+       
    }
 color: #FFFFFF;
     }

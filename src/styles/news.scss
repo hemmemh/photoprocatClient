@@ -289,13 +289,13 @@ color: #60B021;
         cursor: pointer;
         @media (any-hover: hover){
             &:hover{
-                color: #4F9C2C;
+                color: #57f110;
                 transition: all 0.3s ease 0s;
             }
         }
         &.active{
-            color: #4F9C2C;
-            cursor: inherit;
+            color: #57f110;
+            cursor: pointer;
         }
     }
 }

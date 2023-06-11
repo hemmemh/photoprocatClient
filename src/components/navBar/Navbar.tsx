@@ -43,7 +43,7 @@ const Navbar:FC<button>  = ({filterCatalog,setfilterCatalog}) => {
     const [filter, setfilter] = useState('')
     const [filterTime, setfilterTime] = useState<any>(null)
     const {user} = useContext(Context)
-    
+    const [activeType, setactiveType] = useState(null)
     const location = useLocation()
     const navigate = useNavigate()
     const addClick = useCallback(
@@ -101,7 +101,9 @@ const Navbar:FC<button>  = ({filterCatalog,setfilterCatalog}) => {
             login({mail,password}).then(e=>{
                 console.log(jwtDecode(e.refreshToken));
                 user.setuser(jwtDecode(e.refreshToken))
-                navigate(USER_ROUTE)
+                setloginModal(false)
+            }).catch(e=>{
+                alert('неверен логин или пароль')
             })
         }else{
             if (!validationEmail) {
@@ -193,8 +195,8 @@ const Navbar:FC<button>  = ({filterCatalog,setfilterCatalog}) => {
                 <div ref={menuIconRef} onClick={()=>setmenu(prev=>!prev)} className="Navbar__menu menu">
                     <button  type="button" className={menu ?"menu__icon icon-menu active" :"menu__icon icon-menu"}><span></span></button>
                 </div>
-                <div onClick={()=>navigate(HOME_ROUTE)} className="Navbar__logo">
-                    <div className="Navbar__image">
+                <div  className="Navbar__logo">
+                    <div onClick={()=>navigate(HOME_ROUTE)} className="Navbar__image">
                         {isMobile 
                         ?
                         <img src={require("../../images/navbar/logo-mobile.png")} alt=""/>

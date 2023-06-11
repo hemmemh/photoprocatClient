@@ -84,7 +84,7 @@ const Compare = () => {
         <Navigation>Главная / Сравнить товары</Navigation>
         {compare.length !== 0 ?
         <>
-         <div className="Compare__title">СРАВНИТЬ <span>5 ТОВАРОВ</span></div>
+         <div className="Compare__title">СРАВНИТЬ <span>{compare.length} ТОВАРОВ</span></div>
         <div className="Compare__items items-compare">
             <div onClick={()=>setitemsView(prev=>!prev)} className={itemsView ?"items-compare__action active" : "items-compare__action"}> <span></span></div>
             <div className="items-compare__delete _icon-delete"></div>

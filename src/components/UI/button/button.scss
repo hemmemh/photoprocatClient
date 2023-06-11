@@ -124,6 +124,11 @@ line-height: 12px;
 text-align: center;
 text-transform: uppercase;
 width:rem(100);
+@media (max-width:$mobileSmall){
+    font-size: 9px;
+line-height: 10px;
+    width:rem(70);    
+}
 color: #FFFFFF;
 .Button__cover{
     padding: 0  0 40/150  *100% 0;
@@ -140,6 +145,11 @@ line-height: 12px;
 text-align: center;
 text-transform: uppercase;
 width:rem(50);
+@media (max-width:$mobileSmall){
+    font-size: 9px;
+line-height: 10px;
+    width:rem(36);    
+}
 color: #FFFFFF;
 &.active{
     cursor: inherit;

@@ -62,8 +62,7 @@ background: #fff;
        }
     }
     &__logo {
-        cursor: pointer;
-        z-index: 13;
+        z-index: 20;
         @media (max-width:$mobile){
             order: 2;
             position: absolute;;top: 50%;left: 50%;
@@ -74,6 +73,8 @@ background: #fff;
         flex: 1 1 auto;
     }
     &__image{
+        cursor: pointer;
+      
         max-width:rem(151);
         @media (max-width:$mobile){
             max-width:rem(45);

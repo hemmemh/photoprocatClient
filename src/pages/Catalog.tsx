@@ -67,6 +67,7 @@ const Catalog = () => {
   const [observerLoader, setobserverLoader] = useState(false)
   const [searchParamsLoader, setsearchParamsLoader] = useState(false)
   const [priceRange, setpriceRange] = useState<any>([0,10])
+  const [type, settype] = useState('')
   const { ref, inView, entry } = useInView({
     /* Optional options */
     threshold: 0,
@@ -82,6 +83,7 @@ const Catalog = () => {
             
            }
            setproducts({...data})
+           settype(data.responce[0].type.name)
            let price:any = []
            data.responce.forEach((el:any)=>price.push(el.price))
            price = price.sort((a:any,b:any)=>a-b)
@@ -183,6 +185,7 @@ const Catalog = () => {
             
            }
            setproducts({...data})
+           settype(data.responce[0].type.name)
            let price:any = []
            data.responce.forEach((el:any)=>price.push(el.price))
            price = price.sort((a:any,b:any)=>a-b)
@@ -403,12 +406,16 @@ const Catalog = () => {
         console.log(brand.checkedBrands,'hhuu');
         
     }
+    const changeVal = (val:any,type:any,pos:any)=>{
+        //setsliderMouseOn({...sliderMouseOn,[type]:sliderMouseOn[type].map((e:any,i:any)=>i === pos ? val : e )})
+
+    }
   return (
    <div className="Catalog">
     <Navbar filterCatalog={filterCatalog} setfilterCatalog={setfilterCatalog}/>
     <div className="Catalog__container">
-        <Nav>Главная / Корзина</Nav>
-        <div className="Catalog__title">Фотокамеры</div>
+        <Nav>Главная / Каталог</Nav>
+        <div className="Catalog__title">{type}</div>
         <div className="Catalog__text">Отложение, основываясь большей частью на сейсмических данных, не входит своими составляющими, что очевидно, в силы нормальных реакций связей, так же как и абразивный блеск. Следует отметить, что инфлюация значительно характеризует астатический батолит.</div>
         <div className="Catalog__brands brandsCatalog">
             <div className="brandsCatalog__title">Можно выбрать несколько брендов</div>
@@ -569,10 +576,10 @@ const Catalog = () => {
                   max={Number(arr.sort((a:any,b:any)=>b-a)[0])}
            />
          <div className="slider-right-main-catalog__sliderInputs">
-             <input type='text' value={`От ${priceValue[0]}`} className="slider-right-main-catalog__sliderInput"></input>
+             <input type='text' value={`От ${sliderMouseOn[typeName][0]}`} onChange={(e:any)=>changeVal(e.target.value,typeName,0)} className="slider-right-main-catalog__sliderInput"></input>
              <div className="slider-right-main-catalog__d">-</div>
              
-             <input type='text' value={`До ${priceValue[1]}`} className="slider-right-main-catalog__sliderInput"></input>
+             <input type='text' value={`До ${sliderMouseOn[typeName][1]}`} onChange={(e:any)=>changeVal(e.target.value,typeName,1)}  className="slider-right-main-catalog__sliderInput"></input>
              
          </div>
                         </div>

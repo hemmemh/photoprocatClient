@@ -1,9 +1,56 @@
 .Catalog {
+    .MuiSlider-root{
+        height: rem(4);
+    }
+    .MuiSlider-rail{
+        background: #3c6a18;
+    }
+    .MuiSlider-track{
+        background: #60B021;
+    }
+    .MuiSlider-thumb{
+        background: #60B021;
+        width: 20px;
+        height: 20px;
+    }
+    .slider-right-main-catalog__sliderInputs {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .slider-right-main-catalog__d{
+    font-family: 'Ubuntu';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+/* identical to box height, or 143% */
 
+
+color: #75758A;
+   }
+   .slider-right-main-catalog__sliderInput {
+        background: #F5F5F5;
+        border: 1px solid #E3E3E3;
+        box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15);
+        width: rem(80);
+        height: rem(30);
+        padding-left: rem(10);
+        display: flex;
+        align-items: center;
+        font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        color: #75758A;
+    }
     &__container {
         margin-bottom: rem(80);
+        margin-top: rem(90);
         @media (max-width:$mobile){
             margin-bottom: rem(30);
+            margin-top: rem(50);
         }
     }
     &__main {
@@ -505,38 +552,8 @@ color: #000000;
             background: #3c6a18;
             color: #ffffff;
         }
-        &__sliderInputs {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-       &__d{
-        font-family: 'Ubuntu';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 20px;
-/* identical to box height, or 143% */
-
-
-color: #75758A;
-       }
-        &__sliderInput {
-            background: #F5F5F5;
-            border: 1px solid #E3E3E3;
-            box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15);
-            width: rem(80);
-            height: rem(30);
-            padding-left: rem(10);
-            display: flex;
-            align-items: center;
-            font-family: 'Ubuntu';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 14px;
-            line-height: 20px;
-            color: #75758A;
-        }
+        
+     
     }
 }
 
@@ -591,18 +608,5 @@ color: #000000;
         
         color: #75758A;
     }
-    .css-187mznn-MuiSlider-root{
-        height: rem(4);
-    }
-    .css-14pt78w-MuiSlider-rail{
-        background: #3c6a18;
-    }
-    .css-1gv0vcd-MuiSlider-track{
-        background: #60B021;
-    }
-    .css-eg0mwd-MuiSlider-thumb{
-        background: #60B021;
-        width: 20px;
-        height: 20px;
-    }
+
 }
