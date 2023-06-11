@@ -55,12 +55,20 @@ align-items: center;
 position: relative;
 &__delete{
     display: none;
+    cursor: pointer;
+          transition: all 0.3s ease 0s;
+    @media (any-hover: hover){
+        &:hover{
+            color: #4F9C2C;
+            transition: all 0.3s ease 0s;
+        }
+    }
         @media (max-width:583px){
             display: flex;
         }
 }
     &__action{
-     
+     cursor: pointer;
 display: none;
         @media (max-width:583px){
             display: flex;
@@ -70,16 +78,19 @@ display: none;
                border-color: #89e1ff;
                 
                }
+               
             }
         }
        
         gap: rem(1.6);
+       
         span{
             width: rem(4.5);
             height: rem(4.5);
             border: 1px solid #000;
             border-radius: 50%;
             transition: all 0.3s ease 0s;
+           
         }
         &::before,&::after{
             content:'';
@@ -117,7 +128,7 @@ font-style: normal;
 font-weight: 400;
 font-size: 14px;
 line-height: 16px;
-
+cursor: pointer;
 color: #75758A;
 &.active{
     color: #4F9C2C;
@@ -133,6 +144,14 @@ width: 100%;
     }
 
     &__clear {
+        cursor: pointer;
+           transition: all 0.3s ease 0s;
+        @media (any-hover: hover){
+            &:hover{
+                color: #4F9C2C;
+                transition: all 0.3s ease 0s;
+            }
+        }
         display: flex;
         gap: rem(8);
         font-family: 'Ubuntu';
@@ -353,8 +372,10 @@ color: #000000;
 
     &__bottom-left {
         border-bottom: 1px solid #EFEFEF;
+        padding-right: rem(105);
         @media (max-width:583px){
             position: absolute;
+            padding-right: 0;
             left: 50%;
             transform: translate(-50%,0);
             text-align: center;
@@ -371,6 +392,7 @@ color: #000000;
                 justify-content: center;
                 padding-top: 17px;
             }
+            white-space: nowrap;
             font-family: 'Ubuntu';
 font-style: normal;
 font-weight: 400;
@@ -378,7 +400,6 @@ font-size: 14px;
 line-height: 16px;
 padding: 14px 0;
 color: #75758A;
-padding-right: rem(105);
 position: relative;
 &::before{
     content:'';

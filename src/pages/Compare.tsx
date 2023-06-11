@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import Navbar from '../components/navBar/Navbar'
 import Navigation from '../components/UI/navigation/Navigation'
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -22,13 +22,18 @@ const Compare = () => {
     const [fold, setfold] = useState(false)
     const {user} = useContext(Context)
     const [itemsView, setitemsView] = useState(false)
-    const [compare, setcompare] = useState([])
+    const [compare, setcompare] = useState<any>([])
     const [compareTypes,setcompareTypes] = useState([])
     const [loadCompare,  setloadCompare] = useState(false)
     const [activeType, setactiveType] = useState<any>(null)
     const [activeTypeId, setactiveTypeId] = useState<any>(null)
     const [compareId, setcompareId] = useState(null)
+    const [informations, setinformations] = useState([])
+    const [activeTypeLoad, setactiveTypeLoad] = useState(false)
+    const actionRef = useRef<any>()
+    const actionRef2 = useRef<any>()
     useEffect(() => {
+       
         getCompare({id:user.user.compare}).then(data=>{
             console.log(data);
             setcompare(data.compareItems)
@@ -43,10 +48,17 @@ const Compare = () => {
             
             setcompareTypes(typesArr)
             setactiveType(typesArr[0])
+            setinformations(data.compareItems.find((el:any)=>el.product.type.name === typesArr[0]).product.information)
             setloadCompare(true)
+            document.addEventListener('click',addClick)
         })
+
+        return () =>{ 
+            document.removeEventListener('click', addClick)
+            }
     }, [])
     useEffect(() => {
+        setactiveTypeLoad(false)
         const typesArr:any = []
         compare.forEach((el:any)=>{
             if (!typesArr.includes(el.product.type.name)) {
@@ -59,10 +71,20 @@ const Compare = () => {
         if (typesArr.length === 0) {
             setactiveType('Типы')
         }else{
-            setactiveType(typesArr[0])
+            if (!compare.find((ell:any)=>ell.product.type.name === activeType)) {
+                setactiveType(typesArr[0])
+                setinformations(compare.find((el:any)=>el.product.type.name === typesArr[0]).product.information)
+            }
+           
         }
        
     }, [compare])
+    
+    useEffect(() => {
+       if (activeType !== 'Типы') {
+       setactiveTypeLoad(true)
+       }
+    }, [activeType])
     
     const removeItem = (id:any,compareId:any)=>{
         setcompare([...compare.filter((el:any)=>el._id !== id)])
@@ -74,23 +96,43 @@ const Compare = () => {
     const removeByType = ()=>{
         removeItemFromCompareByType({type:activeType,compareId:compareId}).then(data=>{
          setcompare(data.compareItems)
-            
+         setactiveTypeLoad(false)   
         })
     }
+    const addClick = useCallback(
+
+        (e:any) => {
+          if (actionRef.current) {
+            if (!actionRef.current.contains(e.target) &&  e.target !== actionRef2.current) {
+                setitemsView(false)
+               
+            }
+          }
+          
+        },
+        [],
+      )
+
+      const changeActiveType = (el:any)=>{
+        setactiveType(el)
+
+        
+        setinformations(compare.find((ell:any)=>ell.product.type.name === el).product.information)
+      }
   return (
     <div className="Compare">
         <Navbar/>
         <div className="Compare__container">
         <Navigation>Главная / Сравнить товары</Navigation>
         {compare.length !== 0 ?
-        <>
+        <> 
          <div className="Compare__title">СРАВНИТЬ <span>{compare.length} ТОВАРОВ</span></div>
         <div className="Compare__items items-compare">
-            <div onClick={()=>setitemsView(prev=>!prev)} className={itemsView ?"items-compare__action active" : "items-compare__action"}> <span></span></div>
-            <div className="items-compare__delete _icon-delete"></div>
+            <div ref={actionRef2} onClick={()=>setitemsView(prev=>!prev)} className={itemsView ?"items-compare__action active" : "items-compare__action"}> <span></span></div>
+            <div onClick={removeByType} className="items-compare__delete _icon-delete"></div>
             
-            <div className={itemsView ? "items-compare__body active" : "items-compare__body"}>
-                {compareTypes.map((el:any)=><div onClick={()=>setactiveType(el)} className={activeType === el ? "items-compare__item active" : "items-compare__item"}>{el} (10)</div>)}
+            <div ref={actionRef} className={itemsView ? "items-compare__body active" : "items-compare__body"}>
+                {compareTypes.map((el:any)=><div onClick={()=>changeActiveType(el)} className={activeType === el ? "items-compare__item active" : "items-compare__item"}>{el} ({compare.filter((ell:any)=>ell.product.type.name === el).length})</div>)}
             </div>
             
          
@@ -162,15 +204,15 @@ const Compare = () => {
             </div>
             <div className="main-compare__bottom">
                 <div className="main-compare__bottom-left">
-                <Fold value={fold} foldChange={setfold} slice={5} >
-                    <div className="main-compare__bottom-left__item">Цена</div>
-                    <div className="main-compare__bottom-left__item">Глубина</div>
-                    <div className="main-compare__bottom-left__item">Тип</div>
-                    <div className="main-compare__bottom-left__item">Матрица</div>
-                    <div className="main-compare__bottom-left__item">Разрешение</div>
-                    <div className="main-compare__bottom-left__item">Разрешение</div>
-                    <div className="main-compare__bottom-left__item">Разрешение</div>
-                </Fold>
+                  
+                     <Fold value={fold} foldChange={setfold} slice={5} >
+                     { informations.map((el:any)=> 
+                      <div className="main-compare__bottom-left__item">{el.name}</div>
+                      )}
+              
+                 </Fold>
+                 
+               
                 </div>
                 <div className="item-swiperCompare__bottom-right">
                                      
@@ -208,13 +250,7 @@ const Compare = () => {
                             <SwiperSlide>
                             <div className="swiperCompare2__item item-swiperCompare2">
                              <Fold foldClass='ggg' value={fold} foldChange={setfold} slice={5} >
-                             <div className="item-swiperCompare2__item">CMOS</div>
-                             <div className="item-swiperCompare2__item">Зеркальная</div>
-                             <div className="item-swiperCompare2__item">23.5 x 15.6 мм</div>
-                             <div className="item-swiperCompare2__item">45 Мпикс</div>
-                             <div className="item-swiperCompare2__item">3К</div>
-                             <div className="item-swiperCompare2__item">Nikon F</div>
-                             <div className="item-swiperCompare2__item">+/- 5 EV с шагом 1/3 </div>
+                                {el.product.information.map((m:any)=>     <div className="item-swiperCompare2__item">{m.description}</div>)}
                              </Fold>
                             </div>
                          </SwiperSlide>
