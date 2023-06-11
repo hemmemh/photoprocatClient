@@ -46,13 +46,13 @@ const Admin = () => {
     const setDescription = (name:any)=>{
         setDescriptionName(name)
         if (name === 'radio') {
-            setinfoName('неважно')
+            setinfoName('')
         }
         if (name === 'check') {
-            setinfoName('рама')
+            setinfoName('')
         }
         if (name === 'slider') {
-            setinfoName('ползунок')
+            setinfoName('')
         }
     }
     useEffect(() => {
@@ -161,10 +161,10 @@ console.log(files);
         
         JSON.parse(e.informations).forEach((el:any)=>{
             if (Object.values(el)[0] ==='radio') {
-                a = [...a,{[Object.keys(el)[0]]:'неважно'}]
+                a = [...a,{[Object.keys(el)[0]]:''}]
             }
             if (Object.values(el)[0] ==='check') {
-                a = [...a,{[Object.keys(el)[0]]:'выбор'}]
+                a = [...a,{[Object.keys(el)[0]]:''}]
             }
             if (Object.values(el)[0] ==='slider') {
                 sliders.current =[...sliders.current,Object.keys(el)[0]]
