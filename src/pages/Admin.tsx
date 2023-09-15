@@ -237,8 +237,8 @@ console.log(files);
        setbrand({name:'бренд'})
        settype({name:'тип'})
        setfileImages([]) 
-       navigate(HOME_ROUTE)
-       window.location.reload()
+       //navigate(HOME_ROUTE)
+       //window.location.reload()
     })
     }else{
 alert('недостаточно данных')
