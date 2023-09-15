@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     setloader(false)
      refresh().then(e=>{
-         console.log(jwtDecode<any>(e.refreshToken));
+         console.log(jwtDecode<any>(e.refreshToken),'OOPPPO');
          user.setuser(jwtDecode<any>(e.refreshToken))
      }).finally(()=>{
       setloader(true)
