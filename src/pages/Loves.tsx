@@ -34,27 +34,32 @@ const Loves = () => {
     }, [])
     
   return (
-  <div className="Loves">
-    <Navbar/>
-    <div className="Loves__container">
-        <div className="Loves__body">
-        <Navigation navigationClass='news'>Главная/Избранное</Navigation>
-        {productsLoad &&
-           <div className="Loves__grid">
-           {loves.map((e:any)=>
-           <ProductComponent basket={basket} loves={loves} compare={compare} key={e.product._id} data={e.product} inCompare = {compare.find((el:any)=>el.product?._id == e.product?._id) ? true : false} inBasket = {basket.find((el:any)=>el.product?._id == e?._id)  ? true : false}  inLoves = {loves.find((el:any)=>el.product?._id == e.product?._id)  ? true : false}/>)}
-            
-        </div>
-        }
-        </div>
-        
-        
-     
-        
-    </div>
+    <>
+     <Navbar/>
+     <div className="Loves">
+   
+   <div className="Loves__container">
+       <div className="Loves__body">
+       <Navigation navigationClass='news'>Главная/Избранное</Navigation>
+       {productsLoad &&
+          <div className="Loves__grid">
+          {loves.map((e:any)=>
+          <ProductComponent basket={basket} loves={loves} compare={compare} key={e.product._id} data={e.product} inCompare = {compare.find((el:any)=>el.product?._id == e.product?._id) ? true : false} inBasket = {basket.find((el:any)=>el.product?._id == e?._id)  ? true : false}  inLoves = {loves.find((el:any)=>el.product?._id == e.product?._id)  ? true : false}/>)}
+           
+       </div>
+       }
+       </div>
+       
+       
     
-    <Footer/>
-  </div>
+       
+   </div>
+   
+
+ </div>
+     <Footer/>
+    </>
+ 
   
   )
 }

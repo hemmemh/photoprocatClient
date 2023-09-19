@@ -19,38 +19,39 @@ interface button{
     setfilterCatalog?:any
  }
 
-const Navbar:FC<button>  = ({filterCatalog,setfilterCatalog}) => {
-    const [menu, setmenu] = useState(false)
-    const [search, setsearch] = useState(false)
-    const [navBarActive, setnavBarActive] = useState(false)
+const Navbar:FC<button>  = ({setfilterCatalog}) => {
+    const [menu, setmenu] = useState<boolean>(false)
+    const [search, setsearch] = useState<boolean>(false)
+    const [navBarActive, setnavBarActive] = useState<boolean>(false)
     const isMobile = useCheckMobileScreen()
-    const spoilerRef = useRef<any>()
-    const navbarRef = useRef<any>()
-    const menuIconRef = useRef<any>()
-    const [pass, setpass] = useState([])
-    const [loginModal, setloginModal] = useState(false)
-    const [modalStage, setmodalStage] = useState(0)
-    const [mail, setmail] = useState('')
-    const [password, setpassword] = useState('')
-    const [code, setcode] = useState('')
-    const [validationEmail, setvalidationEmail] = useState(true)
-    const [validationPassword, setvalidationPassword] = useState(true)
-    const [validationError, setvalidationError] = useState<any>(false)
-    const [validationErrorText, setValidationErrorText] = useState<any>([])
-    const [passSucc, setpassSucc] = useState(false)
-    const [loader, setloader] = useState(false)
-    const [types, settypes] = useState([])
-    const [filter, setfilter] = useState('')
-    const [filterTime, setfilterTime] = useState<any>(null)
+    const spoilerRef = useRef<HTMLDivElement>(null)
+    const navbarRef = useRef<HTMLDivElement>(null)
+    const menuIconRef = useRef<HTMLDivElement>(null)
+    const [pass, setpass] = useState<string[]>([])
+    const [loginModal, setloginModal] = useState<boolean>(false)
+    const [modalStage, setmodalStage] = useState<number>(0)
+    const [mail, setmail] = useState<string>('')
+    const [password, setpassword] = useState<string>('')
+    const [code, setcode] = useState<string>('')
+    const [validationEmail, setvalidationEmail] = useState<boolean>(true)
+    const [validationPassword, setvalidationPassword] = useState<boolean>(true)
+    const [validationError, setvalidationError] = useState<boolean>(false)
+    const [validationErrorText, setValidationErrorText] = useState<string[]>([])
+    const [passSucc, setpassSucc] = useState<boolean>(false)
+    const [loader, setloader] = useState<boolean>(false)
+    const [types, settypes] = useState<string[]>([])
+    const [filter, setfilter] = useState<string>('')
+    const [filterTime, setfilterTime] = useState<ReturnType<typeof setTimeout>>()
     const {user} = useContext(Context)
-    const [activeType, setactiveType] = useState(null)
     const location = useLocation()
     const navigate = useNavigate()
+
+
     const addClick = useCallback(
 
         (e:any) => {
-            console.log(e.target,menuIconRef.current)
-            if (!spoilerRef.current.contains(e.target) && e.target !== menuIconRef.current) {
+           
+            if (!spoilerRef.current?.contains(e.target) && e.target !== menuIconRef.current) {
                 setmenu(false)
                
             }
@@ -64,9 +65,9 @@ const Navbar:FC<button>  = ({filterCatalog,setfilterCatalog}) => {
         window.addEventListener('scroll', onScroll)
         
         getAllTypes().then(data=>{
-            console.log(data);
             settypes(data)
         })
+
         return () =>{ 
             document.removeEventListener('click', addClick)
             window.removeEventListener('scroll',onScroll)}
@@ -85,17 +86,29 @@ const Navbar:FC<button>  = ({filterCatalog,setfilterCatalog}) => {
     }
    }, [loginModal])
    
+   useEffect(() => {
+    console.log(menu);
+    
+    if (menu && window.innerWidth <= 767.98) {
+      document.body.classList.add('hidden')
+    }else{
+      document.body.classList.remove('hidden')
+    }
+  }, [menu])
 
     const onScroll = useCallback(
         () => {
           const scrollTop = window.scrollY;
-          if (scrollTop>=navbarRef.current.offsetHeight/6) {
+          const offset = navbarRef.current?.offsetHeight || 0
+          if (scrollTop>=offset /6) {
             setnavBarActive(true)
           }else{
             setnavBarActive(false)
           }
         },
         [],)
+
+
     const onLogin = ()=>{
         if (validationPassword && validationEmail) {
             login({mail,password}).then(e=>{
@@ -116,6 +129,7 @@ const Navbar:FC<button>  = ({filterCatalog,setfilterCatalog}) => {
         }
       
     }
+
     const onSetMail = (e:any)=>{
         setmail(e)
         if (!EMAIL_REGEXP.test(e) && e !=='' ) {
@@ -183,9 +197,6 @@ const Navbar:FC<button>  = ({filterCatalog,setfilterCatalog}) => {
    
        
       
-    }
-    const catalogNav = ()=>{
-
     }
   return (
     <div ref={navbarRef} className={navBarActive ? "Navbar active" : "Navbar"}>

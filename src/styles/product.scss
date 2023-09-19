@@ -25,6 +25,9 @@ margin-bottom: rem(50);
         margin-bottom: rem(50);
         gap: rem(30);
       }
+      &__raiting{
+        margin-bottom: rem(30);
+      }
     &__left {
         flex: 0 0 rem(425);
         width: rem(425);

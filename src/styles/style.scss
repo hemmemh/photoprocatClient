@@ -55,6 +55,8 @@ $responsiveType: 1;
 	margin: 0 auto;
 	position: relative;
 	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
 }
 body {
 	// Скролл заблокирован
@@ -128,7 +130,11 @@ body {
 	}
 }
 
-
+body{
+	&.hidden{
+		overflow: hidden;
+	}
+}
 //============================================================================================================================
 @import '../components/UI/accordionUser/accordionUser.scss';
 @import '../components/UI/accordionOne/accordionOne.scss';

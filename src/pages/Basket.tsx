@@ -65,49 +65,54 @@ const Basket = () => {
       
     }
   return (
-   <div className="Basket">
-    <Navbar/>
-    <div className="Basket__container">
-        <div className="Basket__body">
-            <Navigation navigationClass='basket'>Главная / Корзина</Navigation>
-            <div className="Basket__title">Корзина</div>
-            <div className="Basket__items items-basket">
-                <div className="items-basket__top top-basket">
-                    <div className="top-basket__item">Фото</div>
-                    <div className="top-basket__item">Название</div>
-                    <div className="top-basket__item">Цена</div>
-                    <div className="top-basket__item">Количество</div>
-                    <div className="top-basket__item">Итого</div>
-                </div>
-                <div className="items-basket__body">
-                    {load &&
-                      basket?.basketItems.map((e:any)=>
-                        <BasketProduct key={e._id} e={e} setsumPrice={setsumPrice} setProducts={setbasket} products={basket} basketId={basket._id}/>
-                    )}
-                    
-                  
-                   
-                  
-                </div>
-                <div className="items-basket__bottom">
-                     
-                <div className="items-basket__submit">
-                    <Button onClick={buy} className={'basket o'} >Оформить заказ</Button>
-                </div>
-                <div className="items-basket__totalPrice  totalPrice-basket">
-                    <div className="totalPrice-basket__left">Итого:</div>
-                    <div className="totalPrice-basket__right">{sumPrice} Р</div>
-                    
-                </div>
-                </div>
+    <>
+        <Navbar/>
+        <div className="Basket">
+
+<div className="Basket__container">
+    <div className="Basket__body">
+        <Navigation navigationClass='basket'>Главная / Корзина</Navigation>
+        <div className="Basket__title">Корзина</div>
+        <div className="Basket__items items-basket">
+            <div className="items-basket__top top-basket">
+                <div className="top-basket__item">Фото</div>
+                <div className="top-basket__item">Название</div>
+                <div className="top-basket__item">Цена</div>
+                <div className="top-basket__item">Количество</div>
+                <div className="top-basket__item">Итого</div>
+            </div>
+            <div className="items-basket__body">
+                {load &&
+                  basket?.basketItems.map((e:any)=>
+                    <BasketProduct key={e._id} e={e} setsumPrice={setsumPrice} setProducts={setbasket} products={basket} basketId={basket._id}/>
+                )}
+                
+              
                
+              
+            </div>
+            <div className="items-basket__bottom">
+                 
+            <div className="items-basket__submit">
+                <Button onClick={buy} className={'basket o'} >Оформить заказ</Button>
+            </div>
+            <div className="items-basket__totalPrice  totalPrice-basket">
+                <div className="totalPrice-basket__left">Итого:</div>
+                <div className="totalPrice-basket__right">{sumPrice} Р</div>
                 
             </div>
+            </div>
+           
             
         </div>
+        
     </div>
-    <Footer/>
-   </div>
+</div>
+
+        </div>
+        <Footer/>
+    </>
+
    
   )
 }

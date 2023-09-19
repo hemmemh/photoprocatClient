@@ -26,18 +26,26 @@ useEffect(() => {
     },
     [],
   )
-  const keyDown = useCallback(
-    () => {
-      document.onkeydown = function(e) {
-        console.log(e);
+
+useEffect(() => {
+document.addEventListener('keydown',keyDown)
+
+  return () => {
+    document.removeEventListener('keydown',keyDown)
+  }
+}, [])
+
+
+  const keyDown =  function(e:any) {
+      
         if (e.key === "Escape") {
-            console.log('');
+        
             setActive(false)
         }
     }
-    },
-    [],
-  )
+
+    
+    
   
  
 

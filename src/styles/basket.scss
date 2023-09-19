@@ -1,5 +1,5 @@
 .Basket {
-    min-height: 100vh;
+ flex: 1 1 auto;
 margin-top: rem(100);
 @media (max-width:$mobile){
     margin-top: rem(50);
