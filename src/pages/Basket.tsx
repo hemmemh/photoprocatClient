@@ -1,24 +1,23 @@
-import React, { useState,useEffect,useContext } from 'react'
+import { useState,useEffect,useContext } from 'react'
 import Navbar from '../components/navBar/Navbar'
 import Navigation from '../components/UI/navigation/Navigation'
 import Button from '../components/UI/button/Button'
 import Footer from '../components/footer/Footer'
-import Amount from '../components/UI/amount/Amount'
 import { addOrder, getBasket, removeAll} from '../https/basketApi'
 import { Context } from '..'
-import { API_URL } from '../utils/config'
 import BasketProduct from '../components/BasketProduct'
 import { useNavigate } from 'react-router-dom'
 import { HOME_ROUTE, USER_ROUTE } from '../utils/routs'
 import { change } from '../https/productApi'
+import { IBasket, IProduct } from '../utils/interfaces'
 
 const Basket = () => {
 
     const {user} = useContext(Context)
-    const [basket, setbasket] = useState<any>({})
-    const [load, setload] = useState(false)
-    const [products, setproducts] = useState<any>([])
-    const [sumPrice, setsumPrice] = useState(0)
+    const [basket, setbasket] = useState<IBasket>()
+    const [load, setload] = useState<boolean>(false)
+    const [products, setproducts] = useState<Array<IProduct>>([])
+    const [sumPrice, setsumPrice] = useState<number>(0)
     const navigate = useNavigate()
     useEffect(() => {
             getBasket({id:user.user.id}).then(data=>{
@@ -35,7 +34,6 @@ const Basket = () => {
     }, [])
     const buy = ()=>{
         getBasket({id:user.user.id}).then(data=>{
-           
             let arr:any = []
     for (const it of data.basketItems) {
         arr = [...arr, {[it.product._id]:it.count}]

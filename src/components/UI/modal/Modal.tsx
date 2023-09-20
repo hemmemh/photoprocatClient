@@ -27,6 +27,19 @@ useEffect(() => {
     [],
   )
 
+  
+  useEffect(() => {
+
+    
+    if (active) {
+      document.body.classList.add('hidden')
+    }else{
+      document.body.classList.remove('hidden')
+    }
+  }, [active])
+
+
+
 useEffect(() => {
 document.addEventListener('keydown',keyDown)
 

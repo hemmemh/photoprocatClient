@@ -1,15 +1,13 @@
-import React, { useRef, useState,useEffect,useContext} from 'react'
+import { useRef, useState,useEffect,useContext} from 'react'
 import Navbar from '../components/navBar/Navbar'
 import Navigation from '../components/UI/navigation/Navigation'
 import {Rating } from '@mui/material'
 import Button from '../components/UI/button/Button'
-import Button2 from '../components/UI/button2/Button2'
 import Footer from '../components/footer/Footer'
 import AccordionOne from '../components/UI/accordionOne/AccordionOne'
 import { Modal } from '../components/UI/modal/Modal'
 import Input from '../components/UI/input/Input'
 import { addComment, addNews, getAllNews } from '../https/newsApi'
-import { log } from 'console'
 import { API_URL } from '../utils/config'
 import Loader from '../components/UI/loader/Loader'
 import { Context } from '..'
@@ -18,25 +16,26 @@ import { HOME_ROUTE } from '../utils/routs'
 
 const News = () => {
     const {user} = useContext(Context)
-    const [modal, setmodal] = useState(false)
-    const [modalCooment, setmodalCooment] = useState(false)
-    const [name, setname] = useState(user.user.name)
-    const [sername, setsername] = useState(user.user.name)
-    const [text, settext] = useState('')
-    const [textComment, settextComment] = useState('')
-    const [title, settitle] = useState('')
+    const [modal, setmodal] = useState<boolean>(false)
+    const [modalCooment, setmodalCooment] = useState<boolean>(false)
+    const [name, setname] = useState<string>(user.user.name)
+    const [sername, setsername] = useState<string>(user.user.name)
+    const [text, settext] = useState<string>('')
+    const [textComment, settextComment] = useState<string>('')
+    const [title, settitle] = useState<string>('')
     const [fileImage, setFileImage] = useState<any>(null)
-    const [fileName, setFileName] = useState<any>('')
-    const [fileDiv, setFileDiv] = useState(false)
+    const [fileName, setFileName] = useState<string | null>('')
+    const [fileDiv, setFileDiv] = useState<boolean>(false)
     const [file, setfile] = useState<any>(null)
     const [news, setnews] = useState([])
-    const [newsId, setnewsId] = useState(null)
-    const [loader, setloader] = useState(false)
-    const inputRef = useRef<any>()
+    const [newsId, setnewsId] = useState<string>('')
+    const [loader, setloader] = useState<boolean>(false)
+    const inputRef = useRef<HTMLInputElement>(null)
     const navigate = useNavigate()
     useEffect(() => {
         getAllNews().then(data=>{
             console.log(data);
+            
             setnews(data)
             setloader(true)
         })
@@ -87,7 +86,7 @@ const News = () => {
 
      }
      const activateInput=()=>{
-        inputRef.current.click()
+        inputRef.current?.click()
      }
      const modalCommentId=(id:any)=>{
         setmodalCooment(true)

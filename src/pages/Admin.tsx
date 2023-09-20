@@ -1,4 +1,4 @@
-import React,{useRef, useState,useEffect} from 'react'
+import{useRef, useState,useEffect} from 'react'
 import Navbar from '../components/navBar/Navbar'
 import Footer from '../components/footer/Footer'
 import Button from '../components/UI/button/Button'
@@ -9,40 +9,44 @@ import RadioGroup from '../components/UI/radioGroup/RadioGroup'
 import { createBrand, getAllBrands } from '../https/brandsApi'
 import ProductSpoiler from '../components/UI/productSpoiler/ProductSpoiler'
 import { createProduct } from '../https/productApi'
-import { set } from 'mobx'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { ADMIN_ROUTE, HOME_ROUTE } from '../utils/routs'
+
+import { useNavigate } from 'react-router-dom'
+import { HOME_ROUTE } from '../utils/routs'
+import { IBrand, IType } from '../utils/interfaces'
 
 
 
 const Admin = () => {
-    const [modal, setmodal] = useState(false)
-    const [modalSection, setmodalSection] = useState(1)
-    const [name, setname] = useState('')
+    const [modal, setmodal] = useState<boolean>(false)
+    const [modalSection, setmodalSection] = useState<number>(1)
+    const [name, setname] = useState<string>('')
     const [typeInformation, settypeInformation] = useState<any>([])
     const [typeInformationProduct, settypeInformationProduct] = useState<any>([])
-    const [infoName, setinfoName] = useState('неважно')
-    const [descriptionName, setDescriptionName] = useState('radio')
+    const [infoName, setinfoName] = useState<string>('неважно')
+    const [descriptionName, setDescriptionName] = useState<string>('radio')
     const [files, setfiles] = useState<any>([])
     const [file, setfile] = useState<any>(null)
     const [fileImages, setfileImages] = useState<any>([])
     const [fileImage, setfileImage] = useState<any>(null)
-    const [fileDiv, setfileDiv] = useState(false)
-    const [fileDiv2, setfileDiv2] = useState(false)
+    const [fileDiv, setfileDiv] = useState<boolean>(false)
+    const [fileDiv2, setfileDiv2] = useState<boolean>(false)
     const [description, setdescription] = useState('')
-    const [price, setprice] = useState<any>(0)
-    const inputRef = useRef<any>()
-    const inputRef2 = useRef<any>()
-    const [brands, setbrands] = useState([])
-    const [types, settypes] = useState([])
+    const [price, setprice] = useState<string | Blob>('0')
+    const inputRef = useRef<HTMLInputElement>(null)
+    const inputRef2 = useRef<HTMLInputElement>(null)
+    const [brands, setbrands] = useState<Array<IBrand>>([])
+    const [types, settypes] = useState<Array<IType>>([])
     const [brand, setbrand] = useState<any>({name:'бренд'})
     const [type, settype] = useState<any>({name:'тип'})
-    const [changeDescriptionLoader, setchangeDescriptionLoader] = useState(false)
     const sliders = useRef<any>([])
     const navigate = useNavigate()
+
+
     const senInfo = (name:any)=>{
         setinfoName(name)
     }
+
+
     const setDescription = (name:any)=>{
         setDescriptionName(name)
         if (name === 'radio') {
@@ -55,27 +59,23 @@ const Admin = () => {
             setinfoName('')
         }
     }
+
+
     useEffect(() => {
-      getAllTypes().then(data=>{
-        console.log(data);
-        settypes(data)
-        
-      })
-      getAllBrands().then(data=>{
-        console.log(data);
-        setbrands(data)
-        
-      })
+      getAllTypes().then(data=> settypes(data))
+      getAllBrands().then(data=>setbrands(data))
     }, [])
     
+
     const  setModalActive = (e:any)=>{
         setmodalSection(e)
         setmodal(true)
     }
+
+
     const createTypeFun = ()=>{
         if (typeInformation.length !== 0 && name !=='') {
             createType({name,informations:JSON.stringify(typeInformation)}).then(data=>{
-                console.log(data);
                 settypeInformation([])
                 setname('')
                 navigate(HOME_ROUTE)
@@ -87,15 +87,15 @@ const Admin = () => {
       
        
     }
+
+
     const createBrandFun = ()=>{
         if ( name !=='' && file!== null) {
             const formaData = new FormData()
             formaData.append('name',name)
-      
             formaData.append('image',file)
            
             
-    
         createBrand(formaData).then(data=>{
         if (name !== '' && file!=null) {
                 console.log(data);
@@ -110,31 +110,28 @@ const Admin = () => {
         }else{
             alert('недостаточно данных')
         }
-      
-       
     }
+
+
     const createInfo = ()=>{
         settypeInformation((prev:any)=>[...prev,{[infoName]:descriptionName}])
         setinfoName('')
         setDescriptionName('')
     }
+
+
     const fileload = (e:any)=>{
         let reader = new FileReader();
-       
         reader.readAsDataURL(e.target.files[0]);
         setfiles([...files,e.target.files[0]])
         reader.onloadend = ()=>{
             setfileImages([...fileImages,reader.result])
             setfileDiv(true)
-               
         }
-console.log(files);
-
     }
    
      const fileloadType = (e:any)=>{
         let reader = new FileReader();
-       
         reader.readAsDataURL(e.target.files[0]);
         setfile(e.target.files[0])
         reader.onloadend = ()=>{
@@ -142,23 +139,22 @@ console.log(files);
             setfileDiv2(true)
                
         }
-
     }
    
      const activateInput=()=>{
-        inputRef.current.click()
+        inputRef.current?.click()
      }
+
 
      const activateInput2=()=>{
-        inputRef2.current.click()
+        inputRef2.current?.click()
      }
 
+
      const addtypeInformationProduct = (e:any)=>{
-        console.log(e);
-        
         let a:any = []
-        console.log( JSON.parse(e.informations),'pp');
-        
+
+
         JSON.parse(e.informations).forEach((el:any)=>{
             if (Object.values(el)[0] ==='radio') {
                 a = [...a,{[Object.keys(el)[0]]:''}]
@@ -172,8 +168,6 @@ console.log(files);
             }
         }
             )
-        console.log(a,'pooo');
-      
         settypeInformationProduct(a)
         settype(e)
 
@@ -200,22 +194,21 @@ console.log(files);
       
      }
      const setBrandf = (e:any)=>{
-
-        setbrand(e)
-     }
+        console.log(e,'--=');
+        
+        setbrand(e)}
     const setPricef = (f:any)=>{
-        if (parseInt(f) == Number(f) || f == '' ) {
-            setprice(f)
-        }
+        if (parseInt(f) == Number(f) || f == '' ) setprice(f)
     }
      const addProduct = ()=>{
         let bool = true
 
         typeInformationProduct.forEach((el:any) => {
-            if (Object.values(el)[0] === '') {
-                bool = false
-            }
-        });
+            if (Object.values(el)[0] === '') bool = false
+            
+        })
+
+
     if (name !== '' && description !== '' && price!== '' && bool === true && '_id' in type && '_id' in brand && files.length > 1) {
         const formaData = new FormData()
         formaData.append('name',name)

@@ -1,4 +1,9 @@
 .modal{
+
+    &::-webkit-scrollbar {
+    width: 0;
+      }
+    overflow: scroll;
     align-items: center;
     justify-content: center;
     position: fixed;
@@ -17,7 +22,6 @@
         pointer-events: inherit;
     }
     &__body{
-    
     background: #ffff;
     transform: scale(0.5);
     transition: all 0.3s ease 0s;

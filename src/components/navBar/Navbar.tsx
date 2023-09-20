@@ -73,6 +73,8 @@ const Navbar:FC<button>  = ({setfilterCatalog}) => {
             window.removeEventListener('scroll',onScroll)}
 
     }, [])
+
+    
    useEffect(() => {
     if (loginModal === false) {
         setmodalStage(0)

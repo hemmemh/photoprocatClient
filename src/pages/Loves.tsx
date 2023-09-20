@@ -1,4 +1,4 @@
-import React,{useEffect,useContext,useState} from 'react'
+import {useEffect,useContext,useState} from 'react'
 import Navbar from '../components/navBar/Navbar'
 import Footer from '../components/footer/Footer'
 import { getLoves } from '../https/lovesApi'
@@ -7,14 +7,15 @@ import ProductComponent from '../components/ProductComponent'
 import { getCompare } from '../https/compareApi'
 import { getBasket } from '../https/basketApi'
 import Navigation from '../components/UI/navigation/Navigation'
+import { IBasketItem, ICompareItem, ILovesItem } from '../utils/interfaces'
 
 
 const Loves = () => {
     const {user} = useContext(Context)
-    const [loves, setloves] = useState([])
-    const [compare, setcompare] = useState([])
-    const [basket, setbasket] = useState([])
-    const [productsLoad, setproductsLoad] = useState(false)
+    const [loves, setloves] = useState<Array<ILovesItem>>([])
+    const [compare, setcompare] = useState<Array<ICompareItem>>([])
+    const [basket, setbasket] = useState<Array<IBasketItem>>([])
+    const [productsLoad, setproductsLoad] = useState<boolean>(false)
     useEffect(() => {
      getLoves({id:user.user.loves}).then(data=>{
         console.log(data);

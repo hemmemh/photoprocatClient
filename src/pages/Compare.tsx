@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useRef, useState } from 'react'
+import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import Navbar from '../components/navBar/Navbar'
 import Navigation from '../components/UI/navigation/Navigation'
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,35 +7,34 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-import { Controller, FreeMode } from 'swiper';
+import { Controller} from 'swiper';
 import Footer from '../components/footer/Footer';
 import Fold from '../components/UI/fold/Fold';
 import Button from '../components/UI/button/Button';
 import { getCompare, removeItemFromCompare, removeItemFromCompareByType } from '../https/compareApi';
 import { Context } from '..';
 import { API_URL } from '../utils/config';
+import { ICompareItem } from '../utils/interfaces';
 
 
 const Compare = () => {
     const [firstSwiper, setFirstSwiper] =   useState<afea | null>(null);
     const [secondSwiper, setSecondSwiper] = useState<afea | null>(null);
-    const [fold, setfold] = useState(false)
+    const [fold, setfold] = useState<boolean>(false)
     const {user} = useContext(Context)
-    const [itemsView, setitemsView] = useState(false)
+    const [itemsView, setitemsView] = useState<boolean>(false)
     const [compare, setcompare] = useState<any>([])
-    const [compareTypes,setcompareTypes] = useState([])
-    const [loadCompare,  setloadCompare] = useState(false)
-    const [activeType, setactiveType] = useState<any>(null)
-    const [activeTypeId, setactiveTypeId] = useState<any>(null)
-    const [compareId, setcompareId] = useState(null)
-    const [informations, setinformations] = useState([])
-    const [activeTypeLoad, setactiveTypeLoad] = useState(false)
-    const actionRef = useRef<any>()
-    const actionRef2 = useRef<any>()
+    const [compareTypes,setcompareTypes] = useState<Array<string>>([])
+    const [loadCompare,  setloadCompare] = useState<boolean>(false)
+    const [activeType, setactiveType] = useState<string>('')
+    const [compareId, setcompareId] = useState<string>('')
+    const [informations, setinformations] = useState<Array<string>>([])
+    const [activeTypeLoad, setactiveTypeLoad] = useState<boolean>(false)
+    const actionRef = useRef<HTMLDivElement>(null)
+    const actionRef2 = useRef<HTMLDivElement>(null)
     useEffect(() => {
        
         getCompare({id:user.user.compare}).then(data=>{
-            console.log(data);
             setcompare(data.compareItems)
             setcompareId(data._id)
             const typesArr:any = []
@@ -44,8 +43,6 @@ const Compare = () => {
                     typesArr.push(el.product.type.name)
                 }
             })
-            console.log(typesArr,'[[[2');
-            
             setcompareTypes(typesArr)
             setactiveType(typesArr[0])
             setinformations(data.compareItems.find((el:any)=>el.product.type.name === typesArr[0]).product.information)
@@ -65,15 +62,13 @@ const Compare = () => {
                 typesArr.push(el.product.type.name)
             }
         })
-        console.log(typesArr,'[[[2');
-        
         setcompareTypes(typesArr)
         if (typesArr.length === 0) {
             setactiveType('Типы')
         }else{
             if (!compare.find((ell:any)=>ell.product.type.name === activeType)) {
                 setactiveType(typesArr[0])
-                setinformations(compare.find((el:any)=>el.product.type.name === typesArr[0]).product.information)
+                setinformations(compare.find((el:any)=>el.product.type.name === typesArr[0])?.product?.information)
             }
            
         }
@@ -90,7 +85,6 @@ const Compare = () => {
         setcompare([...compare.filter((el:any)=>el._id !== id)])
         removeItemFromCompare({id,compareId}).then((data:any)=>{
             console.log(data);
-            
         })
     }
     const removeByType = ()=>{
@@ -115,8 +109,6 @@ const Compare = () => {
 
       const changeActiveType = (el:any)=>{
         setactiveType(el)
-
-        
         setinformations(compare.find((ell:any)=>ell.product.type.name === el).product.information)
       }
   return (
@@ -195,39 +187,26 @@ const Compare = () => {
          
       }
         )}
-
-    
-      
               </Swiper>
                   </div>
-            
-              </div>
-              
-              
+              </div> 
           </div>
           <div className="main-compare__bottom">
               <div className="main-compare__bottom-left">
-                
-                   <Fold value={fold} foldChange={setfold} slice={5} >
+                   <Fold value={fold} foldChange={setfold} slice={2} >
                    { informations.map((el:any)=> 
                     <div className="main-compare__bottom-left__item">{el.name}</div>
                     )}
-            
                </Fold>
-               
-             
               </div>
-              <div className="item-swiperCompare__bottom-right">
-                                   
+              <div className="item-swiperCompare__bottom-right">                  
               <Swiper
          slidesPerView={2}
-          
       className="swiperCompare2"
       spaceBetween={9}
       modules={[Controller]}
       onSwiper={setSecondSwiper}
       controller={{ control: firstSwiper }}
-      
       breakpoints={{
           786: {
               spaceBetween: 55,
@@ -252,7 +231,7 @@ const Compare = () => {
                       return(
                           <SwiperSlide>
                           <div className="swiperCompare2__item item-swiperCompare2">
-                           <Fold foldClass='ggg' value={fold} foldChange={setfold} slice={5} >
+                           <Fold foldClass='ggg' value={fold} foldChange={setfold} slice={2} >
                               {el.product.information.map((m:any)=>     <div className="item-swiperCompare2__item">{m.description}</div>)}
                            </Fold>
                           </div>

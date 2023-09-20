@@ -1,4 +1,4 @@
-import React,{useState,useRef,useEffect} from 'react'
+import {useState,useRef,useEffect} from 'react'
 import Navbar from '../components/navBar/Navbar'
 import Navigation from '../components/UI/navigation/Navigation'
 import Input from '../components/UI/input/Input'
@@ -9,34 +9,30 @@ import dayjs, { Dayjs } from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { registration } from '../https/userApi'
 import { EMAIL_REGEXP, PASSWORD_REGEX } from '../utils/config'
-import { HOME_ROUTE } from '../utils/routs'
-import { useNavigate } from 'react-router-dom'
 import Loader from '../components/UI/loader/Loader'
 
 
 const Registration = () => {
-    const [calendar, setcalendar] = useState(false)
+    const [calendar, setcalendar] = useState<boolean>(false)
     const [data, setdata] = useState<Dayjs | null>(dayjs('2022-04-17'))
-    const [name, setname] = useState('')
-    const [secondName, setSecondName] = useState('')
-    const [mail, setmail] = useState('')
-    const [password, setpassword] = useState('')
-    const [tell, settell] = useState('')
-    const calendarIcon = useRef<any>()
-    const calendarRef = useRef<any>()
-    const [validationEmail, setvalidationEmail] = useState(true)
-    const [validationPassword, setvalidationPassword] = useState(true)
-    const [loader, setloader] = useState(false)
-    const [successfullReg, setsuccessfullReg] = useState(false)
-    const navigate = useNavigate()
+    const [name, setname] = useState<string>('')
+    const [secondName, setSecondName] = useState<string>('')
+    const [mail, setmail] = useState<string>('')
+    const [password, setpassword] = useState<string>('')
+    const [tell, settell] = useState<string>('')
+    const calendarIcon = useRef<HTMLImageElement>(null)
+    const calendarRef = useRef<HTMLDivElement>(null)
+    const [validationEmail, setvalidationEmail] = useState<boolean>(true)
+    const [validationPassword, setvalidationPassword] = useState<boolean>(true)
+    const [loader, setloader] = useState<boolean>(false)
+    const [successfullReg, setsuccessfullReg] = useState<boolean>(false)
+
     useEffect(() => {
         document.addEventListener('click',onCalendar)
         document.querySelector('.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root input')?.addEventListener('click',onCalendar)
         return () => document.removeEventListener('click',onCalendar);
     }, [])
     const onCalendar = (e:any)=>{
-        console.log(e.target);
-        
         if (e.target !== calendarIcon.current) {
             if ( !calendarRef.current?.contains(e.target) ) {
                 setcalendar(false)
@@ -66,22 +62,16 @@ const Registration = () => {
         setmail(e)
         if (!EMAIL_REGEXP.test(e) && e !=='' ) {
             setvalidationEmail(false)
-         
           }else{
-          
             setvalidationEmail(true)
-        
           }
     }
 
     const changePassword = (password:any)=>{
         setpassword(password)
-       
         if (!PASSWORD_REGEX.test(password) && password !=='' ) {
           setvalidationPassword(false)
-         
         }else{
-    
           setvalidationPassword(true)
         }
       }

@@ -1,50 +1,49 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Navbar from '../components/navBar/Navbar'
 import { Swiper, SwiperSlide, } from 'swiper/react';
 import { Navigation } from 'swiper';
 import 'swiper/css';
 import "swiper/css/navigation";
-import Rating from '@mui/material/Rating';
-import Button2 from '../components/UI/button2/Button2';
-import Button from '../components/UI/button/Button';
 import Footer from '../components/footer/Footer';
 import { getByPurchase } from '../https/productApi';
-import { API_URL } from '../utils/config';
 import ProductComponent from '../components/ProductComponent';
 import { Context } from '..';
 import { getBasket } from '../https/basketApi';
 import { getCompare } from '../https/compareApi';
 import { getLoves } from '../https/lovesApi';
+import { IBasketItem, ICompareItem, ILovesItem, IProduct } from '../utils/interfaces';
+
+
+
 const Home = () => {
-  const [products, setproducts] = useState([])
-  const [loader, setloader] = useState(false)
+  const [products, setproducts] = useState<Array<IProduct>>([])
+  const [loader, setloader] = useState<boolean>(false)
   const {user} = useContext(Context)
-  const [basket, setbasket] = useState([])
-  const [compare, setcompare] = useState([])
-  const [loves, setloves] = useState([])
-  const [inBasket, setinBasket] = useState(false)
+  const [basket, setbasket] = useState<Array<IBasketItem>>([])
+  const [compare, setcompare] = useState<Array<ICompareItem>>([])
+  const [loves, setloves] = useState<Array<ILovesItem>>([])
+
   useEffect(() => {
     getByPurchase().then(data=>{
-      console.log(data,'yyyu');
-      setproducts(data)
-     
-    }).then(()=>{
-      getBasket({id:user.user.id}).then(data=>{
-        setbasket(data?.basketItems)
+      console.log(data);
+      
+      setproducts(data)}).then(()=>{
+      getBasket({id:user.user.id}).
+      then(data=>{
+        console.log(data);
         
-  })
+        setbasket(data?.basketItems)})
+
   getCompare({id:user.user.compare}).then(data=>{
-  
-    setcompare(data?.compareItems)
-
-})
-getLoves({id:user.user.loves}).then(data=>{
- 
+    console.log(data);
     
-  setloves(data?.lovesItems)
+    setcompare(data?.compareItems)})
 
- })
 
+     getLoves({id:user.user.loves}).then(data=>{
+      console.log(data);
+      
+      setloves(data?.lovesItems)})
     }).then(()=>{
       setloader(true)
     })
@@ -54,19 +53,14 @@ getLoves({id:user.user.loves}).then(data=>{
     <div className="Home">
        <Navbar/>
        <div className="Home__header headerHome">
-
         <div className="headerHome__image">
          <img src={require("../images/home/header.png")} alt=""/>
          </div>
-      
-        
-        
          <div className="headerHome__container">
           <div className="headerHome__texts">
             <div className="headerHome__text"><span className='headerHome__span2'>АРЕНДА</span> ФОТО <span className='headerHome__span'>И видео</span></div>
             <div className="headerHome__text">И видео</div>
             <div className="headerHome__text">Оборудования</div>
-            
           </div>
          </div>
        </div>
@@ -80,8 +74,6 @@ getLoves({id:user.user.loves}).then(data=>{
               </div>
               <div className="possibileHome__text">Самый большой выбор техники</div>
               </div>
-              
-              
             </div>
             <div className="possibileHome__item">
             <div className="possibileHome__cover">
@@ -91,7 +83,6 @@ getLoves({id:user.user.loves}).then(data=>{
               <div className="possibileHome__text">Быстрое оформление заказа</div>
             </div>
             </div>
-              
             <div className="possibileHome__item">
             <div className="possibileHome__cover">
             <div className="possibileHome__image">
@@ -100,7 +91,6 @@ getLoves({id:user.user.loves}).then(data=>{
               <div className="possibileHome__text">Можно забрать заказ в пункте выдачи</div>
             </div>
             </div>
-             
             <div className="possibileHome__item">
             <div className="possibileHome__cover">
             <div className="possibileHome__image">
@@ -108,8 +98,7 @@ getLoves({id:user.user.loves}).then(data=>{
               </div>
               <div className="possibileHome__text">Доставка в любую точку Москвы</div>
             </div>
-            </div>
-              
+            </div> 
             <div className="possibileHome__item">
             <div className="possibileHome__cover">
             <div className="possibileHome__image">
@@ -158,16 +147,9 @@ getLoves({id:user.user.loves}).then(data=>{
       products.map((ell:any)=>
       <SwiperSlide>
          <ProductComponent key={ell._id} data={ell} basket={basket} loves={loves} compare={compare} inCompare = {compare?.find((el:any)=>el.product?._id == ell._id) ? true : false} inBasket = {basket?.find((el:any)=>el.product?._id == ell._id)  ? true : false} inLoves = {loves?.find((el:any)=>el.product?._id == ell._id)  ? true : false}/>
-   
-      
     </SwiperSlide>
     )}
-    
-    
-            </Swiper>
-          
-            
-            
+      </Swiper>
         </div>
       </div>
        

@@ -5,10 +5,7 @@ import "swiper/css/navigation";
 import { Navigation } from 'swiper';
 import Nav from '../components/UI/navigation/Navigation'
 import ProductSpoiler from '../components/UI/productSpoiler/ProductSpoiler';
-import { FormControlLabel, Radio, RadioProps, Rating, Skeleton, Slider, ToggleButton, ToggleButtonGroup } from '@mui/material';
-import Button from '../components/UI/button/Button';
-import Button2 from '../components/UI/button2/Button2';
-import styled from '@emotion/styled';
+import { Skeleton, Slider} from '@mui/material';
 import RadioGroup from '../components/UI/radioGroup/RadioGroup';
 import CheckBox from '../components/UI/checkBox/CheckBox';
 import Navbar from '../components/navBar/Navbar';
@@ -17,7 +14,6 @@ import AccordionUser from '../components/UI/accordionUser/AccordionUser';
 import AccordionUserItem from '../components/UI/accordionUser/AccordionUserItem';
 import AccordionOne from '../components/UI/accordionOne/AccordionOne';
 import Toggle from '../components/UI/toggle/Toggle';
-import { getAllTypes } from '../https/typesApi';
 import { getAllBrands } from '../https/brandsApi';
 import { API_URL } from '../utils/config';
 import { Context } from '..';
@@ -26,48 +22,47 @@ import ProductComponent from '../components/ProductComponent';
 import { getBasket } from '../https/basketApi';
 import { getCompare } from '../https/compareApi';
 import { getLoves } from '../https/lovesApi';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import useIntersectionObserver from '../hooks/UseIntersectionObserver';
 import { useInView } from 'react-intersection-observer';
-import { log } from 'console';
+import { IBasketItem, IBrand, ICompareItem, ILovesItem, IProducts } from '../utils/interfaces';
+
 
 const Catalog = () => {
  
     const [priceValue, setpriceValue] = useState<number[]>([10,20])
-    const [VisibleAccordionFiltr, setVisibleAccordionFiltr] = useState(true)
-    const [toggle, settoggle] = useState(0)
-    const [toggle2, settoggle2] = useState(0)
-    const [brands, setbrands] = useState<any>([])
-    const [brandsLoad, setbrandsLoad] = useState(false)
+    const [VisibleAccordionFiltr, setVisibleAccordionFiltr] = useState<boolean>(true)
+    const [toggle, settoggle] = useState<number>(0)
+    const [toggle2, settoggle2] = useState<number>(0)
+    const [brands, setbrands] = useState<Array<IBrand>>([])
+    const [brandsLoad, setbrandsLoad] = useState<boolean>(false)
     const [checkedBrands, secheckedBrands] = useState<any>([])
-    const [products, setproducts] = useState<any>({})
-    const [productsLoad, setproductsLoad] = useState(false)
-    const [sort, setsort] = useState('purchaseNumber')
+    const [products, setproducts] = useState<IProducts>({count:0,responce:[],responceAll:[]})
+    const [productsLoad, setproductsLoad] = useState<boolean>(false)
+    const [sort, setsort] = useState<string>('purchaseNumber')
     const {brand} = useContext(Context)
     const [sortNumber, setsortNumber] = useState<any>(1)
     const {user} = useContext(Context)
-    const [basket, setbasket] = useState([])
-    const [compare, setcompare] = useState([])
-    const [loves, setloves] = useState([])
+    const [basket, setbasket] = useState<Array<IBasketItem>>([])
+    const [compare, setcompare] = useState<Array<ICompareItem>>([])
+    const [loves, setloves] = useState<Array<ILovesItem>>([])
     const [typeInformation, settypeInformation] = useState({})
     const [informations, setinformations] = useState<any>([])
     const [informationValues, setinformationValues] = useState<any>({})
     const [sliderMouseOn, setsliderMouseOn] = useState<any>({})
     const [searchParams, setSearchParams] = useSearchParams();
-    const [sortLoader, setsortLoader] = useState(false)
-    const [sortNumberLoader, setsortNumberLoader] = useState(false)
-    const [checkedBrandsLoader, setcheckedBrandsLoader] = useState(0)
-    const [informationValuesLoader, setinformationValuesLoasder] = useState(0)
-  const [filterCatalog, setfilterCatalog] = useState('')
-  const [filterLoader, setfilterLoader] = useState(false)
-  const obsRef = useRef<any>()
-  const observer = useIntersectionObserver(obsRef,{})
-  const [page, setpage] = useState(1)
-  const [limit, setlimit] = useState(4)
-  const [observerLoader, setobserverLoader] = useState(false)
-  const [searchParamsLoader, setsearchParamsLoader] = useState(false)
-  const [priceRange, setpriceRange] = useState<any>([0,10])
-  const [type, settype] = useState('')
+    const [sortLoader, setsortLoader] = useState<boolean>(false)
+    const [sortNumberLoader, setsortNumberLoader] = useState<boolean>(false)
+    const [checkedBrandsLoader, setcheckedBrandsLoader] = useState<number>(0)
+    const [informationValuesLoader, setinformationValuesLoasder] = useState<number>(0)
+  const [filterCatalog, setfilterCatalog] = useState<string>('')
+  const [filterLoader, setfilterLoader] = useState<boolean>(false)
+  const [page, setpage] = useState<number>(1)
+  const [limit, setlimit] = useState<number>(6)
+  const [observerLoader, setobserverLoader] = useState<boolean>(false)
+  const [searchParamsLoader, setsearchParamsLoader] = useState<boolean>(false)
+  const [priceRange, setpriceRange] = useState<Array<number>>([0,10])
+  const [type, settype] = useState<string>('')
   const { ref, inView, entry } = useInView({
     /* Optional options */
     threshold: 0,
@@ -78,10 +73,9 @@ const Catalog = () => {
         let informationsConst:any = []
         let slideMouseOneConst:any = {}
 
-        getAllproduct(searchParams.get("type"),null,null,null,null,null,null,null,null,null,null).then(data=>{
-           if (data.count !== 0) {
-            
-           }
+        getAllproduct(searchParams.get("type"),page,limit,null,null,null,null,null,null,null,null).then(data=>{
+        console.log(data);
+        
            setproducts({...data})
            settype(data.responce[0].type.name)
            let price:any = []
@@ -90,6 +84,8 @@ const Catalog = () => {
            setpriceRange([price[0],price[price.length-1]])
            
            for (const it of JSON.parse(data.responce[0].type.informations)) {
+            console.log(it,'ss');
+            
             let val:any = 'неважно'
             if (Object.entries(it)[0][1] == 'check') {
                 val = []
@@ -137,11 +133,6 @@ const Catalog = () => {
            setsliderMouseOn(slideMouseOneConst)
            setinformationValues(informationValuesConst) 
            settypeInformation(typeInformationConst)
-
-           console.log(informationValuesConst,typeInformationConst,'@@@@@@@@@'); 
-           //setproducts({...data})   
-            
-         
        
             getBasket({id:user.user.id}).then(data=>{
                 setbasket(data?.basketItems)
@@ -157,13 +148,10 @@ const Catalog = () => {
             setbrandsLoad(true)
         })
         getCompare({id:user.user.compare}).then(data=>{
-            console.log(data);
             setcompare(data?.compareItems)
        
         })
         getLoves({id:user.user.loves}).then(data=>{
-            console.log(data);
-            
           setloves(data?.lovesItems)
           setproductsLoad(true)
          })
@@ -178,12 +166,7 @@ const Catalog = () => {
         let informationValuesConst = {}
         let informationsConst:any = []
         let slideMouseOneConst:any = {}
-        console.log('111111111');
-    
         getAllproduct(searchParams.get("type"),null,null,null,null,null,null,null,null,null,null).then(data=>{
-           if (data.count !== 0) {
-            
-           }
            setproducts({...data})
            settype(data.responce[0].type.name)
            let price:any = []
@@ -234,16 +217,14 @@ const Catalog = () => {
                 informationValuesConst = {...informationValuesConst,[typeName]:arr[0]} 
             }
            })
+
+     
+           
            setsliderMouseOn(slideMouseOneConst)
            setinformationValues(informationValuesConst) 
            settypeInformation(typeInformationConst)
 
-           console.log(informationValuesConst,typeInformationConst,'@@@@@@@@@'); 
-           //setproducts({...data})   
-            
-         
-       
-            getBasket({id:user.user.id}).then(data=>{
+           getBasket({id:user.user.id}).then(data=>{
                 setbasket(data?.basketItems)
                 
           })
@@ -257,13 +238,10 @@ const Catalog = () => {
             setbrandsLoad(true)
         })
         getCompare({id:user.user.compare}).then(data=>{
-            console.log(data);
             setcompare(data?.compareItems)
        
         })
         getLoves({id:user.user.loves}).then(data=>{
-            console.log(data);
-            
           setloves(data?.lovesItems)
           setproductsLoad(true)
          })
@@ -273,20 +251,13 @@ const Catalog = () => {
    }, [searchParams])
    
     useEffect(() => {
- 
-        console.log(products,((page * limit) - limit ),']iiiiii');
         setobserverLoader(true)
         if (observerLoader) {
 
    
-            if (observerLoader && inView && (page +1) * limit < products.responceAll?.length) {
-                //setproductsLoad(false)
-                console.log('7777777777777777',inView,(((page + 1) * limit) - limit ) <= products.responceAll?.length);
-                console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
+            if (observerLoader && inView &&  products.responce.length < products.responceAll.length) {
                 getAllproduct(searchParams.get("type"),page+1,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
-                    console.log(data,'oop5555555555555555555');
                    setproducts({count:products.count,responce:[...products.responce,...data.responce],responceAll:products.responceAll})
-                   //setproductsLoad(true)
                    setpage(page+1)
                })
             }
@@ -302,10 +273,7 @@ const Catalog = () => {
         setsortLoader(true)
         if (sortLoader) {
         setproductsLoad(false)
-        console.log('222222222222');
-        console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
         getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
-            console.log(sort,'oop5555555555555555555');
             setpage(1)
            setproducts({...data})
            setproductsLoad(true)
@@ -321,7 +289,6 @@ const Catalog = () => {
         setsortNumberLoader(true)
         if (sortNumberLoader) {
             setproductsLoad(false) 
-            console.log('333333333333333');
            getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
                 setproducts({...data})
                 setproductsLoad(true)
@@ -337,8 +304,6 @@ const Catalog = () => {
         setcheckedBrandsLoader((prev:any)=>prev+1)
         if(checkedBrandsLoader > 1){
             setproductsLoad(false)
-            console.log('444444444444');
-            
             getAllproduct(searchParams.get("type"),page,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
                 setproducts({...data})
                 setproductsLoad(true)
@@ -354,20 +319,13 @@ const Catalog = () => {
 
         
   if (informationValuesLoader > 1) {
-    console.log('55555555555555');
-    console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
-            
     setproductsLoad(false)
     getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
        setproducts({...data})
-       console.log(informationValues,typeInformation,'------uyuyuyuyu-222222');
        setproductsLoad(true)
        setpage(1)
    })
   }
-         
-         
-
     }, [informationValues])
 
     
@@ -375,7 +333,6 @@ const Catalog = () => {
      setfilterLoader(true)
      if (filterLoader) {
         setproductsLoad(false)
-        console.log('666666666666');
         getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
             setproducts({...data})
             setproductsLoad(true)
@@ -388,11 +345,7 @@ const Catalog = () => {
     }, [filterCatalog])
     
       
-    const putPriceValue = (event: Event,newValue:number | number[])=>{
-        console.log(newValue,'jjk');
-        
-        setpriceValue(newValue as number[])
-    } 
+ 
 
     const chooseBrand = (e:any)=>{
         if (brand.checkedBrands.includes(e)) {
@@ -402,8 +355,6 @@ const Catalog = () => {
             brand.setCheckedBrands([...brand.checkedBrands,e])  
             secheckedBrands(brand.checkedBrands)
         }
-     
-        console.log(brand.checkedBrands,'hhuu');
         
     }
     const changeVal = (val:any,type:any,pos:any)=>{

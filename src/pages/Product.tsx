@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import  { useContext, useEffect, useState } from 'react'
 import Navbar from '../components/navBar/Navbar'
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -28,40 +28,36 @@ import { addProductInLoves, getLoves, removeProductFromLoves } from '../https/lo
 import { Rating } from '@mui/material';
 import { Modal } from '../components/UI/modal/Modal';
 import Input from '../components/UI/input/Input';
+import { IBasketItem, ICompareItem, ILovesItem, IProduct } from '../utils/interfaces';
 const Product = () => {
     const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
-    const [toggleDesc, settoggleDesc] = useState(0)
+    const [toggleDesc, settoggleDesc] = useState<number>(0)
     const [foldDescription, setfoldDescription] = useState<boolean>(false)
-    const [foldText, setfoldText] = useState(false)
+    const [foldText, setfoldText] = useState<boolean>(false)
     const {id} = useParams()
-    const [product, setproduct] = useState<any>({})
-    const [productLoad, setproductLoad] = useState(false)
+    const [product, setproduct] = useState<IProduct | null>(null)
+    const [productLoad, setproductLoad] = useState<boolean>(false)
     const {user} = useContext(Context)
-    const [inBasket, setinBasket] = useState(false)
-    const [inCompare, setinCompare] = useState(false)
-    const [inLoves, setinLoves] = useState(false)
-    const [loves, setloves] = useState([])
-    const [compare, setcompare] = useState<any>([])
-    const [basket, setbasket] = useState([])
-    const [raiting, setraiting] = useState(1)
-    const [modal, setmodal] = useState(false)
-    const [name, setname] = useState('')
-    const [sername, setsername] = useState('')
-    const [text, settext] = useState('')
-    const [raitingModal, setraitingModal] = useState<any>(1)
+    const [inBasket, setinBasket] = useState<boolean>(false)
+    const [inCompare, setinCompare] = useState<boolean>(false)
+    const [inLoves, setinLoves] = useState<boolean>(false)
+    const [loves, setloves] = useState<Array<ILovesItem>>([])
+    const [compare, setcompare] = useState<Array<ICompareItem>>([])
+    const [basket, setbasket] = useState<Array<IBasketItem>>([])
+    const [raiting, setraiting] = useState<number>(1)
+    const [modal, setmodal] = useState<boolean>(false)
+    const [name, setname] = useState<string>('')
+    const [sername, setsername] = useState<string>('')
+    const [text, settext] = useState<string>('')
+    const [raitingModal, setraitingModal] = useState<number | null>(1)
     
     useEffect(() => {
         getOneproduct({id}).then(data=>{
-            console.log(data);
             setproduct(data)
             setraiting((data.ratings.reduce((accumulator:any, currentValue:any)=>accumulator + currentValue.rate,0))/data.ratings.length)
             getBasket({id:user.user.id}).then(data=>{
-                  console.log(data);
-                  
                  if (  data?.basketItems.find((e:any)=>e.product?._id === id)) setinBasket(true)
-                
                  setbasket(data.basketItems)
-               
             })
             getCompare({id:user.user.compare}).then(data=>{
                 console.log(data);
@@ -84,20 +80,12 @@ const Product = () => {
         setproductLoad(true)   
     })}, [])
     const addToBasket = ()=>{
-        if (!inBasket) {
-         
-            addItemToBasket({basketId:user.user.basket,product:product._id,count:1}).then(data=>{
-                console.log(data);
-                setinBasket(true)
-                setinBasket(true)
-                
-            })
+        if (!inBasket) {     
+            addItemToBasket({basketId:user.user.basket,product:product?._id,count:1}).
+            then(data=>setinBasket(true))
         }else{
-            removeItemFromBasket({id:basket.find((el:any)=>el.product._id === id),basketId:user.user.basket}).then(data=>{
-                console.log(data);
-                setinBasket(false)
-               
-            })
+            removeItemFromBasket({id:basket.find((el:any)=>el.product._id === id),basketId:user.user.basket}).
+            then(data=>setinBasket(false))
         }
        
     }
@@ -105,38 +93,27 @@ const Product = () => {
     const addToCompare = ()=>{
         if (!inCompare) {
          
-            addItemToCompare({compareId:user.user.compare,product:id}).then(data=>{
-               
-                setinCompare(true)
-            })
+            addItemToCompare({compareId:user.user.compare,product:id}).
+            then(data=>setinCompare(true))
         }else{
-            removeItemFromCompare({id:compare.find((el:any)=>el.product._id=== id)?._id,compareId:user.user.compare}).then(data=>{
-                setinCompare(false)
-            })
+            removeItemFromCompare({id:compare.find((el:any)=>el.product._id=== id)?._id,compareId:user.user.compare}).
+            then(data=>setinCompare(false))
         }
       
     }
+
+
     const addToLoves = ()=>{
         if (!inLoves) {
-        addProductInLoves({lovesId:user.user.loves,product:id}).then(data=>{
-            setinLoves(true)
-            
-        })
+        addProductInLoves({lovesId:user.user.loves,product:id}).then(data=>setinLoves(true))
     }else{
-        removeProductFromLoves({id:loves.find((el:any)=>el.product._id=== id),lovesId:user.user.loves}).then(data=>{
-            console.log(data);
-            setinLoves(false)
-            
-        })
+        removeProductFromLoves({id:loves.find((el:any)=>el.product._id=== id),lovesId:user.user.loves}).then(data=>setinLoves(false))
     }
     }
-    const addRaitingToProduct = ()=>{
-        addRaiting({user:user.user.id,rate:raitingModal,product:id,name,sername,text}).then(data=>{
-            console.log(typeof data);
-            "status" in data === false &&  window.location.reload();
-   
 
-        })
+
+    const addRaitingToProduct = ()=>{
+        addRaiting({user:user.user.id,rate:raitingModal,product:id,name,sername,text}).then(data=>"status" in data === false &&  window.location.reload())
     }
   return (
  
@@ -162,10 +139,10 @@ const Product = () => {
        modules={[FreeMode, Navigation, Thumbs]}
        className="mySwiper2"
      >
-       {JSON.parse(product.images).map((e:any)=>       
+       {JSON.parse(product?.images || '').map((e:any)=>       
        <SwiperSlide>
           <div className="gallery-product__sliderItem">
-          <img src={`${API_URL}/${product.name}/${e}`} alt=""/>
+          <img src={`${API_URL}/${product?.name}/${e}`} alt=""/>
           </div>
        </SwiperSlide>
        ) }
@@ -184,10 +161,10 @@ const Product = () => {
        modules={[FreeMode, Navigation, Thumbs]}
        className="mySwiper"
      >
-        {JSON.parse(product.images).map((e:any)=>       
+        {JSON.parse(product?.images || '').map((e:any)=>       
        <SwiperSlide>
            <div className="gallery-product__thumpItem">
-           <img src={`${API_URL}/${product.name}/${e}`} alt=""/>
+           <img src={`${API_URL}/${product?.name}/${e}`} alt=""/>
        </div>
        </SwiperSlide>
        ) }
@@ -212,8 +189,8 @@ const Product = () => {
            </div>
            <div className="main-product__right">
                <Nav navigationClass='product _d2'>Главная / Фотокамеры / Canon / 5D Mark IV body</Nav>
-               <div className="main-product__brand">{product.brand.name}</div>
-               <div className="main-product__name">{product.name}</div>
+               <div className="main-product__brand">{product?.brand.name}</div>
+               <div className="main-product__name">{product?.name}</div>
                <div className="main-product__actions">
                <Button ripple={true} className='product-1 dr'>В наличии</Button>
                <Button onClick={addToBasket} ripple={true} className={inBasket ? 'slider2 _pr active _icon-cart': 'slider2 _pr _icon-cart'}>{inBasket ? 'В корзине' : 'В корзину'}</Button>
@@ -231,14 +208,14 @@ const Product = () => {
                    </Toggle>
                    <div className="description-product__body">
                        
-                   <Fold foldClass={toggleDesc ===0 ?'product active': 'product'} slice={3} value={foldDescription} foldChange={setfoldDescription}>
-                    {product.information.map((et:any)=>
+                   <Fold foldClass={toggleDesc ===0 ?'product active': 'product'} slice={2} value={foldDescription} foldChange={setfoldDescription}>
+                    {product?.information.map((et:any)=>
                     <div className="description-product__description">{et.name}<span>{et.description}</span></div>
                     )}
                    </Fold>
                    <div className={toggleDesc === 1 ? "description-product__foldText active" : "description-product__foldText"}>
                    <FoldText foldClass={toggleDesc === 1  ?'product active': 'product'} value={foldText} foldChange={setfoldText} >
-                       {product.description}
+                       {product?.description}
                    </FoldText>
                    </div>
                    
@@ -292,7 +269,7 @@ const Product = () => {
       
               }}  
             >
-                {product.ratings.map((el:any)=>
+                {product?.ratings.map((el:any)=>
                  <SwiperSlide>
                  <div className="raitings-product__item-cover">
                     <div className="raitings-product__item item-raitings">

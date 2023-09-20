@@ -4,7 +4,7 @@
 
 
 .Navbar {
-
+    transition: all 0.3s ease 0s;
     position: fixed;top: 0;width: 100%;left:0;
   &__cover{
     max-width:$maxWidth + px ;
@@ -29,7 +29,8 @@
   
    
 &.active{
-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease 0s;
+box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 background: #fff; 
 
