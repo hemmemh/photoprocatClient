@@ -102,7 +102,7 @@ const addToLoves = ()=>{
                         <div className="slideHome__body">
                             <div className="slideHome__image">
                               <div className="slideHome__imageCover">
-                              <img src={`${API_URL}/${data.name}/${JSON.parse(data.images)[0]}`} alt=""/>
+                              <img src={`${API_URL}/static/${data.name}/${JSON.parse(data.images)[0]}`} alt=""/>
                            
                               </div>
                             </div>
