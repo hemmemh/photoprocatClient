@@ -73,7 +73,7 @@ const Basket = () => {
     <div className="Basket__body">
         <Navigation navigationClass='basket'>Главная / Корзина</Navigation>
         <>
-        {basket?.basketItems.length !== 0 ?
+        {basket?.basketItems.length !== 0 && basket?.basketItems ?
         <><div className="Basket__title">Корзина</div>
         <div className="Basket__items items-basket">
             <div className="items-basket__top top-basket">
