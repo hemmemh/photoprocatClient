@@ -17,6 +17,13 @@
     justify-content: center;
     }
     &.user{
+        transition: all 0.3s ease 0s;
+        @media (any-hover: hover){
+            &:hover{
+                transition: all 0.3s ease 0s;
+                box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+            }
+        }
         background: linear-gradient(180deg, #8EE902 0%, #4F9C2C 100%);
        border-radius: 100px;
        font-family: 'Ubuntu';
@@ -114,7 +121,30 @@ width: rem(200);
 }
     }
     &.caatalog{
-        background: linear-gradient(180deg, #8EE902 0%, #4F9C2C 100%);
+        transition: all 0.3s ease 0s;
+        @media (any-hover: hover){
+            &:hover{
+                transition: all 0.3s ease 0s;
+                color: #ffffff;
+                &:after{
+                    width: 100%;
+                }
+            }
+        }
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(180deg, #8EE902 0%, #4F9C2C 100%);
+            transition: all .3s;
+            border-radius: 10rem;
+            
+          }
+ background: #fff;
+ border: 1px solid #8EE902;
 border-radius: 100px;
 font-family: 'Ubuntu';
 font-style: normal;
@@ -129,13 +159,44 @@ width:rem(100);
 line-height: 10px;
     width:rem(70);    
 }
-color: #FFFFFF;
+color: #8EE902;
 .Button__cover{
     padding: 0  0 40/150  *100% 0;
+    z-index: 2;
 }
     }
     &.caatalog2{
-        background: linear-gradient(180deg, #8EE902 0%, #4F9C2C 100%);
+        transition: all 0.3s ease 0s;
+        @media (any-hover: hover){
+            &:hover{
+                transition: all 0.3s ease 0s;
+                color: #ffffff;
+                &:after{
+                    width: 100%;
+                }
+                .Button__absolute{
+                    &::before{
+                      color: #fff;
+                        
+                    }
+                }
+            }
+        }
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(180deg, #8EE902 0%, #4F9C2C 100%);
+            transition: all .3s;
+            border-radius: 10rem;
+            
+          }
+         
+ background: #fff;
+ border: 1px solid #8EE902;
 border-radius: 100px;
 font-family: 'Ubuntu';
 font-style: normal;
@@ -153,10 +214,38 @@ line-height: 10px;
 color: #FFFFFF;
 &.active{
     cursor: inherit;
-    background: #75758A;
+    &:after {
+        width: 100%;
+    }
+    .Button__absolute{
+        &::before{
+          color: #fff;
+            
+        }
+    }
 }
 .Button__cover{
     padding: 0  0 80/150  *100% 0;
+}
+.Button__absolute{
+    &::before{
+        color: #8EE902;
+        z-index: 4;
+        font-size: 12px;
+        @media (max-width:$mobileSmall){
+            font-size: 9px;
+        }
+
+      }
+      @media (any-hover: hover){
+        &:hover{
+            &::before{
+                color: #ffffff;
+         
+        
+              }
+        }
+      }
 }
     }
     &.compare{
@@ -217,7 +306,13 @@ color: #000000;
 
     }
     &.basket{
-        
+        transition: all 0.3s ease 0s;
+        @media (any-hover: hover){
+            &:hover{
+                transition: all 0.3s ease 0s;
+                box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+            }
+        }
 background: linear-gradient(180deg, #8EE902 0%, #4F9C2C 100%);
 border-radius: 100px;
 font-family: 'Ubuntu';
@@ -251,6 +346,13 @@ color: #FFFFFF;
 }
     }
     &.slider2{
+        transition: all 0.3s ease 0s;
+        @media (any-hover: hover){
+            &:hover{
+                transition: all 0.3s ease 0s;
+                box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+            }
+        }
         .Button__cover{
             padding: 0  0 61.5% 0;
         }   
@@ -355,11 +457,10 @@ color: #000000;
         }
     }
     @media (any-hover: hover){
-        &:hover{
-            transition: all 0.3s ease 0s;
-            background: #75758A;
-            color: #FFFFFF;
-        }
+        &:after{
+            width: 100%;
+          }
+          color: #fff;
     }
 }
 

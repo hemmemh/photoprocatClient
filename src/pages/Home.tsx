@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import Navbar from '../components/navBar/Navbar'
 import { Swiper, SwiperSlide, } from 'swiper/react';
-import { Navigation } from 'swiper';
+import { Navigation} from 'swiper';
 import 'swiper/css';
 import "swiper/css/navigation";
 import Footer from '../components/footer/Footer';
@@ -12,6 +12,7 @@ import { getBasket } from '../https/basketApi';
 import { getCompare } from '../https/compareApi';
 import { getLoves } from '../https/lovesApi';
 import { IBasketItem, ICompareItem, ILovesItem, IProduct } from '../utils/interfaces';
+import { Background, Parallax } from 'react-parallax';
 
 
 
@@ -54,7 +55,15 @@ const Home = () => {
        <Navbar/>
        <div className="Home__header headerHome">
         <div className="headerHome__image">
-         <img src={require("../images/home/header.png")} alt=""/>
+          
+         
+               <img src={require("../images/home/header.png")} alt=""/>
+           
+    
+         
+ 
+       
+  
          </div>
          <div className="headerHome__container">
           <div className="headerHome__texts">

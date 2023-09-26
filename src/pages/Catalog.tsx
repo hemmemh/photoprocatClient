@@ -59,7 +59,7 @@ const Catalog = () => {
   const [filterCatalog, setfilterCatalog] = useState<string>('')
   const [filterLoader, setfilterLoader] = useState<boolean>(false)
   const [page, setpage] = useState<number>(1)
-  const [limit, setlimit] = useState<number>(3)
+  const [limit, setlimit] = useState<number>(6)
   const [observerLoader, setobserverLoader] = useState<boolean>(false)
   const [searchParamsLoader, setsearchParamsLoader] = useState<boolean>(false)
   const [priceRange, setpriceRange] = useState<Array<number>>([0,10])
@@ -308,7 +308,7 @@ const Catalog = () => {
         setcheckedBrandsLoader((prev:any)=>prev+1)
         if(checkedBrandsLoader > 1){
             setproductsLoad(false)
-            getAllproduct(searchParams.get("type"),page,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
+            getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
                 setproducts({...data})
                 setproductsLoad(true)
                 setpage(1)
