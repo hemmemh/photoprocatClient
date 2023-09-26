@@ -7,9 +7,10 @@ import Footer from '../components/footer/Footer'
 import { DateCalendar, DateField, LocalizationProvider } from '@mui/x-date-pickers'
 import dayjs, { Dayjs } from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { registration } from '../https/userApi'
+import { changeUser, registration } from '../https/userApi'
 import { EMAIL_REGEXP, PASSWORD_REGEX } from '../utils/config'
 import Loader from '../components/UI/loader/Loader'
+import jwtDecode from 'jwt-decode'
 
 
 const Registration = () => {
@@ -44,11 +45,16 @@ const Registration = () => {
     const onRegistration  = ()=>{
         if (validationEmail && validationPassword && mail !=='' && password !=='') {
             setloader(true)
-            registration({mail,password}).then(data=>{
-                setsuccessfullReg(true)
-                setTimeout(() => {
-                    setsuccessfullReg(false)
-                }, 3000);
+            registration({mail,password}).then(response=>{
+                const user = jwtDecode<any>(response.refreshToken)
+                changeUser({id:user.id,name,serName:secondName,birthDate:data,tell}).then(data=>{
+                    console.log(data,'1111');
+                    setsuccessfullReg(true)
+                    setTimeout(() => {
+                        setsuccessfullReg(false)
+                    }, 3000);
+                })
+            
             }).finally(()=>{
                 setloader(false)
             })

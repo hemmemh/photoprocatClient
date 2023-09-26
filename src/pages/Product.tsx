@@ -38,6 +38,7 @@ const Product = () => {
     const [product, setproduct] = useState<IProduct | null>(null)
     const [productLoad, setproductLoad] = useState<boolean>(false)
     const {user} = useContext(Context)
+    const {navbar} = useContext(Context)
     const [inBasket, setinBasket] = useState<boolean>(false)
     const [inCompare, setinCompare] = useState<boolean>(false)
     const [inLoves, setinLoves] = useState<boolean>(false)
@@ -83,19 +84,22 @@ const Product = () => {
         if (!inBasket) {     
             addItemToBasket({basketId:user.user.basket,product:product?._id,count:1}).
             then(data=>setinBasket(true))
+            navbar.setProducts(navbar.products + 1)
         }else{
             removeItemFromBasket({id:basket.find((el:any)=>el.product._id === id),basketId:user.user.basket}).
             then(data=>setinBasket(false))
+            navbar.setProducts(navbar.products - 1)
         }
        
     }
 
     const addToCompare = ()=>{
         if (!inCompare) {
-         
+            navbar.setCompares(navbar.compares + 1)
             addItemToCompare({compareId:user.user.compare,product:id}).
             then(data=>setinCompare(true))
         }else{
+            navbar.setCompares(navbar.compares - 1)
             removeItemFromCompare({id:compare.find((el:any)=>el.product._id=== id)?._id,compareId:user.user.compare}).
             then(data=>setinCompare(false))
         }

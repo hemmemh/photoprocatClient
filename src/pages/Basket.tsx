@@ -14,6 +14,7 @@ import { IBasket, IProduct } from '../utils/interfaces'
 const Basket = () => {
 
     const {user} = useContext(Context)
+    const {navbar} = useContext(Context)
     const [basket, setbasket] = useState<IBasket>()
     const [load, setload] = useState<boolean>(false)
     const [products, setproducts] = useState<Array<IProduct>>([])
@@ -33,11 +34,12 @@ const Basket = () => {
       
     }, [])
     const buy = ()=>{
+        navbar.setProducts(0)
         getBasket({id:user.user.id}).then(data=>{
             let arr:any = []
-    for (const it of data.basketItems) {
-        arr = [...arr, {[it.product._id]:it.count}]
-    }
+            for (const it of data.basketItems) {
+                arr = [...arr, {[it.product._id]:it.count}]
+            }
  
     addOrder({ordersId:user.user.orders,price:sumPrice,products:JSON.stringify(arr)}).then(data=>{
         console.log(data);
@@ -53,11 +55,11 @@ const Basket = () => {
         }).then(()=>{
      
             removeAll({id:user.user.basket}).then(data=>{
-                console.log(data);
+                console.log(data,'7777');
                 
             })
             navigate(HOME_ROUTE)
-            window.location.reload();
+            //window.location.reload();
         })
  
       
@@ -70,7 +72,9 @@ const Basket = () => {
 <div className="Basket__container">
     <div className="Basket__body">
         <Navigation navigationClass='basket'>Главная / Корзина</Navigation>
-        <div className="Basket__title">Корзина</div>
+        <>
+        {basket?.basketItems.length !== 0 ?
+        <><div className="Basket__title">Корзина</div>
         <div className="Basket__items items-basket">
             <div className="items-basket__top top-basket">
                 <div className="top-basket__item">Фото</div>
@@ -103,6 +107,13 @@ const Basket = () => {
            
             
         </div>
+        </>
+         
+         :
+         <div className="Basket__none _icon-cart">нет товаров</div>
+         }</>
+      
+       
         
     </div>
 </div>

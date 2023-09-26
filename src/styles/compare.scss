@@ -1,4 +1,29 @@
 .Compare {
+
+    &__none{
+        flex: 1 1 auto;
+        margin-top: rem(30);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: rem(30);
+        align-items: center;
+        &::before{
+        font-size: 300px;
+        color: #4F9C2C;
+        opacity: 0.5;
+        @media (max-width:$mobile){
+            font-size: 200px;
+        }
+            
+        }
+        font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 30px;
+        line-height: 34px;
+
+    }
 margin-top: rem(114);
 flex: 1 1 auto;
 align-items: stretch;
@@ -12,6 +37,8 @@ align-items: stretch;
     }
     &__body{
         width: 100%;
+        display: flex;
+        flex-direction: column;;
     }
     &__title {
         display: flex;
@@ -194,7 +221,7 @@ color: #75758A;
     }
 }
 .item-swiperCompare {
-   width: rem(150);
+   max-width: rem(150);
    @media (max-width:583px){
     width: auto;
    }

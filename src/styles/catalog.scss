@@ -1,4 +1,9 @@
 .Catalog {
+    &__gridLoader{
+        display: flex;
+        justify-content: center;
+        margin-top: rem(30);
+    }
     .MuiSlider-root{
         height: rem(4);
     }

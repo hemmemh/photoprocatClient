@@ -6,17 +6,28 @@ import { getUser, refresh } from "./https/userApi";
 import { log } from "console";
 import { Context } from ".";
 import jwtDecode from 'jwt-decode'
+import { getBasket } from "./https/basketApi";
+import { getCompare } from "./https/compareApi";
+
 
 function App() {
   const {user} = useContext(Context)
+  const {navbar} = useContext(Context)
   const [loader, setloader] = useState(false)
   useEffect(() => {
     setloader(false)
      refresh().then(e=>{
          console.log(jwtDecode<any>(e.refreshToken),'OOPPPO');
          user.setuser(jwtDecode<any>(e.refreshToken))
+
+
+     }).then(data=>{
+      getBasket({id:user.user.id}).then(data=> navbar.setProducts(data.basketItems.length))
+      getCompare({id:user.user.compare}).then(data=>navbar.setCompares(data.compareItems.length) )
      }).finally(()=>{
       setloader(true)
+      console.log(navbar.compares,navbar.products,'uuui');
+      
      })
   }, [])
   
@@ -34,4 +45,4 @@ function App() {
   );
 }
 
-export default App;
+export default App ;

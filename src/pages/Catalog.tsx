@@ -5,7 +5,7 @@ import "swiper/css/navigation";
 import { Navigation } from 'swiper';
 import Nav from '../components/UI/navigation/Navigation'
 import ProductSpoiler from '../components/UI/productSpoiler/ProductSpoiler';
-import { Skeleton, Slider} from '@mui/material';
+import { CircularProgress, Skeleton, Slider} from '@mui/material';
 import RadioGroup from '../components/UI/radioGroup/RadioGroup';
 import CheckBox from '../components/UI/checkBox/CheckBox';
 import Navbar from '../components/navBar/Navbar';
@@ -27,7 +27,8 @@ import useIntersectionObserver from '../hooks/UseIntersectionObserver';
 import { useInView } from 'react-intersection-observer';
 import { IBasketItem, IBrand, ICompareItem, ILovesItem, IProducts } from '../utils/interfaces';
 
-
+import { observer } from "mobx-react-lite";
+import Loader from '../components/UI/loader/Loader';
 const Catalog = () => {
  
     const [priceValue, setpriceValue] = useState<number[]>([10,20])
@@ -58,11 +59,12 @@ const Catalog = () => {
   const [filterCatalog, setfilterCatalog] = useState<string>('')
   const [filterLoader, setfilterLoader] = useState<boolean>(false)
   const [page, setpage] = useState<number>(1)
-  const [limit, setlimit] = useState<number>(6)
+  const [limit, setlimit] = useState<number>(3)
   const [observerLoader, setobserverLoader] = useState<boolean>(false)
   const [searchParamsLoader, setsearchParamsLoader] = useState<boolean>(false)
   const [priceRange, setpriceRange] = useState<Array<number>>([0,10])
   const [type, settype] = useState<string>('')
+  const [gridLoader, setgridLoader] = useState<boolean>(false)
   const { ref, inView, entry } = useInView({
     /* Optional options */
     threshold: 0,
@@ -255,10 +257,12 @@ const Catalog = () => {
         if (observerLoader) {
 
    
-            if (observerLoader && inView &&  products.responce.length < products.responceAll.length) {
+            if (observerLoader && inView &&  products.responce?.length < products.responceAll?.length) {
+                setgridLoader(true)
                 getAllproduct(searchParams.get("type"),page+1,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
                    setproducts({count:products.count,responce:[...products.responce,...data.responce],responceAll:products.responceAll})
                    setpage(page+1)
+                   setgridLoader(false)
                })
             }
         }
@@ -449,7 +453,7 @@ const Catalog = () => {
            
             
         </div>
-        <div className="mainCatalog__count">Найдено <span>{productsLoad ? products.count : '0'} товаровя</span></div>
+        <div className="mainCatalog__count">Найдено <span>{productsLoad && products.count ? products.count : '0'} товара(ов)</span></div>
         <div className="Catalog__main mainCatalog">
         
             <div className="mainCatalog__left">
@@ -561,6 +565,8 @@ const Catalog = () => {
                 
                   </div>
                  }
+                 { gridLoader && <div className="Catalog__gridLoader"><CircularProgress /></div>
+                 }
               
             </div>
           
@@ -589,7 +595,7 @@ const Catalog = () => {
                        }
                         return  <>
                         <div className="right-main-catalog__slider slider-right-main-catalog">
-                        <div className="slider-right-main-catalog__name">Оптический Zoom</div>
+                        <div className="slider-right-main-catalog__name">{typeName}</div>
                         <Slider  key={typeName} 
                                  getAriaLabel={() => 'Temperature range'}
                                  value={sliderMouseOn[typeName]}
@@ -631,4 +637,4 @@ const Catalog = () => {
   )
 }
 
-export default Catalog
+export default observer(Catalog) 

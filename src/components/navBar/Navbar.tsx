@@ -12,7 +12,7 @@ import { Context } from '../..'
 import { EMAIL_REGEXP, PASSWORD_REGEX } from '../../utils/config'
 import Loader from '../UI/loader/Loader'
 import { getAllTypes } from '../../https/typesApi'
-
+import { observer } from "mobx-react-lite";
 
 interface button{
     filterCatalog?:any
@@ -43,9 +43,10 @@ const Navbar:FC<button>  = ({setfilterCatalog}) => {
     const [filter, setfilter] = useState<string>('')
     const [filterTime, setfilterTime] = useState<ReturnType<typeof setTimeout>>()
     const {user} = useContext(Context)
+    const {navbar} = useContext(Context)
     const location = useLocation()
     const navigate = useNavigate()
-
+    
 
     const addClick = useCallback(
 
@@ -89,7 +90,7 @@ const Navbar:FC<button>  = ({setfilterCatalog}) => {
    }, [loginModal])
    
    useEffect(() => {
-    console.log(menu);
+
     
     if (menu && window.innerWidth <= 767.98) {
       document.body.classList.add('hidden')
@@ -237,12 +238,12 @@ const Navbar:FC<button>  = ({setfilterCatalog}) => {
                 
                 <div className="menu__actions actionsMenu">
                     <div onClick={()=>navigate(LOVES_ROUTE)} className="actionsMenu__action _icon-star"></div>
-                    <div onClick={()=>navigate(COMPARE_ROUTE)} className="actionsMenu__action _icon-compare"></div>
-                    <div onClick={()=>navigate(BASKET_ROUTE)} className="actionsMenu__action _icon-cart"></div>
+                    <div onClick={()=>navigate(COMPARE_ROUTE)} className="actionsMenu__action _icon-compare">{navbar.compares !== 0 && <span className='actionsMenu__span'>{navbar.compares}</span> }</div>
+                    <div onClick={()=>navigate(BASKET_ROUTE)} className="actionsMenu__action _icon-cart">{navbar.products !== 0 &&<span className='actionsMenu__span'>{navbar.products}</span>}</div>
                 </div>
                 <div className="menu__right rightMenu">
                     <div onClick={()=>location.pathname === `${CATALOG_ROUTE}` && setsearch(prev=>!prev)} className="rightMenu__action _icon-search"></div>
-                    <div onClick={()=> Object.keys(user.user).length === 0 ? setloginModal(true) : navigate(USER_ROUTE)} className="rightMenu__action _icon-cabinet"></div>
+                    <div onClick={()=> Object.keys(user.user).length === 0 ? setloginModal(true) : navigate(USER_ROUTE)} className={user.user.id ? "rightMenu__action active _icon-cabinet" : "rightMenu__action _icon-cabinet"}></div>
                 </div>
                  <div ref={spoilerRef} className={menu ? "Navbar__catalog catalogNavbar active" : "Navbar__catalog catalogNavbar"}>
                  <div className="catalogNavbar__left">
@@ -303,7 +304,7 @@ const Navbar:FC<button>  = ({setfilterCatalog}) => {
                     </div>
              
                     <div onClick={()=>setmodalStage(1)} className="login-modal__pass">Вспомнить пароль?</div>
-                    <CheckBox  items='Запомнить пароль для последующего входа' nameVisible={false} name='Формат матрицы' value={pass} change={setpass}/>
+            
                     <div className="login-modal__buttons">
                         <Button onClick={onLogin} className='login-modal g'>Войти</Button>
                         <Button onClick={()=>navigate(REGISTRATION_ROUTE)} className='reg-modal g' >Регистрация</Button>
@@ -355,4 +356,4 @@ const Navbar:FC<button>  = ({setfilterCatalog}) => {
   )
 }
 
-export default Navbar
+export default observer(Navbar) 

@@ -1,6 +1,6 @@
 
 import { Rating } from '@mui/material'
-import React,{FC,useContext,useState,useEffect} from 'react'
+import React,{FC,useContext,useState,useEffect, useRef} from 'react'
 import Button from './UI/button/Button'
 import { API_URL } from '../utils/config'
 import { useNavigate } from 'react-router-dom'
@@ -10,6 +10,7 @@ import { Context } from '..'
 import { addItemToCompare, removeItemFromCompare } from '../https/compareApi'
 import { addProductInLoves, removeProductFromLoves } from '../https/lovesApi'
 import { log } from 'console'
+import { observer } from "mobx-react-lite";
 interface button{
  data:any
  inBasket:any
@@ -21,7 +22,10 @@ interface button{
 }
 
 const ProductComponent:FC<button>  = ({data,inBasket=false,inCompare=false,inLoves=false,basket,loves,compare }) => {
+
+
 const {user} = useContext(Context)
+const {navbar} = useContext(Context)
 const [inBasketSnippet, setinBasketSnippet] = useState(inBasket)
 const [inCompareSnippet, setinCompareSnippet] = useState(inCompare)
 const [inLovesSnippet, setinLovesSnippet] = useState(inLoves)
@@ -36,12 +40,14 @@ const [inLovesSnippet, setinLovesSnippet] = useState(inLoves)
     setinLovesSnippet(inLoves)
   }, [inLoves])
 
-  
-  const addToBasket = ()=>{
+
+  const addToBasket =  ()=>{
+
     if (!inBasketSnippet) {
 
         addItemToBasket({basketId:user.user.basket,product:data._id,count:1}).then(data=>{
           setinBasketSnippet(true)
+          navbar.setProducts(navbar.products + 1)
             console.log(data);
          
         }).catch(e=>
@@ -49,6 +55,7 @@ const [inLovesSnippet, setinLovesSnippet] = useState(inLoves)
     }else{
       removeItemFromBasket({id:basket.find((el:any)=>el.product._id === data._id),basketId:user.user.basket}).then(data=>{
           console.log(data);
+          navbar.setProducts(navbar.products - 1)
           setinBasketSnippet(false)
          
       })
@@ -61,7 +68,7 @@ const addToCompare = ()=>{
 
       addItemToCompare({compareId:user.user.compare,product:data._id}).then(data=>{
         setinCompareSnippet(true)
-        console.log(data);
+        navbar.setCompares(navbar.compares + 1)
         setinCompareSnippet(true)
       }).catch(e=>{
         console.log(e);
@@ -69,6 +76,7 @@ const addToCompare = ()=>{
       })
   }else{
     removeItemFromCompare({id:compare.find((el:any)=>el.product._id=== data._id)?._id,compareId:user.user.compare}).then(data=>{
+      navbar.setCompares(navbar.compares - 1)
       setinCompareSnippet(false)
     })
 }
@@ -115,7 +123,7 @@ const addToLoves = ()=>{
                             </div>
                             <div className="slideHome__actions">
                               <Button onClick={()=>navigate(`${PRODUCT_ROUTE}/${data._id}`)} className='caatalog h' ripple={true} rippleClass='two'>Подробнее</Button>
-                              <Button onClick={addToBasket} className={inBasketSnippet ?'caatalog2 active  _icon-cart' : 'caatalog2  _icon-cart'}></Button>
+                              <Button  onClick={addToBasket} className={inBasketSnippet ?'caatalog2 active  _icon-cart' : 'caatalog2  _icon-cart'}></Button>
                             </div>
                             <div className="slideHome__business businessHome">
                               <div onClick={addToCompare} className={inCompareSnippet ? "businessHome__item active _icon-compare" : "businessHome__item _icon-compare"}></div>
@@ -128,4 +136,4 @@ const addToLoves = ()=>{
   )
 }
 
-export default ProductComponent
+export default observer(ProductComponent)

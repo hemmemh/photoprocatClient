@@ -22,6 +22,7 @@ const Compare = () => {
     const [secondSwiper, setSecondSwiper] = useState<afea | null>(null);
     const [fold, setfold] = useState<boolean>(false)
     const {user} = useContext(Context)
+    const {navbar} = useContext(Context)
     const [itemsView, setitemsView] = useState<boolean>(false)
     const [compare, setcompare] = useState<any>([])
     const [compareTypes,setcompareTypes] = useState<Array<string>>([])
@@ -83,12 +84,14 @@ const Compare = () => {
     
     const removeItem = (id:any,compareId:any)=>{
         setcompare([...compare.filter((el:any)=>el._id !== id)])
+        navbar.setCompares(navbar.compares - 1)
         removeItemFromCompare({id,compareId}).then((data:any)=>{
             console.log(data);
         })
     }
     const removeByType = ()=>{
         removeItemFromCompareByType({type:activeType,compareId:compareId}).then(data=>{
+            navbar.setCompares(navbar.compares - compare.length - data.compareItems.length)
          setcompare(data.compareItems)
          setactiveTypeLoad(false)   
         })
@@ -257,7 +260,7 @@ const Compare = () => {
        
       </div></>
       :
-      <div>Не выбраны товары</div>
+      <div className='Compare__none _icon-compare'>Не выбраны товары</div>
       }
           </div>
           

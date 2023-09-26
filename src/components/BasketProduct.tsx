@@ -1,7 +1,8 @@
-import React,{FC,useState,useEffect} from 'react'
+import React,{FC,useState,useEffect, useContext} from 'react'
 import { API_URL } from '../utils/config'
 import Amount from './UI/amount/Amount'
 import { changeAmount, removeItemFromBasket } from '../https/basketApi'
+import { Context } from '..'
 interface button{
     e:any
     setProducts:any
@@ -13,6 +14,7 @@ interface button{
    
 const BasketProduct:FC<button>  = ({e,setProducts,products,basketId,setsumPrice}) => {
     const [amount, setamount] = useState(0)
+    const {navbar} = useContext(Context)
     useEffect(() => {
       setamount(e.count)
       setsumPrice((prev:any)=>prev+(e.count * e.product.price))
@@ -29,6 +31,8 @@ const BasketProduct:FC<button>  = ({e,setProducts,products,basketId,setsumPrice}
     
     const remove = ()=>{
         setProducts((prev:any)=>({...prev,basketItems:products.basketItems.filter((fil:any)=>fil._id !== e._id)}))
+        setsumPrice((prev:any)=>prev - (e.product.price * amount))
+        navbar.setProducts(navbar.products - 1)
         removeItemFromBasket({id:e._id,basketId}).then(data=>{
             console.log(data);
             
