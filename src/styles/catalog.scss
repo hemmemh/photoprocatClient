@@ -535,6 +535,9 @@ color: #000000;
 .right-main-catalog {
 
     .slider-right-main-catalog {
+        &.price{
+            margin-top:30px
+        }
         max-width: 300px;
         &__name{
             margin-bottom: rem(15);

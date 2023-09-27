@@ -78,8 +78,8 @@ const Admin = () => {
             createType({name,informations:JSON.stringify(typeInformation)}).then(data=>{
                 settypeInformation([])
                 setname('')
-                //navigate(HOME_ROUTE)
-                //window.location.reload()
+                navigate(HOME_ROUTE)
+                window.location.reload()
             })
         }else{
             alert('недостаточно данных')
@@ -104,8 +104,8 @@ const Admin = () => {
             setname('')
             setfile(null)
             setfileImage(null)
-           // navigate(HOME_ROUTE)
-            //window.location.reload()
+            navigate(HOME_ROUTE)
+            window.location.reload()
         })
         }else{
             alert('недостаточно данных')
@@ -230,8 +230,8 @@ const Admin = () => {
        setbrand({name:'бренд'})
        settype({name:'тип'})
        setfileImages([]) 
-       //navigate(HOME_ROUTE)
-       //window.location.reload()
+       navigate(HOME_ROUTE)
+       window.location.reload()
     })
     }else{
 alert('недостаточно данных')

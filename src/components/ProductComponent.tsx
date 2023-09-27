@@ -42,7 +42,14 @@ const [inLovesSnippet, setinLovesSnippet] = useState(inLoves)
 
 
   const addToBasket =  ()=>{
-
+    if (!user.user.id) {
+      if (!navbar.enter.classList.contains('active')) {
+        navbar.enter.classList.add('active')
+        setTimeout(() => {
+          navbar.enter.classList.remove('active')
+        }, 1000);
+      }
+    }
     if (!inBasketSnippet) {
 
         addItemToBasket({basketId:user.user.basket,product:data._id,count:1}).then(data=>{
@@ -50,8 +57,7 @@ const [inLovesSnippet, setinLovesSnippet] = useState(inLoves)
           navbar.setProducts(navbar.products + 1)
             console.log(data);
          
-        }).catch(e=>
-          alert(e.response.data.message))
+        })
     }else{
       removeItemFromBasket({id:basket.find((el:any)=>el.product._id === data._id),basketId:user.user.basket}).then(data=>{
           console.log(data);
@@ -64,6 +70,14 @@ const [inLovesSnippet, setinLovesSnippet] = useState(inLoves)
    
 }
 const addToCompare = ()=>{
+  if (!user.user.id) {
+    if (!navbar.enter.classList.contains('active')) {
+      navbar.enter.classList.add('active')
+      setTimeout(() => {
+        navbar.enter.classList.remove('active')
+      }, 1000);
+    }
+  }
   if (!inCompareSnippet) {
 
       addItemToCompare({compareId:user.user.compare,product:data._id}).then(data=>{
@@ -84,6 +98,18 @@ const addToCompare = ()=>{
 }
 
 const addToLoves = ()=>{
+  if (!user.user.id) {
+
+    
+    if (!navbar.enter.classList.contains('active')) {
+      navbar.enter.classList.add('active')
+      setTimeout(() => {
+        navbar.enter.classList.remove('active')
+      }, 1000);
+    }
+   
+  
+  }
   if (!inLoves) {
   addProductInLoves({lovesId:user.user.loves,product:data._id}).then(data=>{
     console.log('6666666666666666666666666');

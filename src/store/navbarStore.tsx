@@ -3,6 +3,7 @@ import { makeAutoObservable } from "mobx"
 export default class NavbarStore{
     _products:number
     _compares:number
+    _enter:any
    
 
 
@@ -10,13 +11,20 @@ export default class NavbarStore{
    
         this._products=0
         this._compares=0
+        this._enter=null
+   
         makeAutoObservable(this,{},{autoBind:true})
        
     }
 
     setProducts(products:any){
         this._products = products
-        console.log(products,'5664HHH');
+       
+        
+    }
+    setEnter(enter:any){
+        this._enter = enter
+      
         
     }
 
@@ -26,6 +34,10 @@ export default class NavbarStore{
     
     get products(){
         return this._products
+    }
+
+    get enter(){
+        return this._enter
     }
 
      

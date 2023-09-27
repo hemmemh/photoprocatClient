@@ -20,6 +20,7 @@ import { API_URL } from '../utils/config';
 import { IOrderItem } from '../utils/interfaces';
 const User = () => {
     const {user} = useContext(Context)
+    const {navbar} = useContext(Context)
     const [toggle, settoggle] = useState<number>(0)
     const [calendar, setcalendar] = useState<boolean>(false)
     const [data, setdata] = useState<Dayjs | null>(dayjs(user.user.birthDate !== "" ? user.user.birthDate : '2022-04-17'))
@@ -60,6 +61,8 @@ const User = () => {
         logout().then(e=>{
             user.setuser({})
             navigate(HOME_ROUTE)
+            navbar.setCompares(0)
+            navbar.setProducts(0)
         })
     }
     const onSave = ()=>{

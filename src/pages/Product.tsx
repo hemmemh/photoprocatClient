@@ -81,33 +81,65 @@ const Product = () => {
         setproductLoad(true)   
     })}, [])
     const addToBasket = ()=>{
+        if (!user.user.id) {
+            if (!navbar.enter.classList.contains('active')) {
+                navbar.enter.classList.add('active')
+                setTimeout(() => {
+                  navbar.enter.classList.remove('active')
+                }, 1000);
+              }
+          }
         if (!inBasket) {     
             addItemToBasket({basketId:user.user.basket,product:product?._id,count:1}).
-            then(data=>setinBasket(true))
-            navbar.setProducts(navbar.products + 1)
+            then(data=>{
+                navbar.setProducts(navbar.products + 1)
+                setinBasket(true)})
+           
         }else{
             removeItemFromBasket({id:basket.find((el:any)=>el.product._id === id),basketId:user.user.basket}).
-            then(data=>setinBasket(false))
-            navbar.setProducts(navbar.products - 1)
+            then(data=>{
+                navbar.setProducts(navbar.products - 1)
+                setinBasket(false)})
+          
         }
        
     }
 
     const addToCompare = ()=>{
+        if (!user.user.id) {
+            if (!navbar.enter.classList.contains('active')) {
+                navbar.enter.classList.add('active')
+                setTimeout(() => {
+                  navbar.enter.classList.remove('active')
+                }, 1000);
+              }
+          }
         if (!inCompare) {
-            navbar.setCompares(navbar.compares + 1)
+    
             addItemToCompare({compareId:user.user.compare,product:id}).
-            then(data=>setinCompare(true))
+            then(data=>{
+                navbar.setCompares(navbar.compares + 1)
+                setinCompare(true)})
         }else{
-            navbar.setCompares(navbar.compares - 1)
+
             removeItemFromCompare({id:compare.find((el:any)=>el.product._id=== id)?._id,compareId:user.user.compare}).
-            then(data=>setinCompare(false))
+            then(data=>{
+                navbar.setCompares(navbar.compares - 1)
+                setinCompare(false)})
         }
       
     }
 
 
     const addToLoves = ()=>{
+        if (!user.user.id) {
+            if (!navbar.enter.classList.contains('active')) {
+                navbar.enter.classList.add('active')
+                setTimeout(() => {
+                  navbar.enter.classList.remove('active')
+                }, 1000);
+              }
+          }
         if (!inLoves) {
         addProductInLoves({lovesId:user.user.loves,product:id}).then(data=>setinLoves(true))
     }else{

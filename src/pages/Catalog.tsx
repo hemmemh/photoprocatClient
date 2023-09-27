@@ -31,7 +31,7 @@ import { observer } from "mobx-react-lite";
 import Loader from '../components/UI/loader/Loader';
 const Catalog = () => {
  
-    const [priceValue, setpriceValue] = useState<number[]>([10,20])
+    const [priceValue, setpriceValue] = useState<any>([10,20])
     const [VisibleAccordionFiltr, setVisibleAccordionFiltr] = useState<boolean>(true)
     const [toggle, settoggle] = useState<number>(0)
     const [toggle2, settoggle2] = useState<number>(0)
@@ -62,7 +62,8 @@ const Catalog = () => {
   const [limit, setlimit] = useState<number>(6)
   const [observerLoader, setobserverLoader] = useState<boolean>(false)
   const [searchParamsLoader, setsearchParamsLoader] = useState<boolean>(false)
-  const [priceRange, setpriceRange] = useState<Array<number>>([0,10])
+  const [priceRange, setpriceRange] = useState<any>([0,10])
+  const [minMaxPrice, setminMaxPrice] = useState([0,100])
   const [type, settype] = useState<string>('')
   const [gridLoader, setgridLoader] = useState<boolean>(false)
   const { ref, inView, entry } = useInView({
@@ -81,9 +82,11 @@ const Catalog = () => {
            setproducts({...data})
            settype(data.responce[0].type.name)
            let price:any = []
-           data.responce.forEach((el:any)=>price.push(el.price))
+           data.responceAll.forEach((el:any)=>price.push(Number(el.price)))
            price = price.sort((a:any,b:any)=>a-b)
+           setminMaxPrice([price[0],price[price.length-1]])
            setpriceRange([price[0],price[price.length-1]])
+           setpriceValue([price[0],price[price.length-1]])
            
            for (const it of JSON.parse(data.responce[0].type.informations)) {
             console.log(it,'ss');
@@ -172,9 +175,11 @@ const Catalog = () => {
            setproducts({...data})
            settype(data.responce[0].type.name)
            let price:any = []
-           data.responce.forEach((el:any)=>price.push(el.price))
+           data.responceAll.forEach((el:any)=>price.push(el.price))
            price = price.sort((a:any,b:any)=>a-b)
+           setminMaxPrice([price[0],price[price.length-1]])
            setpriceRange([price[0],price[price.length-1]])
+           setpriceValue([price[0],price[price.length-1]])
            
            for (const it of JSON.parse(data.responce[0].type.informations)) {
             let val:any = 'неважно'
@@ -259,7 +264,7 @@ const Catalog = () => {
    
             if (observerLoader && inView &&  products.responce?.length < products.responceAll?.length) {
                 setgridLoader(true)
-                getAllproduct(searchParams.get("type"),page+1,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
+                getAllproduct(searchParams.get("type"),page+1,limit,filterCatalog,checkedBrands,sortNumber,priceValue[0],priceValue[1],sort,informationValues,typeInformation).then(data=>{
                    setproducts({count:products.count,responce:[...products.responce,...data.responce],responceAll:products.responceAll})
                    setpage(page+1)
                    setgridLoader(false)
@@ -277,7 +282,7 @@ const Catalog = () => {
         setsortLoader(true)
         if (sortLoader) {
         setproductsLoad(false)
-        getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
+        getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,priceValue[0],priceValue[1],sort,informationValues,typeInformation).then(data=>{
             setpage(1)
            setproducts({...data})
            setproductsLoad(true)
@@ -293,7 +298,7 @@ const Catalog = () => {
         setsortNumberLoader(true)
         if (sortNumberLoader) {
             setproductsLoad(false) 
-           getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
+           getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,priceValue[0],priceValue[1],sort,informationValues,typeInformation).then(data=>{
                 setproducts({...data})
                 setproductsLoad(true)
                 setpage(1)
@@ -308,7 +313,7 @@ const Catalog = () => {
         setcheckedBrandsLoader((prev:any)=>prev+1)
         if(checkedBrandsLoader > 1){
             setproductsLoad(false)
-            getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
+            getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,priceValue[0],priceValue[1],sort,informationValues,typeInformation).then(data=>{
                 setproducts({...data})
                 setproductsLoad(true)
                 setpage(1)
@@ -324,7 +329,7 @@ const Catalog = () => {
         
   if (informationValuesLoader > 1) {
     setproductsLoad(false)
-    getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
+    getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,priceValue[0],priceValue[1],sort,informationValues,typeInformation).then(data=>{
        setproducts({...data})
        setproductsLoad(true)
        setpage(1)
@@ -337,7 +342,7 @@ const Catalog = () => {
      setfilterLoader(true)
      if (filterLoader) {
         setproductsLoad(false)
-        getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,null,null,sort,informationValues,typeInformation).then(data=>{
+        getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,priceValue[0],priceValue[1],sort,informationValues,typeInformation).then(data=>{
             setproducts({...data})
             setproductsLoad(true)
             setpage(1)
@@ -348,7 +353,20 @@ const Catalog = () => {
      
     }, [filterCatalog])
     
-      
+    useEffect(() => {
+        setfilterLoader(true)
+        if (filterLoader) {
+           setproductsLoad(false)
+           getAllproduct(searchParams.get("type"),1,limit,filterCatalog,checkedBrands,sortNumber,priceValue[0],priceValue[1],sort,informationValues,typeInformation).then(data=>{
+               setproducts({...data})
+               setproductsLoad(true)
+               setpage(1)
+           })
+        }
+       
+   
+        
+       }, [priceValue])
  
 
     const chooseBrand = (e:any)=>{
@@ -542,9 +560,30 @@ const Catalog = () => {
         
         
  }
-   
+
 })}
-                   
+        <AccordionUserItem >
+ <div className='RadioGroup__name'>Цена</div>
+ <div className="right-main-catalog__slider slider-right-main-catalog">
+<Slider 
+getAriaLabel={() => 'Temperature range'}
+value={priceRange}
+defaultValue={priceRange}
+onChange={(event: Event, value: number | number[], activeThumb: number)=>setpriceRange(value)}
+onChangeCommitted={(event: Event | React.SyntheticEvent<Element, Event>, value: number | number[])=>setpriceValue(value)}
+valueLabelDisplay="auto"
+min={minMaxPrice[0]}
+max={minMaxPrice[1]}
+/>
+<div className="slider-right-main-catalog__sliderInputs">
+<input type='text' value={`От ${priceRange[0]}`} className="slider-right-main-catalog__sliderInput"></input>
+<div className="slider-right-main-catalog__d">-</div>
+
+<input type='text' value={`До ${priceRange[1]}`}   className="slider-right-main-catalog__sliderInput"></input>
+
+</div>
+  </div>
+</AccordionUserItem>           
                     </AccordionUser>
                     </AccordionOne>
             
@@ -594,7 +633,7 @@ const Catalog = () => {
                          arr = [0,arr[0]]
                        }
                         return  <>
-                        <div className="right-main-catalog__slider slider-right-main-catalog">
+                        <div className="right-main-catalog__slider  slider-right-main-catalog ">
                         <div className="slider-right-main-catalog__name">{typeName}</div>
                         <Slider  key={typeName} 
                                  getAriaLabel={() => 'Temperature range'}
@@ -618,7 +657,27 @@ const Catalog = () => {
                 }
                   
               })}
-           
+               <div className="right-main-catalog__slider slider-right-main-catalog price">
+<div className='slider-right-main-catalog__name'>Цена</div>
+
+<Slider 
+getAriaLabel={() => 'Temperature range'}
+value={priceRange}
+defaultValue={priceRange}
+onChange={(event: Event, value: number | number[], activeThumb: number)=>setpriceRange(value)}
+onChangeCommitted={(event: Event | React.SyntheticEvent<Element, Event>, value: number | number[])=>setpriceValue(value)}
+valueLabelDisplay="auto"
+min={minMaxPrice[0]}
+max={minMaxPrice[1]}
+/>
+<div className="slider-right-main-catalog__sliderInputs">
+<input type='text' value={`От ${priceRange[0]}`} className="slider-right-main-catalog__sliderInput"></input>
+<div className="slider-right-main-catalog__d">-</div>
+
+<input type='text' value={`До ${priceRange[1]}`}   className="slider-right-main-catalog__sliderInput"></input>
+
+</div>
+</div>
            
             
              

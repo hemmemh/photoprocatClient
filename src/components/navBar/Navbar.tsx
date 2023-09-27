@@ -45,6 +45,7 @@ const Navbar:FC<button>  = ({setfilterCatalog}) => {
     const {user} = useContext(Context)
     const {navbar} = useContext(Context)
     const location = useLocation()
+    const loaderRef = useRef<HTMLDivElement>(null)
     const navigate = useNavigate()
     
 
@@ -61,7 +62,7 @@ const Navbar:FC<button>  = ({setfilterCatalog}) => {
       )
 
       useEffect(() => {
-        
+        navbar.setEnter(loaderRef.current)
         document.addEventListener('click',addClick)
         window.addEventListener('scroll', onScroll)
         
@@ -203,6 +204,7 @@ const Navbar:FC<button>  = ({setfilterCatalog}) => {
     }
   return (
     <div ref={navbarRef} className={navBarActive ? "Navbar active" : "Navbar"}>
+              <div ref={loaderRef} className="Navbar__loader">Войдите в аккаунт</div>
         <div className="Navbar__cover">
             <div className="Navbar__container">
             <div className="Navbar__body">
