@@ -1,0 +1,129 @@
+[class*="icon-"]:before, .CheckBox.origin .CheckBox__item.active .CheckBox__check::before {
+  font-family: "icons";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.CheckBox.origin {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: #000000;
+  margin-bottom: 28px;
+}
+
+.CheckBox.origin .CheckBox__body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 14px;
+}
+
+.CheckBox.origin .CheckBox__name {
+  margin-bottom: 14px;
+}
+
+.CheckBox.origin .CheckBox__label {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  color: #000000;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+@media (any-hover: hover) {
+  .CheckBox.origin .CheckBox__label:hover {
+    color: #60B021;
+    -webkit-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+  }
+}
+
+.CheckBox.origin .CheckBox__check {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 14px;
+  height: 14px;
+  -webkit-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15);
+          box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15);
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.CheckBox.origin .CheckBox__check::before {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.CheckBox.origin .CheckBox__item {
+  gap: 14px;
+}
+
+.CheckBox.origin .CheckBox__item:not(:last-child) {
+  margin-bottom: rem(15);
+}
+
+.CheckBox.origin .CheckBox__item.active .CheckBox__label {
+  color: #000000;
+}
+
+.CheckBox.origin .CheckBox__item.active .CheckBox__check {
+  background: #4F9C2C;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.CheckBox.origin .CheckBox__item.active .CheckBox__check::before {
+  color: #fff;
+  font-size: 8px;
+  display: block;
+  content: "\e904";
+}
+
+.CheckBox__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.CheckBox__check {
+  cursor: pointer;
+  border: 1px solid #E3E3E3;
+}
+
+.CheckBox__label {
+  cursor: pointer;
+}
+/*# sourceMappingURL=checkBox.css.map */

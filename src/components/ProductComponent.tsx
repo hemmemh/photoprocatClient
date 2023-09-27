@@ -29,6 +29,7 @@ const {navbar} = useContext(Context)
 const [inBasketSnippet, setinBasketSnippet] = useState(inBasket)
 const [inCompareSnippet, setinCompareSnippet] = useState(inCompare)
 const [inLovesSnippet, setinLovesSnippet] = useState(inLoves)
+const [loaders, setloaders] = useState({basket:true,compare:true,love:true})
   const navigate = useNavigate()
   useEffect(() => {
     setinBasketSnippet(inBasket)
@@ -50,22 +51,29 @@ const [inLovesSnippet, setinLovesSnippet] = useState(inLoves)
         }, 1000);
       }
     }
-    if (!inBasketSnippet) {
-
-        addItemToBasket({basketId:user.user.basket,product:data._id,count:1}).then(data=>{
-          setinBasketSnippet(true)
-          navbar.setProducts(navbar.products + 1)
-            console.log(data);
-         
-        })
-    }else{
-      removeItemFromBasket({id:basket.find((el:any)=>el.product._id === data._id),basketId:user.user.basket}).then(data=>{
-          console.log(data);
-          navbar.setProducts(navbar.products - 1)
-          setinBasketSnippet(false)
-         
-      })
-  }
+    if (loaders.basket) {
+      if (!inBasketSnippet) {
+        setloaders({...loaders,basket:false})
+          addItemToBasket({basketId:user.user.basket,product:data._id,count:1}).then(data=>{
+            setinBasketSnippet(true)
+            navbar.setProducts(navbar.products + 1)
+              console.log(data);
+           
+          }).finally(()=>{
+            setloaders({...loaders,basket:true})
+          })
+      }else{
+        setloaders({...loaders,basket:false})
+        removeItemFromBasket({id:data._id,basketId:user.user.basket}).then(data=>{
+            navbar.setProducts(navbar.products - 1)
+            setinBasketSnippet(false)
+           
+        }).finally(()=>{
+          setloaders({...loaders,basket:true})
+        })  
+    }
+    }
+    
   
    
 }
@@ -78,29 +86,38 @@ const addToCompare = ()=>{
       }, 1000);
     }
   }
-  if (!inCompareSnippet) {
 
-      addItemToCompare({compareId:user.user.compare,product:data._id}).then(data=>{
-        setinCompareSnippet(true)
-        navbar.setCompares(navbar.compares + 1)
-        setinCompareSnippet(true)
-      }).catch(e=>{
-        console.log(e);
-        
+  if (loaders.compare) {
+    if (!inCompareSnippet) {
+      setloaders({...loaders,compare:false})
+        addItemToCompare({compareId:user.user.compare,product:data._id}).then(data=>{
+          setinCompareSnippet(true)
+          navbar.setCompares(navbar.compares + 1)
+          setinCompareSnippet(true)
+        }).catch(e=>{
+          console.log(e);
+          
+        }).finally(()=>{
+          setloaders({...loaders,compare:true})
+        })
+    }else{
+      setloaders({...loaders,compare:false})
+      removeItemFromCompare({id:data._id,compareId:user.user.compare}).then(data=>{
+        navbar.setCompares(navbar.compares - 1)
+        setinCompareSnippet(false)
+      }).finally(()=>{
+        setloaders({...loaders,compare:true})
       })
-  }else{
-    removeItemFromCompare({id:compare.find((el:any)=>el.product._id=== data._id)?._id,compareId:user.user.compare}).then(data=>{
-      navbar.setCompares(navbar.compares - 1)
-      setinCompareSnippet(false)
-    })
-}
+  }
+  }
+
 
 }
 
 const addToLoves = ()=>{
   if (!user.user.id) {
 
-    
+          setloaders({...loaders,compare:false})
     if (!navbar.enter.classList.contains('active')) {
       navbar.enter.classList.add('active')
       setTimeout(() => {
@@ -110,23 +127,32 @@ const addToLoves = ()=>{
    
   
   }
-  if (!inLoves) {
-  addProductInLoves({lovesId:user.user.loves,product:data._id}).then(data=>{
-    console.log('6666666666666666666666666');
+
+  if (loaders.love) {
+    if (!inLovesSnippet) {
+      setloaders({...loaders,love:false})
+    addProductInLoves({lovesId:user.user.loves,product:data._id}).then(data=>{
     
-    setinLovesSnippet(true)
+      setinLovesSnippet(true)
+        
+    }).catch(error=>{
+      console.log(error.response.data);
       
-  }).catch(error=>{
-    console.log(error.response.data);
-    
-  })
-}else{
-  removeProductFromLoves({id:loves.find((el:any)=>el.product._id=== data._id),lovesId:user.user.loves}).then(data=>{
-      console.log(data);
-      setinLovesSnippet(false)
-      
-  })
-}
+    }).finally(()=>{
+      setloaders({...loaders,love:true})
+    })
+  }else{
+    setloaders({...loaders,love:false})
+    removeProductFromLoves({id:data._id,lovesId:user.user.loves}).then(data=>{
+  
+        setinLovesSnippet(false)
+        
+    }).finally(()=>{
+      setloaders({...loaders,love:true})
+    })
+  }
+  }
+
 }
 
 

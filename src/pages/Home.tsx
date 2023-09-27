@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import Navbar from '../components/navBar/Navbar'
 import { Swiper, SwiperSlide, } from 'swiper/react';
 import { Navigation} from 'swiper';
@@ -13,6 +13,7 @@ import { getCompare } from '../https/compareApi';
 import { getLoves } from '../https/lovesApi';
 import { IBasketItem, ICompareItem, ILovesItem, IProduct } from '../utils/interfaces';
 import { Background, Parallax } from 'react-parallax';
+import { useInView } from 'react-intersection-observer';
 
 
 
@@ -23,7 +24,22 @@ const Home = () => {
   const [basket, setbasket] = useState<Array<IBasketItem>>([])
   const [compare, setcompare] = useState<Array<ICompareItem>>([])
   const [loves, setloves] = useState<Array<ILovesItem>>([])
+  const ref2 = useRef<HTMLDivElement>(null)
+  const { ref, inView, entry } = useInView({
+    /* Optional options */
+    threshold: 0.5,
 
+
+  });
+
+  useEffect(() => {
+    if (inView) {
+      entry?.target.classList.add('active')
+      console.log(ref,entry,'drr');
+      
+    }
+  }, [inView])
+  
   useEffect(() => {
     getByPurchase().then(data=>{
       console.log(data);
@@ -56,8 +72,12 @@ const Home = () => {
        <div className="Home__header headerHome">
         <div className="headerHome__image">
           
-         
-               <img src={require("../images/home/header.png")} alt=""/>
+             <Parallax strength={200}   blur={{ min: -15, max: 50 }} >
+              <Background>
+              <img src={require("../images/home/header.png")} alt=""/>
+              </Background>
+             </Parallax>
+          
            
     
          
@@ -122,7 +142,7 @@ const Home = () => {
         </div>
         
        </div>
-       <div className="Home__slides slidesHome">
+       <div  ref={ref} className="Home__slides slidesHome">
         <div className="slidesHome__container">
         <div className="slidesHome__header">Популярные товары</div>
         <div className="slidesHome__sliderCover">
@@ -166,14 +186,19 @@ const Home = () => {
         
         
        </div>
-       <div className="Home__grid gridHome">
+       <div ref={ref2} className="Home__grid gridHome">
         <div className="gridHome__container">
           <div className="gridHome__cover">
           <div className="gridHome__body">
             <div className="gridHome__item itemGridHome">
               <div className="itemGridHome__cover">
                 <div className="itemGridHome__image">
-                   <img src={require("../images/home/grid/1.png")} alt=""/>
+                  <Parallax strength={50}  >
+                    <Background>
+                    <img src={require("../images/home/grid/1.png")} alt=""/>
+                    </Background>
+                  </Parallax>
+
                 </div>
                 <div className="itemGridHome__texts">
                   <div className="itemGridHome__text">Фотокамеры Canon</div>
@@ -185,7 +210,12 @@ const Home = () => {
             <div className="gridHome__item itemGridHome">
               <div className="itemGridHome__cover">
                 <div className="itemGridHome__image">
+                <Parallax strength={50}>
+                    <Background>
                    <img src={require("../images/home/grid/2.png")} alt=""/>
+                   </Background>
+                  </Parallax>
+
                 </div>
                 <div className="itemGridHome__texts">
                   <div className="itemGridHome__text _add">Видеокамеры</div>
@@ -197,7 +227,11 @@ const Home = () => {
             <div className="gridHome__item itemGridHome">
               <div className="itemGridHome__cover">
                 <div className="itemGridHome__image">
+                <Parallax strength={50}>
+                    <Background>
                    <img src={require("../images/home/grid/3.png")} alt=""/>
+                   </Background>
+                  </Parallax>
                 </div>
                 <div className="itemGridHome__texts">
                   <div className="itemGridHome__text">Товар недели</div>
@@ -209,7 +243,11 @@ const Home = () => {
             <div className="gridHome__item itemGridHome">
               <div className="itemGridHome__cover">
                 <div className="itemGridHome__image">
+                <Parallax strength={50}>
+                    <Background>
                    <img src={require("../images/home/grid/4.png")} alt=""/>
+                   </Background>
+                  </Parallax>
                 </div>
                 <div className="itemGridHome__texts">
                   <div className="itemGridHome__text">Лучшие объективы</div>
@@ -221,7 +259,11 @@ const Home = () => {
             <div className="gridHome__item itemGridHome">
               <div className="itemGridHome__cover">
                 <div className="itemGridHome__image">
+                <Parallax strength={50}>
+                    <Background>
                    <img src={require("../images/home/grid/5.png")} alt=""/>
+                   </Background>
+                  </Parallax>
                 </div>
                 <div className="itemGridHome__texts">
                   <div className="itemGridHome__text">Отличные фотокамеры</div>

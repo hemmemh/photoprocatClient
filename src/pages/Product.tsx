@@ -51,7 +51,7 @@ const Product = () => {
     const [sername, setsername] = useState<string>('')
     const [text, settext] = useState<string>('')
     const [raitingModal, setraitingModal] = useState<number | null>(1)
-    
+    const [loaders, setloaders] = useState({basket:true,compare:true,love:true})
     useEffect(() => {
         getOneproduct({id}).then(data=>{
             setproduct(data)
@@ -80,6 +80,7 @@ const Product = () => {
     ).then(()=>{
         setproductLoad(true)   
     })}, [])
+
     const addToBasket = ()=>{
         if (!user.user.id) {
             if (!navbar.enter.classList.contains('active')) {
@@ -89,19 +90,29 @@ const Product = () => {
                 }, 1000);
               }
           }
-        if (!inBasket) {     
-            addItemToBasket({basketId:user.user.basket,product:product?._id,count:1}).
-            then(data=>{
-                navbar.setProducts(navbar.products + 1)
-                setinBasket(true)})
-           
-        }else{
-            removeItemFromBasket({id:basket.find((el:any)=>el.product._id === id),basketId:user.user.basket}).
-            then(data=>{
-                navbar.setProducts(navbar.products - 1)
-                setinBasket(false)})
-          
-        }
+
+          if(loaders.basket){
+            if (!inBasket) {    
+                setloaders({...loaders,basket:false}) 
+                addItemToBasket({basketId:user.user.basket,product:product?._id,count:1}).
+                then(data=>{
+                    navbar.setProducts(navbar.products + 1)
+                    setinBasket(true)}).finally(()=>{
+                        setloaders({...loaders,basket:true})
+                      })
+               
+            }else{
+                setloaders({...loaders,basket:false})
+                removeItemFromBasket({id:basket.find((el:any)=>el.product._id === id),basketId:user.user.basket}).
+                then(data=>{
+                    navbar.setProducts(navbar.products - 1)
+                    setinBasket(false)}).finally(()=>{
+                        setloaders({...loaders,basket:true})
+                      })
+              
+            }
+          }
+       
        
     }
 
@@ -114,19 +125,27 @@ const Product = () => {
                 }, 1000);
               }
           }
-        if (!inCompare) {
-    
-            addItemToCompare({compareId:user.user.compare,product:id}).
-            then(data=>{
-                navbar.setCompares(navbar.compares + 1)
-                setinCompare(true)})
-        }else{
-
-            removeItemFromCompare({id:compare.find((el:any)=>el.product._id=== id)?._id,compareId:user.user.compare}).
-            then(data=>{
-                navbar.setCompares(navbar.compares - 1)
-                setinCompare(false)})
-        }
+          
+          if(loaders.compare){
+            if (!inCompare) {
+                setloaders({...loaders,compare:false}) 
+                addItemToCompare({compareId:user.user.compare,product:id}).
+                then(data=>{
+                    navbar.setCompares(navbar.compares + 1)
+                    setinCompare(true)}).finally(()=>{
+                        setloaders({...loaders,compare:true})
+                      })
+            }else{
+                setloaders({...loaders,compare:false}) 
+                removeItemFromCompare({id:compare.find((el:any)=>el.product._id=== id)?._id,compareId:user.user.compare}).
+                then(data=>{
+                    navbar.setCompares(navbar.compares - 1)
+                    setinCompare(false)}).finally(()=>{
+                        setloaders({...loaders,compare:true})
+                      })
+            }
+          }
+       
       
     }
 
@@ -140,11 +159,20 @@ const Product = () => {
                 }, 1000);
               }
           }
-        if (!inLoves) {
-        addProductInLoves({lovesId:user.user.loves,product:id}).then(data=>setinLoves(true))
-    }else{
-        removeProductFromLoves({id:loves.find((el:any)=>el.product._id=== id),lovesId:user.user.loves}).then(data=>setinLoves(false))
-    }
+          if(loaders.love){
+            if (!inLoves) {
+                setloaders({...loaders,love:false}) 
+            addProductInLoves({lovesId:user.user.loves,product:id}).then(data=>setinLoves(true)).finally(()=>{
+                setloaders({...loaders,love:true})
+              })
+        }else{
+            setloaders({...loaders,love:false}) 
+            removeProductFromLoves({id:loves.find((el:any)=>el.product._id=== id),lovesId:user.user.loves}).then(data=>setinLoves(false)).finally(()=>{
+                setloaders({...loaders,love:true})
+              })
+        }
+          }
+       
     }
 
 
@@ -237,7 +265,7 @@ const Product = () => {
                
             
                <div className="main-product__description description-product">
-                   <Toggle value={toggleDesc} change={settoggleDesc} toggleClass='product-toggle'>
+                   <Toggle  ripple={false} value={toggleDesc} change={settoggleDesc} toggleClass='product-toggle'>
                        
                        <div className="description-product__toggleItem">Описание</div>
                        <div className="description-product__toggleItem">Характеристики</div>

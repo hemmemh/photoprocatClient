@@ -22,6 +22,8 @@ const Basket = () => {
     const navigate = useNavigate()
     useEffect(() => {
             getBasket({id:user.user.id}).then(data=>{
+                console.log(data);
+                
                 setbasket(data)
                 setload(true)
                 let arr:any = []

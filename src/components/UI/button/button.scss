@@ -213,7 +213,12 @@ line-height: 10px;
 }
 color: #FFFFFF;
 &.active{
-    cursor: inherit;
+    
+    @media (any-hover: hover){
+        &:hover{
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+    }
     &:after {
         width: 100%;
     }
@@ -374,7 +379,7 @@ color: #FFFFFF;
         @include adaptiveValue("line-height",16 ,13 );
      width: 200px;
      &.active{
-        cursor: inherit;
+  
         box-shadow:0px 4px 5px rgba(0, 0, 0, 0.45);
      }
         .Button__cover{

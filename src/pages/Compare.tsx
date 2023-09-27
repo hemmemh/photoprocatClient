@@ -83,7 +83,7 @@ const Compare = () => {
     }, [activeType])
     
     const removeItem = (id:any,compareId:any)=>{
-        setcompare([...compare.filter((el:any)=>el._id !== id)])
+        setcompare([...compare.filter((el:any)=>el.product._id !== id)])
         navbar.setCompares(navbar.compares - 1)
         removeItemFromCompare({id,compareId}).then((data:any)=>{
             console.log(data);
@@ -181,7 +181,7 @@ const Compare = () => {
                            <img src={`${API_URL}/${el.product.name}/${JSON.parse(el.product.images)[0]}`} alt=""/>
                            </div>
                        </div>
-                       <div onClick={()=>removeItem(el._id,compareId)} className="item-swiperCompare__delete"></div>
+                       <div onClick={()=>removeItem(el.product._id,compareId)} className="item-swiperCompare__delete"></div>
                        <div className="item-swiperCompare__name">{el.product.name}</div>
                        <div className="item-swiperCompare__brand">{el.product.brand.name}</div>
                   </div>

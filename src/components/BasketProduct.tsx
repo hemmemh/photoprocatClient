@@ -30,10 +30,10 @@ const BasketProduct:FC<button>  = ({e,setProducts,products,basketId,setsumPrice}
 
     
     const remove = ()=>{
-        setProducts((prev:any)=>({...prev,basketItems:products.basketItems.filter((fil:any)=>fil._id !== e._id)}))
-        setsumPrice((prev:any)=>prev - (e.product.price * amount))
+            setProducts((prev:any)=>({...prev,basketItems:products.basketItems.filter((fil:any)=>fil._id !== e._id)}))
+            setsumPrice((prev:any)=>prev - (e.product.price * amount))
         navbar.setProducts(navbar.products - 1)
-        removeItemFromBasket({id:e._id,basketId}).then(data=>{
+        removeItemFromBasket({id:e.product._id,basketId}).then(data=>{
             console.log(data);
             
            

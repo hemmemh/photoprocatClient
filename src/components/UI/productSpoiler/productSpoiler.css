@@ -1,0 +1,104 @@
+.ProductSpoiler {
+  position: relative;
+}
+
+@media (min-width: 767.98px) {
+  .ProductSpoiler.brand.sort {
+    display: none;
+  }
+}
+
+.ProductSpoiler.brand.sort .ProductSpoiler__before {
+  z-index: 26;
+}
+
+.ProductSpoiler.brand.sort .ProductSpoiler__body {
+  z-index: 25;
+}
+
+.ProductSpoiler.brand.sort .ProductSpoiler__name {
+  z-index: 27;
+}
+
+.ProductSpoiler.brand .ProductSpoiler__body {
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  z-index: 28;
+}
+
+.ProductSpoiler.brand .ProductSpoiler__item {
+  padding: 5px 0;
+}
+
+.ProductSpoiler.brand .ProductSpoiler__item:not(:last-child) {
+  border-bottom: 1px solid #c4c3c3;
+}
+
+.ProductSpoiler.brand .ProductSpoiler__name {
+  z-index: 30;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.ProductSpoiler.brand .ProductSpoiler__before {
+  z-index: 29;
+}
+
+.ProductSpoiler__name {
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.ProductSpoiler__body {
+  position: relative;
+  overflow: visible;
+  pointer-events: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transform-origin: top;
+          transform-origin: top;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  background: #fff;
+  z-index: 10;
+}
+
+.ProductSpoiler__body.active {
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  opacity: 1;
+  pointer-events: inherit;
+}
+
+.ProductSpoiler__item {
+  background: #fff;
+  width: 100%;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+/*# sourceMappingURL=productSpoiler.css.map */

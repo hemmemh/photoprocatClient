@@ -295,8 +295,16 @@ color: #60B021;
             }
         }
         &.active{
+            transition: all 0.3s ease 0s;
             color: #57f110;
+            text-shadow: 0 0 3px rgba($color: #57f110, $alpha: 0.5);
             cursor: pointer;
+            @media (any-hover: hover){
+                &:hover{
+                    transition: all 0.3s ease 0s;
+                    text-shadow: 3px 3px 8px rgba($color: #57f110, $alpha: 1.0);
+                }
+            }
         }
     }
 }
