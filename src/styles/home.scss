@@ -507,7 +507,123 @@ gap: rem(15);
     }
 }
 .itemGridHome {
-    
+    &:nth-child(1){
+        animation:item 5s infinite ease-in-out;
+        @media(min-width:$tablet) {
+            @keyframes item {
+                0% {
+                    transform: scale(1);
+                    box-shadow: 0 0 0px rgba(0, 0, 0, 0.3);
+                }
+                5%{
+                    transform: scale(1.02);
+                    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+                }
+                10%{
+                    transform: scale(1);
+                    box-shadow: 0 0 0px rgba(0, 0, 0, 0.3);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+                    }
+       
+    }
+    &:nth-child(2){
+        animation:item2 5s infinite ease-in-out 0.5s ;
+        @media(min-width:$tablet) {
+            @keyframes item2 {
+                0% {
+                    transform: scale(1);
+                    box-shadow: 0 0 0px rgba(0, 0, 0, 0.5);
+                }
+                5%{
+                    transform: scale(1.02);
+                    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+                }
+                10%{
+                    transform: scale(1);
+                    box-shadow: 0 0 0px rgba(0, 0, 0, 0.5);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+        }
+      
+    }
+    &:nth-child(3){
+        animation:item3 5s infinite ease-in-out 1s ;
+        @media(min-width:$tablet) {
+            @keyframes item3 {
+                0% {
+                    transform: scale(1);
+                    box-shadow: 0 0 0px rgba(0, 0, 0, 0.5);
+                }
+                5%{
+                    transform: scale(1.02);
+                    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+                }
+                10%{
+                    transform: scale(1);
+                    box-shadow: 0 0 0px rgba(0, 0, 0, 0.5);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+        }
+       
+    }
+    &:nth-child(4){
+        animation:item4 5s infinite ease-in-out 1.5s ;
+        @media(min-width:$tablet) {
+            @keyframes item4 {
+                0% {
+                    transform: scale(1);
+                    box-shadow: 0 0 0px rgba(0, 0, 0, 0.5);
+                }
+                5%{
+                    transform: scale(1.02);
+                    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+                }
+                10%{
+                    transform: scale(1);
+                    box-shadow: 0 0 0px rgba(0, 0, 0, 0.5);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+        }
+       
+    }
+    &:nth-child(5){
+        animation:item5 5s infinite ease-in-out 2s ;
+        @media(min-width:$tablet) {
+            @keyframes item5 {
+                0% {
+                    transform: scale(1);
+                    box-shadow: 0 0 0px rgba(0, 0, 0, 0.5);
+                }
+                5%{
+                    transform: scale(1.02);
+                    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+                }
+                10%{
+                    transform: scale(1);
+                    box-shadow: 0 0 0px rgba(0, 0, 0, 0.5);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+        }
+       
+    }
+   
+   
     position: relative;
     &__cover {
       //position: absolute;width: 100%;height: 100%;top: 0;left: 0;

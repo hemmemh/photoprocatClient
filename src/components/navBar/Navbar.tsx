@@ -13,6 +13,8 @@ import { EMAIL_REGEXP, PASSWORD_REGEX } from '../../utils/config'
 import Loader from '../UI/loader/Loader'
 import { getAllTypes } from '../../https/typesApi'
 import { observer } from "mobx-react-lite";
+import { getBasket } from '../../https/basketApi'
+import { getCompare } from '../../https/compareApi'
 
 interface button{
     filterCatalog?:any
@@ -118,8 +120,12 @@ const Navbar:FC<button>  = ({setfilterCatalog}) => {
             login({mail,password}).then(e=>{
                 console.log(jwtDecode(e.refreshToken));
                 user.setuser(jwtDecode(e.refreshToken))
+                
                 setloginModal(false)
-            }).catch(e=>{
+            }).then(data=>{
+                navigate(HOME_ROUTE)
+                window.location.reload()
+               }).catch(e=>{
                 alert('неверен логин или пароль')
             })
         }else{
@@ -133,7 +139,10 @@ const Navbar:FC<button>  = ({setfilterCatalog}) => {
         }
       
     }
-
+  const onNavigate =(el:any) =>{
+    navigate({pathname:CATALOG_ROUTE,search:`?type=${el._id}`})
+    setmenu(false)
+  }
     const onSetMail = (e:any)=>{
         setmail(e)
         if (!EMAIL_REGEXP.test(e) && e !=='' ) {
@@ -251,7 +260,7 @@ const Navbar:FC<button>  = ({setfilterCatalog}) => {
                  <div className="catalogNavbar__left">
                    <div className="catalogNavbar__name"><span>•</span>Каталог</div>
                     <div className="catalogNavbar__items">
-                        {types.map((el:any)=><div key={el.name} onClick={()=>navigate({pathname:CATALOG_ROUTE,search:`?type=${el._id}`})}className="catalogNavbar__item">{el.name}</div>)}
+                        {types.map((el:any)=><div key={el.name} onClick={() => onNavigate(el)} className="catalogNavbar__item">{el.name}</div>)}
                     </div>
                      </div>
                     

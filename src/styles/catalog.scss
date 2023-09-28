@@ -306,7 +306,9 @@ span{
     }
     &__toggleButton{
         //pointer-events: none;
-      
+      &.active{
+        color:#60B021
+      }
         display: flex;
         align-items: center;
         justify-content: center;

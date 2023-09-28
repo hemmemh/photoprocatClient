@@ -55,6 +55,8 @@ const Compare = () => {
             document.removeEventListener('click', addClick)
             }
     }, [])
+
+
     useEffect(() => {
         setactiveTypeLoad(false)
         const typesArr:any = []
@@ -91,7 +93,7 @@ const Compare = () => {
     }
     const removeByType = ()=>{
         removeItemFromCompareByType({type:activeType,compareId:compareId}).then(data=>{
-            navbar.setCompares(navbar.compares - compare.length - data.compareItems.length)
+            navbar.setCompares(data.compareItems.length)
          setcompare(data.compareItems)
          setactiveTypeLoad(false)   
         })

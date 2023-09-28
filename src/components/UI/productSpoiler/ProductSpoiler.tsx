@@ -18,7 +18,7 @@ const ProductSpoiler: FC<FooterProps> = memo(({name,children,changeName=true,spo
     const beforeRef = useRef<any>()
     const bodyRef = useRef<any>()
     const [active, setactive] = useState(false)
-    const [activeName, setactiveName] = useState(name)
+    const [activeName, setactiveName] = useState(children[0])
     activeRef.current = active
   
     
@@ -47,7 +47,7 @@ const ProductSpoiler: FC<FooterProps> = memo(({name,children,changeName=true,spo
        
       
      
-    const setName=(name:any)=>{
+    const setName=(a:any)=>{
       if (changeName) {
         setactiveName(name)
       }
@@ -68,7 +68,7 @@ const ProductSpoiler: FC<FooterProps> = memo(({name,children,changeName=true,spo
         <div onClick={()=>setActiveSpoiler(!active)} className={active ? "ProductSpoiler__name active" :"ProductSpoiler__name" }>{children[0]}</div>
         <div  ref={bodyRef} className={active ? "ProductSpoiler__body active" : "ProductSpoiler__body"}>
             {children?.slice(1).map((item:any,i:any)=>
-            <div key={i} onClick={()=>setName(item)} className="ProductSpoiler__item">{item}</div>
+            <div key={i} onClick={()=>setName(name)} className="ProductSpoiler__item">{item}</div>
                 )}
         </div>
        

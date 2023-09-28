@@ -485,14 +485,14 @@ const Catalog = () => {
                     <div onClick={()=>setsort('rating')} className='mainCatalog__toggleButton'>По рейтингу</div>
                     <div onClick={()=>setsort('date')} className='mainCatalog__toggleButton'>По дате</div>
                 </Toggle>
-                <ProductSpoiler changeName={false}  spoilerClass='brand sort' >
+                <ProductSpoiler  changeName={false}  spoilerClass='brand sort' >
                     <div>Сортировать по</div>
                    
-                    <Toggle value={toggle2} change={settoggle2} toggleClass='toogleLeft'>
-                    <div className='mainCatalog__toggleButton'>По популярности</div>
-                    <div onClick={()=>setsort('price')} className='mainCatalog__toggleButton'>По цене</div>
-                    <div onClick={()=>setsort('rating')} className='mainCatalog__toggleButton'>По рейтингу</div>
-                    <div onClick={()=>setsort('date')} className='mainCatalog__toggleButton'>По дате</div>
+                    <Toggle ripple={false} value={toggle2} change={settoggle2} toggleClass='toogleLeft'>
+                    <div onClick={()=>setsort('purchaseNumber')} className={sort == 'purchaseNumber' ?'mainCatalog__toggleButton active' : 'mainCatalog__toggleButton'}>По популярности</div>
+                    <div onClick={()=>setsort('price')} className={sort == 'price' ?'mainCatalog__toggleButton active' : 'mainCatalog__toggleButton'}>По цене</div>
+                    <div onClick={()=>setsort('rating')} className={sort == 'rating' ?'mainCatalog__toggleButton active' : 'mainCatalog__toggleButton'}>По рейтингу</div>
+                    <div onClick={()=>setsort('date')} className={sort == 'date' ?'mainCatalog__toggleButton active' : 'mainCatalog__toggleButton'}>По дате</div>
                     </Toggle>
                   
                   
