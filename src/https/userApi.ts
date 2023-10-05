@@ -34,6 +34,7 @@ export const forgetPassword2= async(info:any)=>{
 
 export const refresh= async()=>{
     const {data} = await $host. post(`user/refresh`)
+
     return data
 }
 
