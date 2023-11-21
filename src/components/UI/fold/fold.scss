@@ -1,15 +1,21 @@
+@import "../../../app/styles/style.scss";
 .Fold {
     &.product{
-        visibility: hidden;
+        display: none;
         pointer-events: none;
         position: absolute;
         &.active{
-            visibility: visible;
+        display: block;
         pointer-events: inherit;
         position: inherit;
         }
         .Fold__body{
            
+        }
+    }
+    &.origin{
+        .Fold__body{
+            overflow: visible;
         }
     }
     &__body {

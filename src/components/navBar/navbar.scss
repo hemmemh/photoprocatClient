@@ -1,4 +1,4 @@
-
+@import "../../app/styles/style.scss";
 
 
 
@@ -45,7 +45,7 @@
       }
   }
     z-index: 100;
-  &__container{
+  &__cont{
         margin-left: auto;
         margin-right: 0;
         max-width: 1260px;
@@ -82,7 +82,7 @@ background: #fff;
       display: flex;
       align-items: center;
       cursor: pointer;
-        @include adaptiveValue("margin-right",40,20 );
+        margin-right: rem(20);
         @media (max-width:$mobile){
             order:4;
             margin: 0;
@@ -90,6 +90,7 @@ background: #fff;
     }
     &__logo {
         z-index: 20;
+        margin-right: rem(30);
         @media (max-width:$mobile){
             order: 2;
             position: absolute;;top: 50%;left: 50%;
@@ -121,6 +122,7 @@ background: #fff;
 display: flex;
 flex: 1 1 auto;
 z-index: 13;
+margin-right: em(30);
 @media (max-width: em(1180)){
       display: none;
 }
@@ -137,6 +139,7 @@ z-index: 13;
         &:not(:last-child) {
             margin-right: rem(24);
         }
+        white-space: nowrap;
         font-family: 'Ubuntu';
 font-style: normal;
 font-weight: 700;
@@ -265,6 +268,9 @@ margin-bottom: rem(13.5);
     }
 }
 .searchBlock {
+    @media (max-width:$mobile){
+          display: none;
+    }
     position: absolute;width: 100%;height: rem(75);top: rem(74);left: 0;
     pointer-events: none;
     opacity: 0;
@@ -384,10 +390,13 @@ background: none;
 .menu {
 
     &__shedule {
+        white-space: nowrap;
+        position: relative;
+        z-index: 13;
         @media (max-width:$mobile){
             display: none;
        }
-        @include adaptiveValue("margin-right",59    ,20 );
+       margin-right: rem(15);
     }
 
     &__sheduleText {
@@ -433,19 +442,23 @@ background: none;
  }  
  
  &__span{
-        
-    animation:spananim 0.3s linear  0.3s alternate ;
-    @keyframes spananim {
-        0% {
-            transform: translate(0,0);
-        }
-        50%{
-            transform: translate(0,-5px);
-        }
-        100% {
-            transform: translate(0,0);
+    
+     &.active{
+
+        animation:spananim 0.3s linear alternate ;
+        @keyframes spananim {
+            0% {
+                transform: translate(0,0);
+            }
+            50%{
+                transform: translate(0,-5px);
+            }
+            100% {
+                transform: translate(0,0);
+            }
         }
     }
+  
 
     display: flex;
     align-items: center;

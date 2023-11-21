@@ -8,21 +8,20 @@ interface FooterProps{
     navigationClass?:string
     foldClass?:string
     value:boolean
-    foldChange:(a:any)=>void
+    foldActive?:(a:any)=>void
+    foldChange?:(a:any)=>void
   }
-const Fold: FC<FooterProps>  = ({value,foldChange,children,slice=1,foldClass='origin'}) => {
+const Fold: FC<FooterProps>  = ({value,foldActive=()=>{},foldChange=()=>{},children,slice=1,foldClass='origin'}) => {
 
-const bodyRef = useRef<any>()
+const bodyRef = useRef<any>(null)
 
 useEffect(() => {
+
     const sliceChildren:any = [].slice.call(bodyRef.current.children)
     console.log(sliceChildren.length,'pppp');
     
-    if (sliceChildren.length>slice) {
-    if (!value){
-       
+    if (bodyRef.current && sliceChildren.length>slice && !value) {
         sliceChildren.slice(slice,sliceChildren.length).forEach((el:any) => {
-            console.log(el.style.display,'ooop');
            el.style.display = "none";
         })
         let sliceHeight = 0
@@ -30,17 +29,20 @@ useEffect(() => {
             sliceHeight+=el.offsetHeight;
         })
         bodyRef.current.style.height = `${sliceHeight}px`;
-        }
+       
+    }else{
+        foldActive(false)
     }
 }, [])
 
 
 useEffect(() => {
     const sliceChildren:any = [].slice.call(bodyRef.current.children)
-    if (sliceChildren.length>slice) {
+    if (bodyRef.current && sliceChildren.length>slice) {
         if (value) {
             let sliceHeight = 0
-          
+           console.log(bodyRef.current,'ty');
+           
             sliceChildren.slice(0,slice).forEach((el:any) => {
                 sliceHeight+=el.offsetHeight;
             })
@@ -50,7 +52,7 @@ useEffect(() => {
             })
             bodyRef.current.style.height = `${bodyRef.current.scrollHeight}px`;
             setTimeout(() => {
-                bodyRef.current.style.height = `auto`;
+                bodyRef.current && (bodyRef.current.style.height = `auto`)  
               }, 300);
            
         
@@ -66,10 +68,9 @@ useEffect(() => {
           
           setTimeout(() => {
             sliceChildren.slice(slice,sliceChildren.length).forEach((el:any) => {
-                console.log(el.style.display,'ooop');
                el.style.display = "none";
             })
-            bodyRef.current.style.height = `auto`;
+            bodyRef.current && (bodyRef.current.style.height = `auto`)
           }, 300);
                
          
@@ -85,8 +86,8 @@ useEffect(() => {
   return (
   <div className={`Fold ${foldClass}`}>
     <div ref={bodyRef} className="Fold__body">{
-        children.slice(0,children.length).map((e:any)=>
-            <div className="Fold__item">{e}</div>  
+        children.slice(0,children.length).map((e:any,id:number)=>
+            <div key={id} className="Fold__item">{e}</div>  
         )
     }</div>
     

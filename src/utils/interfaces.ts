@@ -1,12 +1,12 @@
 export interface IProduct{
     brand:IBrand
-    date:string
-    description:string
+    date?:string
+    description?:string
     images:string
     information:Array<IInformation>
-    name:string
+    name?:string
     price:number
-    purchaseNumber:number
+    purchaseNumber?:number
     ratings:Array<IRating>
     type:IType
     _id:string
@@ -14,17 +14,17 @@ export interface IProduct{
   }
   
   export interface IBrand {
-    image:string
-    name:string
-    products:[]
-    _id:string
+    image?:string
+    name?:string
+    products?:[]
+    _id?:string
   }
 
   export interface IOrderItem {
     date:string
     number:number
     orders:string
-    ordersItemProduct:IOrdersItemProduct
+    ordersItemProduct:IOrdersItemProduct[]
     price:number
     _id:string
   }
@@ -38,15 +38,15 @@ export interface IProduct{
   }
 
   export interface IProducts {
-    count:number
+    count?:number
     responce:Array<IProduct>
     responceAll:Array<IProduct>
   }
 
   export interface IBasket {
     basketItems:Array<IBasketItem>
-    user:string
-    _id:string
+    user?:string
+    _id?:string
   }
 
 
@@ -76,7 +76,7 @@ export interface IProduct{
   
   export  interface IBasketItem{
     basket:string
-    count:1
+    count:number
     product:IProduct
     _id:string
   }

@@ -1,10 +1,11 @@
+@import "../../../app/styles/style.scss";
 .Fold {
     &.product{
-        visibility: hidden;
+       
         pointer-events: none;
         position: absolute;
         &.active{
-            visibility: visible;
+          
         pointer-events: inherit;
         position: inherit;
         }
@@ -21,7 +22,7 @@
     }
     &__body {
        
-        transition: height 0.3s ease 0s;
+        transition:  0.3s ease 0s;
      
     }
 

@@ -1,3 +1,4 @@
+@import "../../../app/styles/style.scss";
 .modal{
 
     &::-webkit-scrollbar {
@@ -7,6 +8,7 @@
     align-items: center;
     justify-content: center;
     position: fixed;
+    
     z-index: 99;
     width: 100%;
     height: 100%;
@@ -117,12 +119,15 @@
             &__text {
               width: 100%;
                 textarea{
+                    &::-webkit-scrollbar {
+                    width: 0;
+                      }
+                    min-height: 100px;
                     padding: rem(10);
                     width: 100%;
                     border: 1px solid  #4F9C2C;
                     border-radius: rem(10);
                     resize: none;
-                    min-height: rem(200);
                     font-family: 'Ubuntu';
                     font-style: normal;
                     font-weight: 400;
@@ -141,65 +146,27 @@
     &.admin {
  
 		&__body {
-            
+           
 		}
-        .adminModal{
-            padding: rem(30) rem(50);
-            &__input {
-                margin-bottom: rem(30);
-            }
-    
-            &__informations {
-            }
-    
-            &__informationItems {
-                display: flex;
-                gap: rem(30);
-                margin-bottom: rem(30);
-                align-items: flex-start;
-                @media (max-width:$mobile){
-                     flex-direction: column; 
-                }
-            }
-    
-            &__informationSend {
-                margin-bottom: rem(30);
-            }
-        }
-        .adminModalType {
-padding: rem(30) rem(60);
-            &__input {
-            margin-bottom: rem(30);
-            }
-    
-            &__images {
-            }
-            &__file{
-               width: 0;
-               height: 0; 
-            }
-            &__imageAdd {
-                margin-bottom: rem(30);
-            }
-    
-            &__imagesItems {
-                margin-bottom: rem(30);
-            }
-    
-            &__image {
-                width: rem(100);
-                height: rem(100);
-                position: relative;
-                img{
-                    object-fit: contain;
-                    position: absolute;width: 100%;height: 100%;top: 0;left: 0;
-                }
-            }
-    }
+
+
     .adminModalProduct {
+        &__flex{
+            display: flex;
+            gap: em(30);
+        }
         padding: rem(30) rem(60);
+        @media (max-width:$mobile){
+            padding: rem(20) rem(10);
+        }
+        max-height: 70vh;
+        overflow: scroll;
+        &::-webkit-scrollbar {
+        width: 0;
+          }
 		&__input {
             display: flex;
+            flex-direction: column;
             gap: rem(10);
             margin-bottom: rem(20);
             @media (max-width:$tablet){
@@ -228,7 +195,7 @@ padding: rem(30) rem(60);
 
 
 		&__typeChoose {
-          
+          margin-bottom: rem(30);
 		}
 
 		&__typeChooseItem {

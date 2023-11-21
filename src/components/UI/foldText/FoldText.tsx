@@ -5,9 +5,9 @@ interface FooterProps{
     children?:any
     foldClass?:string
     value:boolean
-    foldChange:(a:any)=>void
+    foldActive:(a:any)=>void
   }
-const FoldText: FC<FooterProps>  = ({value,foldChange,children,symbols=10,foldClass='origin'}) => {
+const FoldText: FC<FooterProps>  = ({value,foldActive,children,symbols=10,foldClass='origin'}) => {
  
 const bodyRef = useRef<any>()
 const bodyAbsolute1 = useRef<any>()
@@ -15,18 +15,20 @@ const bodyAbsolute2= useRef<any>()
 
 const slicedTextRef = useRef(children)
 useEffect(() => {
-    console.log(bodyRef.current.offsetHeight,'yyhhh');
+  if (symbols < children.length && !value) {
+      bodyAbsolute1.current.style.position='absolute'
+      bodyAbsolute1.current.style.opacity='0'
+  }else{
+    foldActive(false)
+  }
+
   
-    if (!value) {
-        bodyAbsolute1.current.style.position='absolute'
-        bodyAbsolute1.current.style.opacity='0'
-      
-    }
+   
 }, [])
 
 
 useEffect(() => {
-  if (value) {  
+  if (symbols < children.length && value) {  
     bodyRef.current.style.height = `${bodyRef.current.offsetHeight}px`;
     bodyAbsolute1.current.style.position='inherit'
     bodyAbsolute1.current.style.opacity='1'
@@ -38,7 +40,7 @@ useEffect(() => {
    }, 300);
    
   
-  }else{
+  }else if (symbols < children.length){
     bodyRef.current.style.height = `${bodyRef.current.scrollHeight}px`;
     bodyAbsolute1.current.style.position='absolute'
     bodyAbsolute1.current.style.opacity='0'
@@ -57,8 +59,8 @@ useEffect(() => {
   <div className={`Fold ${foldClass}`}>
     <div ref={bodyRef} className="Fold__body">
         <div ref={bodyAbsolute1} className="Fold__bodyAbsolute">{children}</div>
-        <div ref={bodyAbsolute2}className="Fold__bodyAbsolute2"> {children.slice(0,symbols).replace(/\s{1,}$/,'') + '...'}</div>
-       
+        {symbols < children.length && <div ref={bodyAbsolute2}className="Fold__bodyAbsolute2"> {children.slice(0,symbols).replace(/\s{1,}$/,'') + '...'}</div>}
+        
     </div>
     
   </div>

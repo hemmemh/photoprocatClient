@@ -5,18 +5,19 @@ interface FooterProps{
   children?:ReactNode[] | any
   changeName?:boolean
   lock?:boolean
-  spoilerClass?:string
+  className?:string
   toggle2?:any
 }
 
-const ProductSpoiler: FC<FooterProps> = memo(({name,children,changeName=true,spoilerClass='origin',lock=false,toggle2}) => {
+const ProductSpoiler: FC<FooterProps> = memo(({name,children,changeName=true,className='',lock=false,toggle2}) => {
     const activeRef = useRef<boolean>()
     const stringRef = useRef(Math.random().toString(36).substring(2,7))
     const elementRef = useRef<any>()
  
     const spoilerRef = useRef<any>()
-    const beforeRef = useRef<any>()
+    const headerRef = useRef<any>()
     const bodyRef = useRef<any>()
+
     const [active, setactive] = useState(false)
     const [activeName, setactiveName] = useState(children[0])
     activeRef.current = active
@@ -32,44 +33,43 @@ const ProductSpoiler: FC<FooterProps> = memo(({name,children,changeName=true,spo
       
   }, [])
     
+
     const addClick = useCallback((e:any) => {
-          elementRef.current = e.target
-          const el = document.getElementById(stringRef.current)
-          console.log(el,e.target,'6666');
-          
-          console.log(e.target.closest(`.ProductSpoiler`) ,'yyyyyy');
-          
-            if (activeRef.current && !el?.contains(e.target) && !lock) {
-                setactive(false)
-               
-            }
+      if (spoilerRef.current && e.target !== spoilerRef.current && !spoilerRef.current.contains(e.target)) {
+        setactive(false)
+        return
+    }
+
+
+
         },[])
        
-      
+  
+    const click = useCallback(
+      () => {
+        setactive(prev=>!prev)
+      },
+      [],
+    )
+    
      
-    const setName=(a:any)=>{
+    const setName=(e:any)=>{
       if (changeName) {
-        setactiveName(name)
+        headerRef.current.firstElementChild.textContent = e.target.textContent
       }
     }
      
 
-    const setActiveSpoiler=(bool:any)=>{
-      if (!lock) {
-        setactive(bool)
-      }
-    }
     
     
   
    
   return (
-    <div ref={spoilerRef} id={stringRef.current}  className={`ProductSpoiler ${spoilerClass}`}>
-        <div onClick={()=>setActiveSpoiler(!active)} className={active ? "ProductSpoiler__name active" :"ProductSpoiler__name" }>{children[0]}</div>
-        <div  ref={bodyRef} className={active ? "ProductSpoiler__body active" : "ProductSpoiler__body"}>
-            {children?.slice(1).map((item:any,i:any)=>
-            <div key={i} onClick={()=>setName(name)} className="ProductSpoiler__item">{item}</div>
-                )}
+    <div ref={spoilerRef} id={stringRef.current}  className={`spoiler ${className} ${active && 'active'}`}>
+        <div ref={headerRef} onClick={click} className={"spoiler__header active"}>{children[0]}</div>
+
+        <div  ref={bodyRef} className={"spoiler__cover"}>
+            <div   onClick={setName} className="spoiler__body">{children[1]}</div>
         </div>
        
         

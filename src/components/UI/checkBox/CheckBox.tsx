@@ -1,19 +1,17 @@
 import React, { useCallback, useEffect, useRef, useState,FC,ReactNode } from 'react'
 import './checkBox.scss';
 interface FooterProps{  
-    items:string,
-    name:string,
-    checked?:any,
+ 
+   children:React.ReactNode
     value:string[]
     change:(e:any)=>void,
-    CheckBoxClass?:string,
-    nameVisible?:boolean
+    className?:string,
+    id:string
   }
-const CheckBox: FC<FooterProps> = ({name,items,value,change,checked=[0], CheckBoxClass='origin',nameVisible=true}) => {
+const CheckBox: FC<FooterProps> = ({value,change,className='',id,children}) => {
    
-    //const [checkBoxItem, setcheckBoxItem] = useState<any>(checked)
+
   
-   
     const setItem = (i:string)=>{
       console.log(value);
       
@@ -23,31 +21,12 @@ const CheckBox: FC<FooterProps> = ({name,items,value,change,checked=[0], CheckBo
       }else{
         change([...value, i])
         change([...value, i])
-      }
-         
-     
-   
-       
+      } 
     }
   return (
-    <div className={`CheckBox ${CheckBoxClass}`}>
-      {nameVisible &&  <div className='CheckBox__name'>{name}</div>}
-
-        <div className="CheckBox__body">
-        {items?.split(',').map((e,i:any)=>{
-            return(
-            <div onClick={()=>setItem(e)}  key={e} className={value?.includes(e)  ? `CheckBox__item active` : `CheckBox__item `}> 
-                <div className={`CheckBox__check`}></div>
-                <div className={`CheckBox__label`}>{e}</div>
-            </div>
-        )
-            
-        })} 
-        </div>
-        
-       
+    <div onClick={()=>setItem(id)}  className={value?.includes(id)  ? `CheckBox ${className} active` : `CheckBox__item ${className}`}>
+      {children} 
     </div>
-    
   )
 }
 

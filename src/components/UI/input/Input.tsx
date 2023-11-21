@@ -1,5 +1,5 @@
 import React,{FC, useEffect,useRef,useState} from 'react'
-
+import './input.scss'
 interface button{
    inputClass?:string
    placeholder?:string
@@ -35,11 +35,11 @@ const Input:FC<button> = ({inputClass='origin',placeholder='name',children,lock=
  }, [value])
  
 const addClick = (e:any)=>{
-    if (!lock) {
-        if (!inputRef.current.contains(e.target) && input2Ref.current.value=='') {
+   
+        if (inputRef.current && !lock && !inputRef.current.contains(e.target) && input2Ref.current.value=='') {
             setactive(false)
         }
-    }
+    
 
 }
 const onFocus = ()=>{

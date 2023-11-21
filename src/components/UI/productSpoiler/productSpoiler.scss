@@ -1,97 +1,41 @@
-.ProductSpoiler {
+@import "../../../app/styles/style.scss";
+.spoiler {
     position: relative;
-    
-    &.brand{
-     &.sort{
-        @media (min-width:767.98px){
-              display: none;
-        }
-        .ProductSpoiler__before{
-            z-index: 26;
-        }
-        .ProductSpoiler__body{
-            z-index: 25;
-        }
-        .ProductSpoiler__name{
-            z-index: 27;
-        }
-     }
-        .ProductSpoiler__body{
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-            z-index: 28;
-       
-        }
-        .ProductSpoiler__item{
-            padding: 5px 0;
-            &:not(:last-child) {
-                border-bottom: 1px solid #c4c3c3;
-            }
-        }
-        .ProductSpoiler__name{
-            z-index: 30;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-            font-family: 'Ubuntu';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 16px;
-            line-height: 18px;
-            text-align: center;
-            padding: 10px 0;
-        }
-        .ProductSpoiler__before{
-            z-index: 29;
-        }
-       
-    }
-    &__name {
-    
-    
-        background: #fff;
-        cursor: pointer;
-    
-        position: relative;
-        transition: all 0.3s ease 0s;  
-    }
+   
   
-    &__body {
-        position: relative;
-   
-        overflow:visible;
-        pointer-events: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: absolute;;top: 100%;left:0;
-        width: 100%;
-       opacity: 0;
-       pointer-events: none;
-        transform-origin: top;
-        transition: all 0.3s ease 0s;
-        background: #fff;
-        z-index: 10;
-        &.active{
-            transition: all 0.3s ease 0s;
-            opacity: 1;
-            
-            pointer-events: inherit;
-        }
-    }
-   
-    &__item {
-    
-        background: #fff;
-        width: 100%;
-        cursor: pointer;
-        transition: all 0.3s ease 0s;
-   
-
-        
-    }
-
+  &__cover {
+      position: absolute;
+      width: 100%;
+      overflow: hidden;
+      pointer-events: none;
+  
+  }
+  &__header{
+      position: relative;
+      z-index: 3;
+  }
+  &__body {
+      z-index: 2;
+      position: relative;
+      transition: transform 0.3s ease 0s;
+      transform: translate(0,-100%);
+      box-sizing: border-box;
+      background: #fff;
+  
+  }
+  &.active{
+      .spoiler__body{
+          z-index: 4;
+         transform: translate(0,0);
+     }
+     .spoiler__cover{
+        pointer-events: visible;
+     }
+     .spoiler__header{
+      z-index: 5;
+     }
+  }
 }
-
-
-    
 
     
 

@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState,FC,ReactNode,cloneElement,ReactElement } from 'react'
-
+import './accordionOne.scss'
 
 interface FooterProps{  
   breakpoint?:number,

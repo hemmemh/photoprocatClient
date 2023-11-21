@@ -1,14 +1,15 @@
 import React, { FC, useRef, useState } from 'react'
 import { forEachChild } from 'typescript'
-
+import './button.scss'
 interface button{
    children?:any
    className?:String
+   classNameCover?:String
    ripple?:boolean
    rippleClass?:string
    onClick?:(e:any)=>void
 }
-const Button:FC<button> = ({onClick=()=>{},children,className='origin icon',ripple=true ,rippleClass='origin'}) => {
+const Button:FC<button> = ({onClick=()=>{},children,className='origin',classNameCover='origin',ripple=true ,rippleClass='origin'}) => {
 const buttonRef = useRef<any>()
   const rippleEffect=(e:any)=>{
     if (ripple) {
@@ -44,9 +45,9 @@ const buttonRef = useRef<any>()
 
 
   return (
-    <button ref={buttonRef} onClick={onClick} onMouseDown={e=>rippleEffect(e)} className={`Button ${className.split(' ').slice(0,-1).join(' ')}`}>
+    <button ref={buttonRef} onClick={onClick} onMouseDown={e=>rippleEffect(e)} className={`Button ${className}`}>
         <div className="Button__cover">
-            <div className={`Button__absolute ${className.split(' ').splice(-1)}`}>{children}</div>
+            <div className={`Button__absolute ${classNameCover}`}>{children}</div>
             
         </div>
         

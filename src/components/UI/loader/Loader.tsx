@@ -1,8 +1,8 @@
 import './loader.scss'
 
-const Loader = () => {
+const Loader = ({className=''}:{className?:string}) => {
   return (
-    <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div className={`lds-ring ${className}`}><div></div><div></div><div></div><div></div></div>
   )
 }
 

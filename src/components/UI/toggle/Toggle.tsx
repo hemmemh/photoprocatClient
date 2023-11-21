@@ -1,4 +1,5 @@
 import React, { FC, memo, useCallback, useState } from 'react'
+import './toggle.scss'
 interface FooterProps{  
     breakpoint?:number,
     children?:any,

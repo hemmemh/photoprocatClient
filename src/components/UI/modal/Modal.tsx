@@ -1,6 +1,6 @@
 
 import React, { useCallback, useEffect, useRef,FC } from 'react'
-import  '../../../styles/style.scss'
+import './modal.scss'
 interface FooterProps{  
   active?:any,
   setActive?:any,

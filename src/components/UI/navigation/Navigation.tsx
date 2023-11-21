@@ -1,4 +1,5 @@
 import React, { Children, FC, ReactNode } from 'react'
+import './navigation.scss'
 interface FooterProps{  
     name?:string,
     children?:any

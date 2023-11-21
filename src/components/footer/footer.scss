@@ -1,3 +1,4 @@
+@import "../../app/styles/style.scss";
 .Footer {
 margin-top: auto;
     &__top {
@@ -11,7 +12,7 @@ background-repeat: repeat-x;
 
 
     &__container {
-    }
+    }   
 
     &__body {
         width: 100%;

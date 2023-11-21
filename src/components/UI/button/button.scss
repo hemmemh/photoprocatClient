@@ -1,4 +1,4 @@
-
+@import "../../../app/styles/style.scss";
 
 .Button{
     overflow: hidden;
@@ -37,7 +37,7 @@
         color: #FFFFFF;
         @include adaptiveValue("width", 150,100 );
         .Button__cover{
-            padding: 0  0 50/150  *100% 0;
+            padding: 0  0 calc(50/150  *100%) 0;
         }
 
     }
@@ -58,7 +58,7 @@ text-transform: uppercase;
     @include adaptiveValue("font-size",14 , 6);
 }
 .Button__cover{
-    padding: 0  0 40/140  *100% 0;
+    padding: 0  0 calc(40/140  *100%) 0;
 }
 color: #000000;
 width: 100%;
@@ -83,7 +83,7 @@ width: 100%;
             width:50%
         }
         .Button__cover{
-            padding: 0  0 40/140  *100% 0;
+            padding: 0  0 calc(40/140  *100%) 0;
         }
     }
     &.login-modal{
@@ -99,7 +99,7 @@ text-transform: uppercase;
 color: #FFFFFF;
 width: rem(200);
 .Button__cover{
-    padding: 0  0 50/200  *100% 0;
+    padding: 0  0 calc(50/200  *100%) 0;
 }
     }
     &.reg-modal{
@@ -117,7 +117,7 @@ text-transform: uppercase;
 color: #000000;
 width: rem(200);
 .Button__cover{
-    padding: 0  0 50/200  *100% 0;
+    padding: 0  0 calc(50/200  *100%) 0;
 }
     }
     &.caatalog{
@@ -161,7 +161,7 @@ line-height: 10px;
 }
 color: #8EE902;
 .Button__cover{
-    padding: 0  0 40/150  *100% 0;
+    padding: 0  0 calc(40/150  *100%) 0;
     z-index: 2;
 }
     }
@@ -230,7 +230,7 @@ color: #FFFFFF;
     }
 }
 .Button__cover{
-    padding: 0  0 80/150  *100% 0;
+    padding: 0  0 calc(80/150  *100%) 0;
 }
 .Button__absolute{
     &::before{
@@ -268,7 +268,7 @@ color: #FFFFFF;
         
         @include adaptiveValue("width",160 ,160 );
         .Button__cover{
-            padding: 0  0 40/160  *100% 0;
+            padding: 0  0 calc(40/160  *100%) 0;
         }
     }
     &.registration{
@@ -287,7 +287,7 @@ text-transform: uppercase;
 @include adaptiveValue("width",300 ,200 );
 color: #FFFFFF;
 .Button__cover{
-    padding: 0  0 50/300  *100% 0;
+    padding: 0  0 calc(50/300  *100%) 0;
 }
     }
     &.news{
@@ -297,7 +297,7 @@ border-radius: 100px;
 width: 100%;
 
 .Button__cover{
-    padding: 0  0 40/215  *100% 0;
+    padding: 0  0 calc(40/215  *100%) 0;
 }
 font-family: 'Ubuntu';
 font-style: normal;
@@ -337,17 +337,17 @@ color: #FFFFFF;
 &.news{
     @include adaptiveValue("width",180 , 100);
     .Button__cover{
-        padding: 0  0 50/250  *100% 0;
+        padding: 0  0 calc(50/250  *100% );
     }
 }
 &.news2{
     @include adaptiveValue("width",230 , 100);
     .Button__cover{
-        padding: 0  0 50/250  *100% 0;
+        padding: 0  0 calc(50/250  *100%) 0;
     }
 }
 .Button__cover{
-    padding: 0  0 50/200  *100% 0;
+    padding: 0  0 calc(50/200  *100%) 0;
 }
     }
     &.slider2{
@@ -400,7 +400,7 @@ color: #FFFFFF;
         width: 100px;
 
         .Button__cover{
-            padding: 0  0 40/100  *100% 0;
+            padding: 0  0 calc(40/100  *100%) 0;
         }
         .Button__absolute{
             background: #4F9C2C;
@@ -438,7 +438,7 @@ text-transform: uppercase;
 color: #000000;
 
         .Button__cover{
-            padding: 0  0 40/160  *100% 0;
+            padding: 0  0 calc(40/160  *100%) 0;
         }
     }
     &.toggle{

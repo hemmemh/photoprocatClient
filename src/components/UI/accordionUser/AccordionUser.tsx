@@ -1,18 +1,19 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState,FC,ReactNode,cloneElement,ReactElement } from 'react'
-
+import './accordionUser.scss'
 
 interface FooterProps{  
   breakpoint?:number,
   children?:any,
-  oneOpen?:boolean
+  controll?:boolean
   VisibleAll?:boolean
   accordionClass?:string
+  lock?:boolean
 }
 
 
 
 
-const AccordionUser: FC<FooterProps> = ({breakpoint=7677.98,children,oneOpen=false, VisibleAll,accordionClass="origin"}) => {
+const AccordionUser: FC<FooterProps> = ({breakpoint=7677.98,children,controll=true, VisibleAll,accordionClass="origin",lock=false}) => {
    const [active, setactive] = useState(false)
    const [visible, setVisible] = useState<number|null>(null)
    const footerItems = useRef<any>([])
@@ -29,6 +30,7 @@ const accordion = useCallback(
   },
   [visible],
 )
+
 
 
 //закрытие или открытие всех аккордионов при брейкпоинте
@@ -66,8 +68,6 @@ const accordion = useCallback(
     }, [])
 
     useEffect(() => {
-      console.log('jjjjjyyyyyyyyyyyyyyyyyyy,',VisibleAll);
-      
      if (!VisibleAll) {
       setVisible(null)
       setactive(false)
@@ -81,7 +81,7 @@ const accordion = useCallback(
      
         cloneElement(
           child as React.ReactElement<any>,
-          {active:active,activeItem:visible === i ? true : false,accordion:():any=>accordion(i),visible:visible,accordRef:accordRef}) 
+          {active:active,lock:lock,controll:controll,activeItem:visible === i ? true : false,accordion:():any=>accordion(i),visible:visible,accordRef:accordRef}) 
         )}
     </div>
   )
