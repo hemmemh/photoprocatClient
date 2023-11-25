@@ -41,11 +41,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "react": "react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
-    "start": "webpack serve --env port=3000",
-    "build:prod": "webpack  --env mode=production",
-    "build:dev": "webpack  --env mode=development"
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+
   },
   "eslintConfig": {
     "extends": [
