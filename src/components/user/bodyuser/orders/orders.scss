@@ -1,0 +1,47 @@
+@import "../../../../app/styles/style.scss";
+
+.orders-user {
+    margin-bottom: rem(30);
+    &.active{
+        display: inherit;
+    }
+    display: none;
+}
+
+.top-orders {
+    display: grid;
+    width: 100%;
+    grid-template-columns:  minmax(160px,160px)  minmax(190px,190px) minmax(50px,285px) minmax(50px,285px)  minmax(100px,140px)   minmax(50px,1fr);
+    @media (max-width:$mobile){
+        grid-template-columns:  minmax(80px,80px)  minmax(120px,120px) minmax(35px,285px) minmax(25px,285px)   minmax(30px,140px)   minmax(0,0);   
+    }
+    padding: 17px 0 9px 0;
+    border-bottom: 1px solid  #EFEFEF;
+    &__item {
+        font-family: 'Ubuntu';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+/* identical to box height, or 143% */
+
+
+color: #75758A; 
+    }
+}
+.order {
+    
+    &__top {
+        display: grid;
+        grid-template-columns:  minmax(160px,160px)  minmax(190px,190px) minmax(50px,285px) minmax(50px,285px)  minmax(100px,140px)   minmax(50px,1fr);
+        @media (max-width:$mobile){
+            grid-template-columns:  minmax(80px,80px)  minmax(120px,120px) minmax(35px,285px) minmax(25px,285px)  minmax(30px,140px)   minmax(0,0);   
+        }
+        padding: 16px 0;
+        align-items: center;
+    }
+
+}
+
+
+
