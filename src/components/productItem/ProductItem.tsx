@@ -12,6 +12,9 @@ import {ReactComponent as CartSvg} from '../../images/cart.svg'
 import Loader from '../UI/loader/Loader'
 import Button2 from '../UI/button2/Button2'
 import useCheckMobileScreen from '../../hooks/DetectMobileHook'
+import useAddtoBasket from '../../hooks/useAddtoBasket'
+import useAddtoComapre from '../../hooks/useAddtoComapre'
+import useAddtoLove from '../../hooks/useAddtoLove'
 
 interface button{
  data:any
@@ -27,7 +30,9 @@ interface button{
  const ProductItem:FC<button>  = ({data,inBasket=false,inCompare=false,inLoves=false,className=''}) => {
 
 const navigate = useNavigate()
- const {addToBasket,addToCompare,addToLoves,inBasketSnippet,inCompareSnippet,inLovesSnippet,loaders} = useItemProduct({inBasket,inCompare,inLoves,data})
+ const {addToBasket,inBasketSnippet,loader:basketLoader} = useAddtoBasket({inBasket,productId:data._id})
+ const {addToCompare,inCompareSnippet,loader:compareLoader} = useAddtoComapre({inCompare,productId:data._id})
+ const {addToLoves,inLovesSnippet,loader:loveLoader} = useAddtoLove({inLoves,productId:data._id})
  const mobile = useCheckMobileScreen(767.98,479.98)
  const mobile2 = useCheckMobileScreen(479.98)
 
@@ -58,14 +63,14 @@ const navigate = useNavigate()
                             <div className="slideHome__actions">
                               <Button2 onClick={()=>navigate(`${PRODUCT_ROUTE}/${data._id}`)} className='productCard'>Подробнее</Button2>
                               <Button2  onClick={addToBasket} className={inBasketSnippet ?'productCard _cart active' : 'productCard _cart'}>
-                                {!loaders.basket ? <Loader className={inBasketSnippet ? 'basketLoader _d' :'basketLoader' } /> : <CartSvg/>}
+                                {!basketLoader ? <Loader className={inBasketSnippet ? 'basketLoader _d' :'basketLoader' } /> : <CartSvg/>}
                               </Button2>
                             </div>
                             <div className="slideHome__business businessHome">
-                              {loaders.compare ?
+                              {compareLoader ?
                                 <CompareSvg onClick={addToCompare} className={inCompareSnippet ? "businessHome__item active" : "businessHome__item"}/>:
                                 <Loader />}
-                             {loaders.love ?
+                             {loveLoader ?
                               <StarSvg onClick={addToLoves} className={inLovesSnippet ? "businessHome__item active" : "businessHome__item"}/>
                             :
                             <Loader/>

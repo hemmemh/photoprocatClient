@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from "../../../../../../hooks/reduxHoo
 import { basketSlice } from "../../../../../../store2/reducers/BasketSlice"
 import {useEffect} from 'react'
 import BasketProduct from "../../../../../basketProduct/BasketProduct"
+import { CSSTransition, TransitionGroup } from "react-transition-group"
 
 
 
@@ -19,14 +20,22 @@ const BodyItems = () => {
 
   return (
     <div className="items-basket__body">
+       <TransitionGroup className="todo-list">
     {
+             
       basket.basketItems.map((e:any)=>
+      <CSSTransition
+      key={e._id}
+      timeout={500}
+      classNames="item"
+    >
         <BasketProduct 
-        key={e._id} 
         e={e} 
         products={basket}
         basketId={user.basket}/>
+        </CSSTransition>
       )}
+      </TransitionGroup>
     </div>
   )
 }
