@@ -4,7 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-/src/images/404/xampp-windows-x64-8.2.4-0-VS16-installer.exe 
+
 
 # testing
 /coverage
