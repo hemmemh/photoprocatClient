@@ -8,4 +8,3 @@ export const USER_ROUTE = '/user'
 export const REGISTRATION_ROUTE = '/registration'
 export const NEWS_ROUTE = '/news'
 export const ADMIN_ROUTE = '/admin'
-

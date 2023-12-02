@@ -1,28 +1,27 @@
 import React, { useRef } from 'react'
-import cls from './myFile.module.scss'
+import './myFile.scss'
 
-type MyFile = {
-    children:React.ReactNode
-    setValue:(e:any)=>void
+interface IMyFile {
+    children: React.ReactNode
+    setValue: (e: any) => void
 }
 
-const MyFile = ({children,setValue}:MyFile) => {
+const MyFile = ({ children, setValue }: IMyFile) => {
     const inputRef = useRef<HTMLInputElement>(null)
 
-    const click = ()=>{
+    const click = () => {
         inputRef.current && inputRef.current.click()
     }
 
-  return (
-    <div className={cls.Myfile}>
-    <input ref={inputRef} type="file" onChange={setValue}/>
-    <div onClick={click}>
-        {children}
-    </div>
-    
+    return (
+        <div className="MyFile">
+            <input className='MyFile__input' ref={inputRef} type="file" onChange={setValue}/>
+            <div onClick={click}>
+                {children}
+            </div>
 
-   </div>
-  )
+        </div>
+    )
 }
 
 export default MyFile

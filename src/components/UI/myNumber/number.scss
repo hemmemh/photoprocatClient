@@ -1,0 +1,99 @@
+@import "../../../app/styles/style";
+
+.MyNumber{
+    input{
+        background: none;
+        width: 100%;
+        text-align: center;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        /* display: none; <- Crashes Chrome on hover */
+        appearance: none;
+        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
+
+    input[type="number"] {
+        appearance:textfield; /* Firefox */
+    }
+
+
+    &.registration{
+        background: #FFF;
+        border: 1px solid #E3E3E3;
+        padding: rem(41) 0 rem(20) rem(17);
+        position: relative;
+
+        @media (max-width:$mobile){
+            padding: rem(20) 0 rem(20) rem(17);  
+
+  
+        }
+
+        input{
+            text-align: left;
+        }
+
+        &.active{
+            border-image-slice: 1;
+            border-image-source: linear-gradient(to left, #8EE901, #4F9C2C);
+        }
+
+        &.act{
+            border-image-slice: 1;
+            border-image-source: linear-gradient(to left, #e90101, #942222);
+        }
+
+        .Input__placeholder{
+            transition: all 0.3s ease 0s;
+            position: absolute;top: rem(41);left:rem(17);
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            color: #75758A;
+
+            @media (max-width:$mobile){
+                top: -10px; 
+                background: #fff;
+                padding:0 5px;
+            }
+
+            &.active{
+                top: rem(20);
+                transition: all 0.3s ease 0s;
+
+                @media (max-width:$mobile){
+                    top: -10px; 
+                    background: #fff;
+                    padding:0 5px;
+                }
+            }
+        }
+
+        .Input__text{
+            font-style: normal;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 16px;
+            color: #000;
+        }
+
+        &.gv{
+            padding: rem(20) 0 rem(10) rem(10); 
+
+            @media (max-width:$mobile){
+                padding: rem(20) 0 rem(10) rem(10); 
+            }
+
+            .Input__placeholder{
+                position: absolute;top: rem(18);left:rem(17);
+
+                &.active{
+                    top: rem(0);
+                }
+            }
+        }
+    }
+}

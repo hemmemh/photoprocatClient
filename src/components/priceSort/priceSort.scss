@@ -1,4 +1,4 @@
-@import "../../app/styles/style.scss";
+@import "../../app/styles/style";
 
 
 .slider-right-main-catalog {
@@ -6,21 +6,23 @@
         margin-top:30px
 
     }
+
     max-width: 300px;
+
     &__name{
         margin-bottom: rem(15);
-        font-family: 'Ubuntu';
-font-style: normal;
-font-weight: 700;
-font-size: 14px;
-line-height: 18px;
-/* identical to box height, or 129% */
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 18px;
 
-text-transform: uppercase;
+        /* identical to box height, or 129% */
 
-color: #000000;
+        text-transform: uppercase;
+        color: #000;
 
     }
+
     &__sliderInputs {
         display: flex;
         justify-content: space-between;
@@ -30,12 +32,10 @@ color: #000000;
     &__sliderInput {
         background: #f8f8f8;
         border: 1px solid #E3E3E3;
-      
         width: rem(80);
         height: rem(30);
         display: flex;
         align-items: center;
-        font-family: 'Ubuntu';
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
@@ -44,35 +44,39 @@ color: #000000;
     }
 
     &__d{
-        font-family: 'Ubuntu';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
-    padding: 0 5px;
-    /* identical to box height, or 143% */
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        padding: 0 5px;
+
+        /* identical to box height, or 143% */
     
     
-    color: #75758A;
-       }
+        color: #75758A;
+    }
     
     .MuiSlider-root{
         height: rem(4);
     }
+
     .MuiSlider-track{
         background: #60B021;
     }
+
     .MuiSlider-rail{
         background: #3c6a18;
     }
+
     .MuiSlider-thumb{
         background: #60B021;
         width: 20px;
         height: 20px;
     }
+
     .MuiSlider-valueLabel{
         background: #3c6a18;
-        color: #ffffff;
+        color: #fff;
     }
     
  

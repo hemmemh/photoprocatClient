@@ -1,44 +1,48 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createType } from '../https/typesApi'
 import { HOME_ROUTE } from '../app/config/routs'
+import { type ITypeInformation } from '../utils/interfaces'
 
 const useBrand = () => {
-    const [typeInformation, settypeInformation] = useState<any>([])
+    const [typeInformation, settypeInformation] = useState<ITypeInformation[]>([])
     const [infoName, setinfoName] = useState<string>('')
     const [descriptionName, setDescriptionName] = useState<string>('radio')
     const [name, setname] = useState<string>('')
     const navigate = useNavigate()
 
-    const senInfo = (name:any)=>{
+    const senInfo = (name: string) => {
         setinfoName(name)
     }
 
-    const createInfo = ()=>{
-        settypeInformation((prev:any)=>[...prev,{[infoName]:descriptionName}])
+    const createInfo = () => {
+        settypeInformation((prev: ITypeInformation[]) => [
+            ...prev,
+            { [infoName]: descriptionName } as ITypeInformation
+        ])
         setinfoName('')
         setDescriptionName('')
     }
 
-    const setDescription = (name:any)=>{
+    const setDescription = (name: string) => {
         setDescriptionName(name)
         setinfoName('')
     }
 
-    const createTypeFun = ()=>{
-        if (typeInformation.length !== 0 && name !=='') {
-            createType({name,informations:JSON.stringify(typeInformation)}).then(data=>{
+    const createTypeFun = () => {
+        if (typeInformation.length !== 0 && name !== '') {
+            createType({ name, informations: JSON.stringify(typeInformation) }).then(data => {
                 settypeInformation([])
                 setname('')
                 navigate(HOME_ROUTE)
                 window.location.reload()
             })
-        }else{
+        } else {
             alert('недостаточно данных')
         }
     }
 
-  return {setname,infoName,createInfo,senInfo,createTypeFun,descriptionName,setDescription,name,typeInformation}
+    return { setname, infoName, createInfo, senInfo, createTypeFun, descriptionName, setDescription, name, typeInformation }
 }
 
 export default useBrand

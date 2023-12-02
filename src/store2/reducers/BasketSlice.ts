@@ -1,47 +1,42 @@
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { type IBasket, type IProduct } from '../../utils/interfaces'
 
-import { createSlice,PayloadAction } from '@reduxjs/toolkit'
-import {IBasket, IBasketItem, IProduct} from '../../utils/interfaces'
-import dayjs, { Dayjs } from 'dayjs'
-    
+interface IinitialState {
+    load: boolean
+    products: IProduct[]
+    sumPrice: number
+    basket: IBasket
 
-
-type initialState = {
-    load:boolean,
-    products:IProduct[],
-    sumPrice:number,
-    basket:IBasket,
-  
 }
 
-const initialState:initialState = {
-    load:true,
-    products:[],
-    sumPrice:0,
-    basket:{
-        basketItems:[],
-        user:'',
-        _id:'',
-    },
-   
+const initialState: IinitialState = {
+    load: true,
+    products: [],
+    sumPrice: 0,
+    basket: {
+        basketItems: [],
+        user: '',
+        _id: ''
+    }
 
 }
 
 export const basketSlice = createSlice({
-    name:'basket',
+    name: 'basket',
     initialState,
-    reducers:{
-        setLoad(state,action:PayloadAction<boolean>){
+    reducers: {
+        setLoad (state, action: PayloadAction<boolean>) {
             state.load = action.payload
-        }, 
-        setProducts(state,action:PayloadAction<IProduct[]>){
-            state.products= action.payload
-        }, 
-        setSumPrice(state,action:PayloadAction<number>){
-            state.sumPrice= action.payload
-        }, 
-        setBasket(state,action:PayloadAction<IBasket>){
-            state.basket= action.payload
-        }, 
+        },
+        setProducts (state, action: PayloadAction<IProduct[]>) {
+            state.products = action.payload
+        },
+        setSumPrice (state, action: PayloadAction<number>) {
+            state.sumPrice = action.payload
+        },
+        setBasket (state, action: PayloadAction<IBasket>) {
+            state.basket = action.payload
+        }
 
     }
 

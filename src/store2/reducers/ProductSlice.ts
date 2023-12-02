@@ -1,72 +1,70 @@
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { type IProduct } from '../../utils/interfaces'
 
-import { createSlice,PayloadAction } from '@reduxjs/toolkit'
-import {IProduct} from '../../utils/interfaces'
-
-
-type initialState = {
-    product:IProduct | null
-    productLoad:boolean
-    inBasket:boolean
-    inCompare:boolean
-    inLoves:boolean
-    raiting:number
-    modal:boolean,
-    ref:any
-    loaders:{
-        basket:boolean,
-        compare:boolean,
-        love:boolean,
+interface IinitialState {
+    product: IProduct | null
+    productLoad: boolean
+    inBasket: boolean
+    inCompare: boolean
+    inLoves: boolean
+    raiting: number
+    modal: boolean
+    ref: any
+    loaders: {
+        basket: boolean
+        compare: boolean
+        love: boolean
     }
 }
-const initialState:initialState = {
-    product:null,
-    productLoad:false,
-    inBasket:false,
-    inCompare:false,
-    inLoves:false,
-    raiting:1,
-    modal:false,
-    ref:null,
-    loaders:{
-        basket:true,
-        compare:true,
-        love:true,
+const initialState: IinitialState = {
+    product: null,
+    productLoad: false,
+    inBasket: false,
+    inCompare: false,
+    inLoves: false,
+    raiting: 1,
+    modal: false,
+    ref: null,
+    loaders: {
+        basket: true,
+        compare: true,
+        love: true
     }
 
 }
 
 export const productSlice = createSlice({
-    name:'product',
+    name: 'product',
     initialState,
-    reducers:{
-        setProduct(state,action:PayloadAction<IProduct | null>){
+    reducers: {
+        setProduct (state, action: PayloadAction<IProduct | null>) {
             state.product = action.payload
         },
-        setProductLoad(state,action:PayloadAction<boolean>){
+        setProductLoad (state, action: PayloadAction<boolean>) {
             state.productLoad = action.payload
         },
-        setInBasket(state,action:PayloadAction<boolean>){
+        setInBasket (state, action: PayloadAction<boolean>) {
             state.inBasket = action.payload
         },
-        setInCompare(state,action:PayloadAction<boolean>){
+        setInCompare (state, action: PayloadAction<boolean>) {
             state.inCompare = action.payload
         },
-        setInLoves(state,action:PayloadAction<boolean>){
+        setInLoves (state, action: PayloadAction<boolean>) {
             state.inLoves = action.payload
         },
-        setRaiting(state,action:PayloadAction<number>){
+        setRaiting (state, action: PayloadAction<number>) {
             state.raiting = action.payload
         },
-        setModal(state,action:PayloadAction<boolean>){
+        setModal (state, action: PayloadAction<boolean>) {
             state.modal = action.payload
         },
-        setLoaders(state,action:PayloadAction<any>){
+        setLoaders (state, action: PayloadAction<any>) {
             state.loaders = action.payload
         },
-        setRef(state,action:PayloadAction<any>){
+        setRef (state, action: PayloadAction<any>) {
             state.ref = action.payload
-        },
-        
+        }
+
     }
 
 })

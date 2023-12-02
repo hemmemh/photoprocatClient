@@ -1,40 +1,39 @@
-import { useRef} from 'react'
-import Button from '../../../../UI/button/Button'
+import { memo } from 'react'
 
-import { fileload } from '../../../../../store2/actions/AdminActions'
-import { useAppDispatch, useAppSelector } from '../../../../../hooks/reduxHooks'
 import Button2 from '../../../../UI/button2/Button2'
 
-export  const ImagesProduct = () => {
+import MyFile from '../../../../UI/myFile/MyFile'
 
-    const inputRef2 = useRef<HTMLInputElement>(null)
-    const {fileImages} = useAppSelector(state=>state.reducer.admin)
-    const dispatch = useAppDispatch()
+interface IImagesProduct {
+    addFile: (e: React.ChangeEvent<HTMLInputElement>) => void
+    fileImages: Array<string | ArrayBuffer | null>
 
-    const activateInput2=()=>{
-        inputRef2.current?.click()
-     }
-
-
-
-
-  return (
-    <div className="adminModalProduct__images">
-        <div className="adminModalProduct__imageAdd">
-        <input ref={inputRef2}  onChange={(e:any)=>dispatch(fileload(e))} type="file" className="adminModalType__file" />
-         <Button2 onClick={activateInput2} className='buttonCart'>выбрать изображение (минимум 2)</Button2>
-        </div>
-        <div className="adminModalProduct__imagesItems">
-          {fileImages.length !== 0 &&
-          fileImages.map((f:any)=>
-          <div className="adminModalProduct__image">
-          <img src={f} alt=""/>
-       </div>
-       ) 
-         
-        }  
-        </div>
-    </div>
-  )
 }
+export const ImagesProduct = memo(({ addFile, fileImages }: IImagesProduct) => {
+    return (
+        <div className="adminModalProduct__images">
+            <div className="adminModalProduct__imageAdd">
+                <MyFile setValue={addFile}><Button2 className='buttonCart'>выбрать изображение (минимум 2)</Button2></MyFile>
 
+            </div>
+            <div className="adminModalProduct__imagesItems">
+                {fileImages.length !== 0 &&
+          fileImages.map((f: string | ArrayBuffer | null) => {
+              console.log(f)
+
+              if (f !== null) {
+                  return (
+                      <div key={f.toString()} className="adminModalProduct__image">
+                          <img src={f.toString()} alt=""/>
+                      </div>
+                  )
+              }
+          }
+
+          )
+
+                }
+            </div>
+        </div>
+    )
+})

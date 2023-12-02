@@ -1,46 +1,46 @@
-@import "../../app/styles/style.scss";
+@import "../../app/styles/style";
+
 .Footer {
-margin-top: auto;
-    &__top {
-    }
-    &__bottom {
-    }
+    margin-top: auto;
+
+  
 }
+
 .topFooter {
-background: url(../../images/footer/pattern.png);
-background-repeat: repeat-x;
+    background: url("../../images/footer/pattern.png");
+    background-repeat: repeat-x;
 
 
-    &__container {
-    }   
 
     &__body {
         width: 100%;
         display: flex;
         height: rem(74);
         align-items: center;
-        @media (max-width:530px){
+
+        @media (width <=530px){
             justify-content: center;
-      }
+        }
     }
 
-    &__left {
-    }
-
-    &__center {
-    }
+  
 }
+
 .leftTopFooter {
-display: flex;
-gap: rem(10);
-@include adaptiveValue("margin-right",82,3 );
-@media (max-width:$tablet){
-     flex: 1 1 auto;
-     margin-right: 0;
-}
-@media (max-width:$mobile){
-     display: none; 
-}
+    display: flex;
+    gap: rem(10);
+
+    @include adaptiveValue("margin-right",82,3 );
+
+    @media (max-width:$tablet){
+        flex: 1 1 auto;
+        margin-right: 0;
+    }
+
+    @media (max-width:$mobile){
+        display: none; 
+    }
+
     &__icon {
         width: rem(40);
         height: rem(40);
@@ -49,63 +49,63 @@ gap: rem(10);
         display: flex;
         align-items: center;
         justify-content: center;
+
         &::before{
             color: #8EE901;
             
         }
     }
 
-    &__texts {
-    }
-
+  
     &__topText {
-        font-family: 'Ubuntu';
-font-style: normal;
-font-weight: 700;
-font-size: 16px;
-line-height: 20px;
-/* or 125% */
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20px;
+
+        /* or 125% */
 
 
-color: #8EE901;
+        color: #8EE901;
     }
 
     &__bottomText {
-        font-family: 'Ubuntu';
-font-style: normal;
-font-weight: 700;
-font-size: 16px;
-line-height: 20px;
-color: #fff;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20px;
+        color: #fff;
     }
 }
 
 .centerTopFooter {
-display: flex;
+    display: flex;
 
-@include adaptiveValue("margin-right",105 ,-90 );
-@media (max-width:$mobile){
-   flex:  1 1 auto;
-   margin: 0;
-}
-@media (max-width:530px){
-      flex:  0 0 auto;
-}
+    @include adaptiveValue("margin-right",105 ,-90 );
+
+    @media (max-width:$mobile){
+        flex:  1 1 auto;
+        margin: 0;
+    }
+
+    @media (width <=530px){
+        flex:  0 0 auto;
+    }
+
     &__input {
         display:block;
         padding: rem(12) rem(20);
-        font-family: 'Ubuntu';
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
         line-height: 16px;
         color: #75758A;
         background: #fff;
-        
         flex-basis: rem(315); 
         min-width: rem(315);
        
         @include adaptiveValue("min-width", 315, 180);
+
         @media (max-width:$mobile){
             flex-basis: rem(295); 
             min-width: rem(295);
@@ -118,7 +118,6 @@ display: flex;
         flex-basis: rem(160);
         min-width: rem(160);
         padding: rem(12) 0;
-        font-family: 'Ubuntu';
         font-style: normal;
         font-weight: 700;
         font-size: 14px;
@@ -129,10 +128,12 @@ display: flex;
         align-items: center; 
         justify-content: center;
         transition: all 0.3s ease 0s;
+
         &::before{
-        font-size: rem(12);
-        display: none;
+            font-size: rem(12);
+            display: none;
         }
+
         @media (any-hover: hover){
             &:hover{
                 background: #34661d;
@@ -140,40 +141,42 @@ display: flex;
                 transition: all 0.3s ease 0s;
             }
         }
-        @media (max-width:$mobile){
-            
-        }
+
     
         @media (max-width:$tablet){
             flex-basis: rem(120);
             min-width: rem(120);
             font-size: 11px;
             line-height: 15px;
-       }
-       @media (max-width:$mobile){
-        flex-basis: rem(40); 
-        min-width: rem(40);
-        padding: 0;
-        &::before{
-            font-size: rem(12);
-            display: block;
-            }
-        span{
-            display: none;
         }
+
+        @media (max-width:$mobile){
+            flex-basis: rem(40); 
+            min-width: rem(40);
+            padding: 0;
+
+            &::before{
+                font-size: rem(12);
+                display: block;
+            }
+
+            span{
+                display: none;
+            }
        
-   }
-color: #FFFFFF;
+        }
+
+        color: #FFF;
     }
 
-    &__right {
-       
-    }
+
 }
+
 .rightCenter {
-@media (max-width:530px){
-      display: none;
-}
+    @media (width <=530px){
+        display: none;
+    }
+
     &__phone {
         display: flex;
         align-items: center;
@@ -181,74 +184,74 @@ color: #FFFFFF;
         gap: rem(12);
     }
 }
-//=======================================================================================================
+
 
 
 .bottomFooter {
-background: #F5F5F5;
-    &__container {
-    }
+    background: #F5F5F5;
+
 
     &__body {
         display: flex;
-       padding-top: rem(31);
-       padding-bottom: rem(35);
-       @media (max-width:$mobile){
-        padding-top: rem(22);
-        padding-bottom: rem(25);
-       }
-       @media (max-width:$mobileSmall){
-         flex-direction: column;
-         align-items: center;
-         gap: rem(17);
-       }
+        padding-top: rem(31);
+        padding-bottom: rem(35);
+
+        @media (max-width:$mobile){
+            padding-top: rem(22);
+            padding-bottom: rem(25);
+        }
+
+        @media (max-width:$mobileSmall){
+            flex-direction: column;
+            align-items: center;
+            gap: rem(17);
+        }
     }
 
-    &__left {
-    }
 
-    &__links {
-    }
-
-    &__payments {
-    }
 }
+
 .left-bottom-footer {
-flex: 0 1 285px;
-@media (max-width:$mobile){
-     display: flex;
-     flex-direction: column;
+    flex: 0 1 285px;
+
+    @media (max-width:$mobile){
+        display: flex;
+        flex-direction: column;
       
-}
-@media (max-width:$pc){
-    flex: 1 1 33.333%;   
-}
-padding-right: rem(30);
+    }
+
+    @media (max-width:$pc){
+        flex: 1 1 33.333%;   
+    }
+
+    padding-right: rem(30);
+
     &__title {
         max-width: rem(151);
         img{width: 100%;}
+
         @media (max-width:$mobile){
             flex: 1 1 auto;
-       }
-       @media (max-width:$mobileSmall){
-          display: none;
-       }
+        }
+
+        @media (max-width:$mobileSmall){
+            display: none;
+        }
     }
 
     &__text {
-        font-family: 'Ubuntu';
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
         line-height: 20px;
-        color: #000000;
+        color: #000;
+
         @media (max-width:$mobile){
-             display: none; 
+            display: none; 
         }
     }
 
     &__conf {
-        font-family: 'Ubuntu';
         font-style: normal;
         font-weight: 400;
         font-size: 12px;
@@ -256,23 +259,27 @@ padding-right: rem(30);
         color: #75758A;
     }
 }
-.links-bottom-footer {
- display: flex;
- flex: 0 1  570px;
- gap: rem(85);
 
- @media (max-width:$pc){
-     justify-content: center; 
-     flex: 1 1 33.333%; 
- }
- @media (max-width:$mobile){
-   justify-content: right;
-}
+.links-bottom-footer {
+    display: flex;
+    flex: 0 1  570px;
+    gap: rem(85);
+
+    @media (max-width:$pc){
+        justify-content: center; 
+        flex: 1 1 33.333%; 
+    }
+
+    @media (max-width:$mobile){
+        justify-content: right;
+    }
+
     &__left {
         display: flex;
         flex-direction: column;
+
         @media (max-width:$mobile){
-             gap: rem(10); 
+            gap: rem(10); 
         }
     
     }
@@ -290,58 +297,60 @@ padding-right: rem(30);
     }
 
     &__bottom {
-        font-family: 'Ubuntu';
         font-style: normal;
         font-weight: 400;
         font-size: 12px;
         line-height: 20px;
         color: #75758A;
+
         @media (max-width:$mobileSmall){
             display: none;
-         }
+        }
     }
 
     &__right {
         @media (max-width:$pc){
-             display: none; 
+            display: none; 
         }
     }
 
     &__tel {
-        font-family: 'Ubuntu';
         font-style: normal;
         font-weight: 700;
         font-size: 16px;
         line-height: 26px;
-        color: #000000;
+        color: #000;
     }
 
     &__adress {
-        font-family: 'Ubuntu';
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
         line-height: 20px;
-        color: #000000;
+        color: #000;
     }
 }
+
 .payment-bottom-footer {
     @media (max-width:$pc){
         justify-content: center; 
         flex: 1 1 33.333%; 
     }
+
     @media (max-width:$mobile){
         display: none;
-   }
- display: flex;
- gap: rem(20);
- align-items: flex-start;
- :nth-child(n){
-    margin-top: -4px;
- }
- :nth-child(3){
-    padding-top: rem(16);
- }
-    &__payment {
     }
+
+    display: flex;
+    gap: rem(20);
+    align-items: flex-start;
+
+    :nth-child(n){
+        margin-top: -4px;
+    }
+
+    :nth-child(3){
+        padding-top: rem(16);
+    }
+
 }

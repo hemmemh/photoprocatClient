@@ -1,24 +1,20 @@
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
-import { createSlice,PayloadAction } from '@reduxjs/toolkit'
-
-    
-
-
-type initialState = {
-   load:boolean
+interface IinitialState {
+    load: boolean
 }
 
-const initialState:initialState = {
-load:true
+const initialState: IinitialState = {
+    load: true
 }
 
 export const loveSlice = createSlice({
-    name:'love',
+    name: 'love',
     initialState,
-    reducers:{
-        setLoad(state,action:PayloadAction<boolean>){
+    reducers: {
+        setLoad (state, action: PayloadAction<boolean>) {
             state.load = action.payload
-        }, 
+        }
     }
 
 })

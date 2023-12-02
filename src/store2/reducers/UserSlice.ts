@@ -1,63 +1,56 @@
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
-import { createSlice,PayloadAction } from '@reduxjs/toolkit'
-import {IProduct} from '../../utils/interfaces'
-import dayjs, { Dayjs } from 'dayjs'
-
-
-
-type initialState = {
-toggle:number
-name:string,
-serName:string,
-data:string,
-tell:string
-loadData:boolean
-loaduser:boolean
-repeatLoad:boolean
+interface IinitialState {
+    toggle: number
+    name: string
+    serName: string
+    data: string
+    tell: string
+    loadData: boolean
+    loaduser: boolean
+    repeatLoad: boolean
 }
 
-const initialState:initialState = {
-    toggle:1,
-    name:'',
-serName:'',
-data:'2022-04-17',
-tell:'',
-loadData:false,
-loaduser:true,
-repeatLoad:false
+const initialState: IinitialState = {
+    toggle: 1,
+    name: '',
+    serName: '',
+    data: '2022-04-17',
+    tell: '',
+    loadData: false,
+    loaduser: true,
+    repeatLoad: false
 }
 
 export const userSlice = createSlice({
-    name:'user',
+    name: 'user',
     initialState,
-    reducers:{
-        setToggle(state,action:PayloadAction<number>){
+    reducers: {
+        setToggle (state, action: PayloadAction<number>) {
             state.toggle = action.payload
         },
-        setName(state,action:PayloadAction<string>){
+        setName (state, action: PayloadAction<string>) {
             state.name = action.payload
         },
-        setSerName(state,action:PayloadAction<string>){
+        setSerName (state, action: PayloadAction<string>) {
             state.serName = action.payload
         },
-        setData(state,action:PayloadAction<string>){
-            state.data= action.payload
+        setData (state, action: PayloadAction<string>) {
+            state.data = action.payload
         },
-        setTell(state,action:PayloadAction<string>){
-            state.tell= action.payload
+        setTell (state, action: PayloadAction<string>) {
+            state.tell = action.payload
         },
-        setLoadData(state,action:PayloadAction<boolean>){
-            state.loadData= action.payload
+        setLoadData (state, action: PayloadAction<boolean>) {
+            state.loadData = action.payload
         },
-        setLoaduser(state,action:PayloadAction<boolean>){
-            state.loaduser= action.payload
+        setLoaduser (state, action: PayloadAction<boolean>) {
+            state.loaduser = action.payload
         },
-        setRepeatLoad(state,action:PayloadAction<boolean>){
+        setRepeatLoad (state, action: PayloadAction<boolean>) {
             state.repeatLoad = action.payload
-        },
+        }
 
-
-        
     }
 
 })

@@ -6,20 +6,18 @@ import { getProduct } from '../../store2/actions/ProductActions'
 import { useAppDispatch } from '../../hooks/reduxHooks'
 import './product.scss'
 const ProductMain = () => {
-
     const dispatch = useAppDispatch()
-    const {id} = useParams()
+    const { id } = useParams()
     useEffect(() => {
         dispatch(getProduct(id))
-}, [])
+    }, [])
 
-
-  return (
-    <div className="Product">
-        <BodyProduct/>
-        <ModalRaiting/>
-   </div>
-  )
+    return (
+        <div className="Product">
+            <BodyProduct/>
+            <ModalRaiting/>
+        </div>
+    )
 }
 
 export default ProductMain
