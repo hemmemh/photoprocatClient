@@ -10,6 +10,7 @@ import useFiles from '../../../../hooks/useFiles'
 export const ProductModal = memo(() => {
     const dispatch = useAppDispatch()
     const { addFile, fileImages, files, setFiles, setfileImages } = useFiles()
+
     const dispatchProduct = async () => {
         await dispatch(addProduct(files))
         setFiles([])
